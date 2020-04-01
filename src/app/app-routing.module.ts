@@ -17,17 +17,17 @@ const routes: Routes = [
 	{
 		path: 'stocks',
     loadChildren: './components/stocks/stocks.module#StocksModule',
-   // canLoad: [AuthGuardService]
+    canLoad: [AuthGuardService]
   },
 	{
 		path: 'beneficiaires',
     loadChildren: './components/beneficiaires/beneficiaires.module#BeneficiairesModule',
-  //  canLoad: [AuthGuardService]
+    canLoad: [AuthGuardService]
   },
 	{
 		path: 'distributeurs',
     loadChildren: './components/distributeurs/distributeurs.module#DistributeursModule',
-    //canLoad: [AuthGuardService]
+    canLoad: [AuthGuardService]
   },
   {
     path: 'utilisateurs',
@@ -36,17 +36,17 @@ const routes: Routes = [
   {
     path: 'allocations',
     loadChildren: './components/allocations/allocations.module#AllocationsModule',
-   // canLoad: [AuthGuardService]
+    canLoad: [AuthGuardService]
   },
   {
     path: 'livreurs',
     loadChildren: './components/livreurs/livreurs.module#LivreursModule',
-  //  canLoad: [AuthGuardService]
+    canLoad: [AuthGuardService]
   },
   {
     path: 'biens',
     loadChildren: './components/biens/biens.module#BiensModule',
-    //canLoad: [AuthGuardService]
+    canLoad: [AuthGuardService]
   }
     //]//,
 	//	canActivate: [AuthGuardService]
