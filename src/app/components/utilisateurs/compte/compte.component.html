@@ -1,0 +1,104 @@
+<section>
+  <!-- informations personnelles -->
+  <button type="button" (click)="showInfos()" pButton label="Informations Personnelles" icon="pi pi-eye">
+  </button>
+  <p-dialog header="Informations personnelles" [(visible)]="visible" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <p> <span class="lbl">Prenom: </span> <span class="dt">{{ user.firstName }}</span> </p>
+    <p> <span class="lbl">Nom: </span> <span class="dt">{{ user.lastName }}</span> </p>
+    <p> <span class="lbl">Telephone: </span> <span class="dt">{{ user.phoneNumber }}</span> </p>
+    <p> <span class="lbl">Numéro CNI: </span> <span class="dt">{{ user.identityNumber }}</span> </p>
+    <p> <span class="lbl">Email: </span> <span class="dt">{{ user.email }}</span> </p>
+    <p> <span class="lbl">Nom d'utilisateur: </span> <span class="dt">{{ user.username }}</span> </p>
+    <p> <span class="lbl">Mot de passe: </span> <span class="dt">{{ user.password }}</span> </p>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="clickModifier()" label="modifier"
+        class="ui-button-success"></button>
+      <button type="button" pButton icon="pi pi-times" (click)="visible=false" label="fermer"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </p-dialog>
+  <!-- formulaire de modification des données de l'utilisateur -->
+  <!-- <p-toast [style]="{marginTop: '80px'}"></p-toast> -->
+
+  <form [hidden]="visibleForm" [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+    <!-- <p-panel header="Validate"> -->
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1">
+            Prenom *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="firstName" placeholder="prenom" />
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1">
+            Nom *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="lastName"  placeholder="nom" />
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1">
+            Telephone *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="phoneNumber" placeholder="Telephone" />
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1">
+            Numéro CNI *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="identityNumber" placeholder="identityNumber" />
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1">
+            Email *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="email" formControlName="email" placeholder="email" />
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1">
+            Nom d'utilisateur *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="username" formControlName="username" placeholder="nom d'utilisateur" />
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1">
+            Password *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="password" formControlName="password" placeholder="mot de passe - Min(6)" />
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1"></div>
+          <div class="ui-grid-col-4">
+            <button pButton type="submit" label="Submit" [disabled]="!userform.valid"></button>
+          </div>
+          <div class="ui-grid-col-4"></div>
+        </div>
+        <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+          Form Submitted
+          <br>
+          {{diagnostic}}
+        </div>
+      </div>
+    <!-- </p-panel> -->
+  </form>
+</section>

@@ -36,6 +36,10 @@ import { UtilisateursModule } from './components/utilisateurs/utilisateurs.modul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { PanelModule } from 'primeng/panel';
+import { MessagesModule } from 'primeng/messages';
 
 
 
@@ -64,12 +68,16 @@ import { DialogModule } from 'primeng/dialog';
     StocksModule,
     UtilisateursModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    DialogModule
+    DialogModule,
+    ToastModule,
+    PanelModule,
+    MessagesModule
   ],
   providers: [
     DatePipe,
     FileService,
     RequestCacheService,
+    MessageService,
    // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptorService, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],

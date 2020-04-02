@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { UtilisateursRoutingModule } from './utilisateurs-routing.module';
 import { ShareModule } from 'src/app/share/share/share.module';
 import { FormsModule } from '@angular/forms';
+import { CompteComponent } from './compte/compte.component';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     ListUtilisateurComponent,
     DetailsUtilisateurComponent,
     FormUtilisateurComponent,
-    LoginComponent
+    LoginComponent,
+    CompteComponent
   ],
   imports: [
     CommonModule,

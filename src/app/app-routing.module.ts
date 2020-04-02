@@ -3,6 +3,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { CompteComponent } from './components/utilisateurs/compte/compte.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
     path: 'biens',
     loadChildren: './components/biens/biens.module#BiensModule',
     //canLoad: [AuthGuardService]
+  },
+  {
+    path: 'user',
+    component: CompteComponent,
   }
     //]//,
 	//	canActivate: [AuthGuardService]
