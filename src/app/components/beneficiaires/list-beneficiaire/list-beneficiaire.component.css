@@ -6,7 +6,3 @@
 ::ng-deep footer{
   background-color: #379956 !important;
 }
-
-::ng-deep tbody tr td a i{
-  color: #379956;
-}

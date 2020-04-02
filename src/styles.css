@@ -272,6 +272,18 @@ body .ui-table .ui-table-tbody > tr.ui-state-highlight td:first-child {
   width: 200px;
 }
 
+tbody tr td a i{
+  color: #379956;
+}
+
+tbody tr td a{
+  border-right: 2px solid #979797;
+}
+
+tbody tr td a:last-child{
+  border-right: 0px !important;
+}
+
 @media (min-width: 62rem) {
   .grid-column {
     padding-left: 0.5rem;
