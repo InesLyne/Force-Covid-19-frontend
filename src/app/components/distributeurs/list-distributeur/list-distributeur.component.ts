@@ -130,7 +130,7 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = 'Ajout un distributeur';
+    this.modalTitle = oldData?'Modifier un distributeur':'Ajout un distributeur';
   }
 
   showDetailsDialog(data) {
@@ -143,6 +143,7 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
   onDialogHide(event) {
     this.displayDialog = event;
     this.displayDetailsDialog = event;
+    console.log('Here')
     this.selectedData = null;
   }
 

@@ -88,7 +88,7 @@ export class SubdivisionService {
   async updateSubdivision(subdivision: SubdivisionModel) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + subdivision.id, JSON.stringify(subdivision)).subscribe(
+        this.http.put<any>(this.baseUrl+ '/'  + subdivision.id, JSON.stringify(subdivision)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -108,7 +108,7 @@ export class SubdivisionService {
   async patchSubdivision(subdivision: SubdivisionModel) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + subdivision.id, JSON.stringify(subdivision)).subscribe(
+        this.http.patch<any>(this.baseUrl+ '/'  + subdivision.id, JSON.stringify(subdivision)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -128,7 +128,7 @@ export class SubdivisionService {
   async deleteSubdivision(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl+ '/'  + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

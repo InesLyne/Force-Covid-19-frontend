@@ -45,15 +45,15 @@ export class DistributeurService {
       },
       () => {
       }
-    );
-    this.loadFakeData();
-    this.emitDistributeurs();
+    )
+    /* this.loadFakeData();
+    this.emitDistributeurs(); */
   }
 
   async getDistributeur(id: string) {
     return new Promise(
       (resolve, reject) => {
-        this.http.get<any>(this.baseUrl  + id).subscribe(
+        this.http.get<any>(this.baseUrl  + '/' +  id).subscribe(
           (distributeur: any) => {
             resolve(distributeur);
           }, (error: any) => {
@@ -90,7 +90,7 @@ export class DistributeurService {
   async updateDistributeur(distributeur: Distributeur) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + distributeur.id, JSON.stringify(distributeur)).subscribe(
+        this.http.put<any>(this.baseUrl + '/' + distributeur.id, JSON.stringify(distributeur)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -110,7 +110,7 @@ export class DistributeurService {
   async patchDistributeur(distributeur: Distributeur) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + distributeur.id, JSON.stringify(distributeur)).subscribe(
+        this.http.patch<any>(this.baseUrl + '/' + distributeur.id, JSON.stringify(distributeur)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -130,7 +130,7 @@ export class DistributeurService {
   async deleteDistributeur(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl+ '/'  + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -146,6 +146,7 @@ export class DistributeurService {
 
     );
   }
+
 
   loadFakeData() {
     this.distributeurs = [];
