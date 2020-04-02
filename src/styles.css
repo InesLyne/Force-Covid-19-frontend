@@ -258,6 +258,20 @@ body .ui-table .ui-table-tbody > tr.ui-state-highlight td:first-child {
   height: 50px !important;
 }
 
+.action{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.action button:last-child{
+  margin-left: 10px;
+}
+
+.action button{
+  width: 200px;
+}
+
 @media (min-width: 62rem) {
   .grid-column {
     padding-left: 0.5rem;
