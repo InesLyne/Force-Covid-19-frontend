@@ -40,6 +40,7 @@
                     [paginator]="true" 
                     [rows]="searchCriteria.size"
                     [responsive]="true"
+                    [lazy]="true"
                     (onLazyLoad)="loadItemLazy($event)"
                     [resizableColumns]="true">
           <ng-template pTemplate="caption">
