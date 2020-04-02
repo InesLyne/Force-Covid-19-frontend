@@ -3,6 +3,7 @@ import { Stock } from 'src/app/models/stock';
 import { StockService } from 'src/app/services/stock.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalService } from 'src/app/global.service';
+import {CalendarModule} from 'primeng/calendar';
 
 @Component({
   selector: 'app-from-stock',
@@ -19,6 +20,7 @@ export class FromStockComponent implements OnInit {
 
   users: any;
   welfares: any;
+  value: Date;
   
   constructor(private stockService: StockService, private global: GlobalService) { }
 
