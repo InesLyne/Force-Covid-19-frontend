@@ -1,17 +1,58 @@
 /* Header */
 .header {
   padding: 15px 40px;
-  padding-bottom: 0;
   vertical-align: middle;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header > div:first-child {
 }
 
 .header .logo {
-  height: 85%;
-  display: inline-block;
+  height: 80px;
 }
+
+.header .herder-links, .header .herder-links .pages-links{
+  display: flex;
+  align-items: center;
+}
+
+.header .herder-links .pages-links{
+  margin-right: 30px;
+}
+
+.header .herder-links .pages-links a{
+  font-size: 18px;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #595959;
+  width: 140px;
+  height: 55px;
+  outline: none;
+}
+
+.header .herder-links .pages-links a.active{
+  color: #379956;
+  font-weight: bold;
+}
+
+a img.active, a.active img:not(.active){
+  display: none;
+}
+
+a.active img.active{
+  display: block;
+}
+
+.header .herder-links .pages-links a img{
+  height: 30px;
+  margin-bottom: 5px;
+}
+
 .header .title {
   font-size: 30px;
   font-weight: normal;
@@ -27,7 +68,7 @@
 }
 
 .user {
-  text-align: center;
+  text-align: right;
   height: 100%;
   margin-top: 25px;
   text-align: left;
@@ -50,6 +91,31 @@
   font-weight: bold;
   width: 50%;
   /* margin: 5px 0 0 5px; */
+}
+
+.user div.userinfos:hover + .logout {
+  display: block;
+}
+.user div.userinfos + .logout {
+  display: none;
+}
+
+.user .logout:hover {
+  display: block !important;
+
+}
+
+.user .logout {
+  background: #ddd;
+  text-align: center;
+  color: #000;
+  margin-top: -11px;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+.user div.userinfos > .name:hover, .user div.userinfos > .role:hover {
+  cursor: pointer;
 }
 
 .user .name {
@@ -77,6 +143,10 @@
   font-weight: bold;
   padding: 0 3px;
   font-size: 10px;
+}
+
+.user .login-btn {
+  margin-top: 10px;
 }
 
 /* Custom Menu Item */

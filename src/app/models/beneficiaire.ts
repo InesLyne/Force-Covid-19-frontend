@@ -7,7 +7,7 @@ export class Beneficiaire {
     numberOfChildren: number;
     numberOfElderly: number;
     numberOfPeopleInCharge: number;
-    address: number;
+    address: string;
     latitude: number;
     longitude: number;
     allocations: string[];

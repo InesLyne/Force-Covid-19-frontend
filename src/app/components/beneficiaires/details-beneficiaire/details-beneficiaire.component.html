@@ -1,33 +1,49 @@
-<div *ngIf="beneficiaire" class="p-grid">
-  <div class="p-col-12">
-    <p>Nom : <span class="txt-bold">{{beneficiaire?.lastName}} </span></p>
-  </div>
-  <div class="p-col-12">
-    <p>Salaire Mensuel : <span class="txt-bold">{{beneficiaire?.lastName}}</span></p>
-  </div>
-  <div class="p-col-12">
 
-    <p>Nbre d'enfants : <span class="txt-bold">{{beneficiaire?.lastName}}</span></p>
-
-  </div>
-  <div class="p-col-12">
-
-    <p>Nbre personnes agées : <span class="txt-bold">{{beneficiaire?.lastName}}</span></p>
-
-  </div>
-  <div class="p-col-12">
-    <p>Contact : <span class="txt-bold" class="txt-bold">{{beneficiaire?.lastName}}</span></p>
-
-
-  </div>
-  <div class="p-col-12">
-
-    <p>Adresse : <span class="txt-bold">{{beneficiaire?.lastName}}</span></p>
-
-  </div>
-  <div class="p-col-12">
-
-    <p>Coordonnées : <span class="txt-bold">{{beneficiaire?.lastName}}</span></p>
-
+<div class="form-wrapper">
+  <div *ngIf="beneficiaire"  class="p-grid">
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Prénom</label>
+      <span>{{beneficiaire.firstName}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Nom</label>
+      <span>{{beneficiaire.lastName}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Salaire mensuel</label>
+      <span>{{beneficiaire.monthlyIncome}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Nombre d'enfants</label>
+      <span>{{beneficiaire.numberOfChildren}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Nombre de personnes en charge</label>
+      <span>{{beneficiaire.numberOfPeopleInCharge}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Contact</label>
+      <span>{{beneficiaire.mobileNumber}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Adresse</label>
+      <span>{{beneficiaire.address}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Latitude</label>
+      <span>{{beneficiaire.latitude}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Longitude</label>
+      <span>{{beneficiaire.longitude}}</span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Allocation</label>
+      <span *ngFor="let alloc of beneficiaire.allocations" >{{alloc}} , </span>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Subdivision</label>
+      <span>{{beneficiaire.subdivision}}</span>
+    </div>
   </div>
 </div>

@@ -1,21 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Distributeur } from 'src/app/models/distributeur';
 import { DistributeurService } from 'src/app/services/distributeur.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-from-distributeur',
   templateUrl: './from-distributeur.component.html',
   styleUrls: ['./from-distributeur.component.css']
 })
-export class FromDistributeurComponent implements OnInit {
-  form: FormGroup;
+export class FromDistributeurComponent implements OnInit, OnDestroy {
   distributeur: Distributeur;
   @Input() id: any;
-  @Output() displayChange = new EventEmitter();
+  @Output() displayChange = new EventEmitter<boolean>();
   errorMsg: any;
+  successMsg: any;
+
+  managers: any;
   
-  constructor(private distributeurService: DistributeurService, private fb: FormBuilder) { }
+  constructor(private distributeurService: DistributeurService) { }
 
   ngOnInit(): void {
     if(this.id){
@@ -23,6 +24,13 @@ export class FromDistributeurComponent implements OnInit {
     } else {
       this.distributeur = new Distributeur();
     }
+
+    this.managers = [
+      {label: 'Selectionnner un manager', value: null},
+      {label: 'Modou khoulé', value: '/api/users/25'},
+      {label: 'Mbaye Traoré', value: '/api/users/26'},
+      {label: 'Ameth Gaye', value: '/api/users/27'},
+  ];
   }
 
   onGetDistributeur(id: string){
@@ -35,6 +43,38 @@ export class FromDistributeurComponent implements OnInit {
         this.errorMsg=error;
       }
     )
+  }
+
+  onAddDistributeur(){
+    this.distributeurService.addDistributeur(this.distributeur).then(
+      (response: any)=>{
+        this.successMsg= response;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onUpdateDistributeur(){
+    this.distributeurService.updateDistributeur(this.distributeur).then(
+      (response: any)=>{
+        this.successMsg= response;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onSubmit() {
+    if (this.id) {
+      this.onUpdateDistributeur();
+    } else {
+      this.onAddDistributeur();
+    }
   }
 
   onDialogHide() {

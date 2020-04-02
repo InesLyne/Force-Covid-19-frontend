@@ -5,6 +5,7 @@ export class Distributeur {
     address: string;
     latitude: number;
     longitude: number;
+    manager: string;
 
     constructor(){}
 }

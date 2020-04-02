@@ -1,1 +1,25 @@
-<p>details-stock works!</p>
+
+<div class="form-wrapper">
+    <div *ngIf="stock"  class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label class="form-label" for="">Quantité</label>
+            <span>{{stock.quantity}}</span>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label class="form-label" for="">Utilisateur</label>
+            <span>{{stock.userId}}</span>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label class="form-label" for="">Bien</label>
+            <span>{{stock.welfare}}</span>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label class="form-label" for="">Créer le</label>
+            <span>{{stock.created}}</span>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label class="form-label" for="">Dernière modification</label>
+            <span>{{stock.updated}}</span>
+        </div>
+    </div>
+</div>

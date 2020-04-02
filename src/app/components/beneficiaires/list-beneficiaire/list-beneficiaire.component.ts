@@ -5,8 +5,13 @@ import { Table } from 'primeng/table';
 import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
+import {SelectItem} from 'primeng/api';
 
 
+interface City {
+  name: string;
+  code: string;
+}
 @Component({
   selector: 'app-list-beneficiaire',
   templateUrl: './list-beneficiaire.component.html',
@@ -30,8 +35,31 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   modalTitle: string;
 
   errorMsg: any;
+
+  cities1: SelectItem[];
+  cities2: SelectItem[];
+  selectedCity1: City;
+  selectedCity2: City;
   
-  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) { }
+  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) {
+    this.cities1 = [
+      {label:'Select City', value:null},
+      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+    ];
+
+    this.cities2 = [
+      {label:'Select City', value:null},
+      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+    ];
+  }
 
   ngOnInit(): void {
     this.cols = [
@@ -102,7 +130,11 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = 'Ajout d\'un bénéficiaire';
+    if(oldData){
+      this.modalTitle = 'Modifier d\'un bénéficiaire';
+    }else{
+      this.modalTitle = 'Ajout d\'un bénéficiaire';
+    }
   }
 
   showDetailsDialog(data) {

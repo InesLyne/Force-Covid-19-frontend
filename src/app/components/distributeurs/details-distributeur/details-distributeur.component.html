@@ -1,1 +1,28 @@
-<p>details-distributeur works!</p>
+<div class="form-wrapper">
+    <div *ngIf="distributeur"  class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Adresse</label>
+        <span>{{distributeur.address}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Zone geographique</label>
+        <span>{{distributeur.geographicalArea}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Capacité de stockage</label>
+        <span>{{distributeur.storageCapacity}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Latitude</label>
+        <span>{{distributeur.latitude}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Longitude</label>
+        <span>{{distributeur.longitude}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Manager</label>
+        <span>{{distributeur.manager}}</span>
+      </div>
+    </div>
+</div>

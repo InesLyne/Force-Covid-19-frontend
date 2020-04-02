@@ -1,16 +1,54 @@
-<div class="p-grid header">
-  <div class="p-col-4">
-    <img class="logo" width="220" src="assets/icons/Logo-ForceCovid19-extended.svg" />
+<div class="header">
+  <div class="logo">
+    <img width="220" src="assets/icons/Logo-ForceCovid19-extended.svg" />
   </div>
-  <div class="p-col-6" styl>
-    <p-menubar [model]="items"> </p-menubar>
-  </div>
-  <div class="p-col-2 user">
-    <img class="avatar" src="assets/images/avatar.png" />
-    <div class="userinfos">
-      <span class="name">Ibrahima Ndiaye</span>
-      <span class="role">Administrateur</span>
+  
+  <div class="herder-links">
+    <div class="pages-links">
+      <a routerLink="">
+        <img width="220" src="assets/images/home.svg" />
+        <div>Accueil</div>
+      </a>
+      <a routerLinkActive="active" routerLink="stocks">
+        <img width="220" src="assets/images/stocks.svg" />
+        <img class="active" width="220" src="assets/images/stocks-active.svg" />
+        <div>Mon Stock</div>
+      </a>
+      <a routerLinkActive="active" routerLink="distributeurs">
+        <img width="220" src="assets/images/antenna.svg" />
+        <img class="active" width="220" src="assets/images/antenna-active.svg" />
+        <div>Distributeurs</div>
+      </a>
+      <a routerLinkActive="active" routerLink="beneficiaires">
+        <img width="220" src="assets/images/alias-numbers.svg" />
+        <img class="active" width="220" src="assets/images/alias-numbers-active.svg" />
+        <div>Bénéficiaires</div>
+      </a>
+      <a routerLinkActive="active" routerLink="#">
+        <img width="220" src="assets/images/statistics.svg" />
+        <img class="active" width="220" src="assets/images/stocks-active.svg" />
+        <div>Statistiques</div>
+      </a>
     </div>
-    <a class="notif pi pi-bell" href="#"><span class="notif_badge">3</span></a>
+    <div class=" user">
+      <div *ngIf="user != null; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+          <img class="avatar" src="assets/images/avatar.png" />
+          <div class="userinfos">
+            <div *ngIf="user.firstName !== undefined && user.lastName !== undefined; then firstAndLastName else adminName"></div>
+            <ng-template #firstAndLastName><span class="name">{{ user.firstName + ' ' + user.lastName}}</span></ng-template>
+            <ng-template #adminName><span class="name">{{ user.username}}</span></ng-template>
+            <span class="role">{{ user.type }}</span>
+            <span class="ui-submenu-icon pi pi-fw pi-caret-down"></span>
+          </div>
+          <a class="logout" href="#" (click)="logout()" hidden>
+            <span class="ui-menuitem-icon pi pi-unlock" >Déconnexion</span>
+          </a>
+          <a class="notif pi pi-bell" href="#"><span class="notif_badge">3</span></a>
+      </ng-template>
+      <ng-template #elseBlock> 
+          <button pButton type="button" icon="pi pi-lock" (click)="redirectToLogin()" label="Me connecter" class="login-btn bgColor-primary ui-button-raised"></button>
+      </ng-template>
+    </div>
   </div>
 </div>

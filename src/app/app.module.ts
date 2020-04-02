@@ -70,7 +70,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DatePipe,
     FileService,
     RequestCacheService,
-   // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptorService, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   bootstrap: [AppComponent]
