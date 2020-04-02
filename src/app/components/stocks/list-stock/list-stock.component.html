@@ -80,7 +80,7 @@
 
 
 <p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true"
-  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  [style]="{width: '60vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]='false'>
   <app-from-stock [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
   </app-from-stock>
   <app-details-stock [id]="selectedData" *ngIf="displayDetailsDialog" (displayChange)="onDialogHide($event)">

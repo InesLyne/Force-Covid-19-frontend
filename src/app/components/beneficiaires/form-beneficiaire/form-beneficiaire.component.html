@@ -46,6 +46,7 @@
       <p-dropdown [options]="subdivisions" [(ngModel)]="beneficiaire.subdivision" name="subdivision"></p-dropdown>
     </div>
     <div class="p-col-12 txt-align-center">
+      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
       <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
     </div>
   </div>

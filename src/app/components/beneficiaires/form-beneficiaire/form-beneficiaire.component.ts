@@ -10,7 +10,7 @@ import { Beneficiaire } from 'src/app/models/beneficiaire';
   templateUrl: './form-beneficiaire.component.html',
   styleUrls: ['./form-beneficiaire.component.css']
 })
-export class FormBeneficiaireComponent implements OnInit, OnDestroy {
+export class FormBeneficiaireComponent implements OnInit {
   beneficiaire: Beneficiaire;
   @Input() id: any;
   @Output() displayChange = new EventEmitter<boolean>();

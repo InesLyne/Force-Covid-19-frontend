@@ -82,8 +82,8 @@
   </div>
 </section>
 
-<p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-    [draggable]="false" [resizable]="false">
+<p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true"
+  [style]="{width: '60vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]='false'>
     <app-form-beneficiaire [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
     </app-form-beneficiaire>
     <app-details-beneficiaire [id]="selectedData" *ngIf="displayDetailsDialog"

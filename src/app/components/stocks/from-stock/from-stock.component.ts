@@ -9,7 +9,7 @@ import { GlobalService } from 'src/app/global.service';
   templateUrl: './from-stock.component.html',
   styleUrls: ['./from-stock.component.css']
 })
-export class FromStockComponent implements OnInit , OnDestroy{
+export class FromStockComponent implements OnInit {
   form: FormGroup;
   stock: Stock;
   @Input() id: any;
