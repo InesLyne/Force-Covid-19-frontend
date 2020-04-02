@@ -7,8 +7,41 @@
     </div>
   </div>
 </section>
+<section class="page-section first">
+  <div class="page-actions">
+    <form action="" class="form-filter">
+      <button type="button" class="button bgColor-yellow">
+        Filtrer
+      </button>
+    </form>
+    <button (click)="showFormDialog()" type="button" class="button bgColor-primary">
+      Ajouter un distributeur
+    </button>
+  </div>
+</section>
 
 <section class="page-section first">
+  <div class="page-actions">
+    <form action="" class="form-filter">
+      <div class="form-group">
+        <label for="" class="form-label">Nom</label>
+        <p-dropdown name="selectedCity1" [options]="cities1" [(ngModel)]="selectedCity1"></p-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="" class="form-label">Nom</label>
+        <p-dropdown name="selectedCity2" [options]="cities2" [(ngModel)]="selectedCity2"></p-dropdown>
+      </div>
+      <button type="button" class="button bgColor-yellow">
+        Filtrer
+      </button>
+    </form>
+    <button (click)="showFormDialog()" type="button" class="button bgColor-primary">
+      Ajouter un Distributeur
+    </button>
+  </div>
+</section>
+
+<section class="page-section">
   <div class="p-grid">
       <p-table #dt [columns]="cols" 
                     [value]="listItems" 

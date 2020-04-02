@@ -45,15 +45,13 @@ export class StockService {
       },
       () => {
       }
-    );
-    this.loadFakeData();
-    this.emitStocks();
+    )
   }
 
   async getStock(id: string) {
     return new Promise(
       (resolve, reject) => {
-        this.http.get<any>(this.baseUrl  + id).subscribe(
+        this.http.get<any>(this.baseUrl  + '/' + id).subscribe(
           (stock: any) => {
             resolve(stock);
           }, (error: any) => {
@@ -86,10 +84,11 @@ export class StockService {
     );
   }
 
+
   async updateStock(stock: Stock) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + stock.id, JSON.stringify(stock)).subscribe(
+        this.http.put<any>(this.baseUrl + '/' + stock.id, JSON.stringify(stock)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -109,7 +108,7 @@ export class StockService {
   async patchStock(stock: Stock) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + stock.id, JSON.stringify(stock)).subscribe(
+        this.http.patch<any>(this.baseUrl+ '/'  + stock.id, JSON.stringify(stock)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -129,7 +128,7 @@ export class StockService {
   async deleteStock(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl+ '/'  + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -145,20 +144,4 @@ export class StockService {
 
     );
   }
-
-  loadFakeData() {
-    this.stocks = [];
-    for (let i = 1; i <= 20; i++) {
-      let item = new Stock();
-      item.id = i;
-      item.welfare = 'Nom ' + i;
-      item.quantity = i;
-      item.created = 'created' + i;
-      item.updated = 'updated ' + i;
-      item.userId = i;
-      this.stocks.push(item);
-    }
-    this.emitTotalRecordsSubject(20);
-  }
-
 }

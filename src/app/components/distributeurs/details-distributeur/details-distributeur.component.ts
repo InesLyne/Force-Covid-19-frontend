@@ -11,7 +11,7 @@ import { Distributeur } from 'src/app/models/distributeur';
 export class DetailsDistributeurComponent implements OnInit {
   distributeur: Distributeur;
   @Input() id: any;
-  @Output() displayChange = new EventEmitter();
+  @Output() displayChange = new EventEmitter<boolean>();
   errorMsg: any;
   
   constructor(private distributeurService: DistributeurService, private route: ActivatedRoute) { }

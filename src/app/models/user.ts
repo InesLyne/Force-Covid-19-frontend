@@ -10,7 +10,7 @@ export class User {
     phoneNumber: string;
     identityNumber: string;
     email:string;
-    astLogin: string;
+    lastLogin: string;
     isActive: string;
     
     constructor(){}

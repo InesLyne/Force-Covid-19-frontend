@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
+import { AuthentificationService } from 'src/app/services/authentification.service';
 
+ 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,8 +12,14 @@ import { MenuItem } from 'primeng/api';
 })
 export class HeaderComponent implements OnInit {
   items: MenuItem[];
-
-  constructor() { }
+  user: User;
+  
+  constructor(
+    private authService: AuthentificationService,
+    private router: Router
+  ) { 
+    
+  }
 
   ngOnInit(): void {
     this.items = [
@@ -60,5 +70,17 @@ export class HeaderComponent implements OnInit {
       },
       { separator: true },
     ];
+
+    this.user = this.authService.getCurrentUser();
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['login']);
+  }
+
+  logout() {
+    this.authService.setToken(null);
+    this.authService.setUser(null);
+    this.user = null;
   }
 }

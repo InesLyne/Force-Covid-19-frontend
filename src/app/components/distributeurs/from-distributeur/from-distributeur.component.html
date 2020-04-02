@@ -1,1 +1,31 @@
-<p>from-distributeur works!</p>
+<form #f="ngForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+    <div *ngIf="distributeur"  class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Adresse</label>
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.address" type="text" name="address">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Zone geographique</label>
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.geographicalArea" type="text" name="geographicalArea">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Capacité de stockage</label>
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.storageCapacity" type="text" name="storageCapacity">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Latitude</label>
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.latitude" type="number" name="latitude">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Longitude</label>
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.longitude" type="number" name="longitude">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Manager</label>
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.manager" type="text" name="manager">
+      </div>
+      <div class="p-col-12 txt-align-center">
+        <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
+      </div>
+    </div>
+  </form>

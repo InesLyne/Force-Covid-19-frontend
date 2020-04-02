@@ -45,15 +45,13 @@ export class BeneficiaireService {
       },
       () => {
       }
-    );
-    this.loadFakeData();
-    this.emitBeneficiaires();
+    )
   }
 
   async getBeneficiaire(id: string) {
     return new Promise(
       (resolve, reject) => {
-        this.http.get<any>(this.baseUrl  + id).subscribe(
+        this.http.get<any>(this.baseUrl  + '/' +  id).subscribe(
           (beneficiaire: any) => {
             resolve(beneficiaire);
           }, (error: any) => {
@@ -90,7 +88,7 @@ export class BeneficiaireService {
   async updateBeneficiaire(beneficiaire: Beneficiaire) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
+        this.http.put<any>(this.baseUrl+ '/'  + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -110,7 +108,7 @@ export class BeneficiaireService {
   async patchBeneficiaire(beneficiaire: Beneficiaire) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
+        this.http.patch<any>(this.baseUrl+ '/'  + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -130,7 +128,7 @@ export class BeneficiaireService {
   async deleteBeneficiaire(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl+ '/'  + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -145,19 +143,5 @@ export class BeneficiaireService {
       }
 
     );
-  }
-
-  loadFakeData() {
-    this.beneficiaires = [];
-    for (let i = 1; i <= 20; i++) {
-      let bene = new Beneficiaire();
-      bene.id =  i;
-      bene.firstName = 'Nom ' + i;
-      bene.lastName = 'Prenom ' + i;
-      bene.mobileNumber = 'piece D Identite' + i;
-      bene.mobileNumber = 'telephone ' + i;
-      this.beneficiaires.push(bene);
-    }
-    this.emitTotalRecordsSubject(20);
   }
 }

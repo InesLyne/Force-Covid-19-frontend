@@ -51,7 +51,7 @@ export class CategoryService {
   async getCategory(id: string) {
     return new Promise(
       (resolve, reject) => {
-        this.http.get<any>(this.baseUrl  + id).subscribe(
+        this.http.get<any>(this.baseUrl  + '/' +  id).subscribe(
           (category: any) => {
             resolve(category);
           }, (error: any) => {
@@ -88,7 +88,7 @@ export class CategoryService {
   async updateCategory(category: CategoryModel) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + category.id, JSON.stringify(category)).subscribe(
+        this.http.put<any>(this.baseUrl + '/' + category.id, JSON.stringify(category)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -108,7 +108,7 @@ export class CategoryService {
   async patchCategory(category: CategoryModel) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + category.id, JSON.stringify(category)).subscribe(
+        this.http.patch<any>(this.baseUrl + '/' + category.id, JSON.stringify(category)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -128,7 +128,7 @@ export class CategoryService {
   async deleteCategory(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl + '/' + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

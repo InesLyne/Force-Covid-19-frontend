@@ -6,8 +6,3 @@
 ::ng-deep footer{
   background-color: #379956 !important;
 }
-
-.page-actions{
-  display: flex;
-  justify-content: space-between;
-}

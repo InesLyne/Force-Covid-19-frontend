@@ -27,7 +27,7 @@
 }
 
 .user {
-  text-align: center;
+  text-align: right;
   height: 100%;
   margin-top: 25px;
   text-align: left;
@@ -50,6 +50,31 @@
   font-weight: bold;
   width: 50%;
   /* margin: 5px 0 0 5px; */
+}
+
+.user div.userinfos:hover + .logout {
+  display: block;
+}
+.user div.userinfos + .logout {
+  display: none;
+}
+
+.user .logout:hover {
+  display: block !important;
+
+}
+
+.user .logout {
+  background: #ddd;
+  text-align: center;
+  color: #000;
+  margin-top: -11px;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+.user div.userinfos > .name:hover, .user div.userinfos > .role:hover {
+  cursor: pointer;
 }
 
 .user .name {
@@ -77,6 +102,10 @@
   font-weight: bold;
   padding: 0 3px;
   font-size: 10px;
+}
+
+.user .login-btn {
+  margin-top: 10px;
 }
 
 /* Custom Menu Item */
