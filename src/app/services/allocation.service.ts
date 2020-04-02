@@ -89,7 +89,7 @@ export class AllocationService {
   async updateAllocation(allocation: Allocation) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + allocation.id, JSON.stringify(allocation)).subscribe(
+        this.http.put<any>(this.baseUrl+ '/'  + allocation.id, JSON.stringify(allocation)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -109,7 +109,7 @@ export class AllocationService {
   async patchAllocation(allocation: Allocation) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + allocation.id, JSON.stringify(allocation)).subscribe(
+        this.http.patch<any>(this.baseUrl+ '/'  + allocation.id, JSON.stringify(allocation)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -129,7 +129,7 @@ export class AllocationService {
   async deleteAllocation(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl + '/' + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

@@ -14,28 +14,16 @@
       </div>
       <div class="p-col-12 p-md-6 p-lg-3">
         <label class="form-label" for="">Latitude</label>
-        <input class="form-input" [required]="true" [(ngModel)]="distributeur.latitude" type="text" name="latitude">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.latitude" type="number" name="latitude">
       </div>
       <div class="p-col-12 p-md-6 p-lg-4">
         <label class="form-label" for="">Longitude</label>
-        <input class="form-input" [required]="true" [(ngModel)]="distributeur.longitude" type="text" name="longitude">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.longitude" type="number" name="longitude">
       </div>
       <div class="p-col-12 p-md-6 p-lg-4">
         <label class="form-label" for="">Manager</label>
         <input class="form-input" [required]="true" [(ngModel)]="distributeur.manager" type="text" name="manager">
       </div>
-      <!-- <div class="p-col-12 p-md-6 p-lg-4">
-        <label class="form-label" for="">Adresse</label>
-        <input class="form-input" type="text" formControlName="firstname">
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-4">
-        <label class="form-label" for="">Coordonnées GPS</label>
-        <input class="form-input" type="text" formControlName="firstname">
-      </div>
-      <div class="p-col-12">
-        <p-checkbox name="groupname" value="val1" formControlName="firstname" label="Activez la géolocalisation">
-        </p-checkbox>
-      </div> -->
       <div class="p-col-12 txt-align-center">
         <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
       </div>

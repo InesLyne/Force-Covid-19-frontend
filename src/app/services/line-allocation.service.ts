@@ -88,7 +88,7 @@ export class LineAllocationService {
   async updateLineAllocation(lineAllocation: LineAllocationModel) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + lineAllocation.id, JSON.stringify(lineAllocation)).subscribe(
+        this.http.put<any>(this.baseUrl+ '/'  + lineAllocation.id, JSON.stringify(lineAllocation)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -108,7 +108,7 @@ export class LineAllocationService {
   async patchLineAllocation(lineAllocation: LineAllocationModel) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + lineAllocation.id, JSON.stringify(lineAllocation)).subscribe(
+        this.http.patch<any>(this.baseUrl+ '/'  + lineAllocation.id, JSON.stringify(lineAllocation)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -128,7 +128,7 @@ export class LineAllocationService {
   async deleteLineAllocation(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl+ '/'  + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

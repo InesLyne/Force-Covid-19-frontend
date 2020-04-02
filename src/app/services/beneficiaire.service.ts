@@ -88,7 +88,7 @@ export class BeneficiaireService {
   async updateBeneficiaire(beneficiaire: Beneficiaire) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
+        this.http.put<any>(this.baseUrl+ '/'  + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -108,7 +108,7 @@ export class BeneficiaireService {
   async patchBeneficiaire(beneficiaire: Beneficiaire) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
+        this.http.patch<any>(this.baseUrl+ '/'  + beneficiaire.id, JSON.stringify(beneficiaire)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -128,7 +128,7 @@ export class BeneficiaireService {
   async deleteBeneficiaire(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl+ '/'  + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
