@@ -22,7 +22,7 @@
       </div>
       <div class="p-col-12 p-md-6 p-lg-4">
         <label class="form-label" for="">Manager</label>
-        <input class="form-input" [required]="true" [(ngModel)]="distributeur.manager" type="text" name="manager">
+        <p-dropdown [options]="managers" [(ngModel)]="distributeur.manager" name="manager"></p-dropdown>
       </div>
       <div class="p-col-12 txt-align-center">
         <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>

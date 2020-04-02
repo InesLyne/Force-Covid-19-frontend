@@ -13,6 +13,8 @@ export class FromDistributeurComponent implements OnInit, OnDestroy {
   @Output() displayChange = new EventEmitter<boolean>();
   errorMsg: any;
   successMsg: any;
+
+  managers: any;
   
   constructor(private distributeurService: DistributeurService) { }
 
@@ -22,6 +24,13 @@ export class FromDistributeurComponent implements OnInit, OnDestroy {
     } else {
       this.distributeur = new Distributeur();
     }
+
+    this.managers = [
+      {label: 'Selectionnner un manager', value: null},
+      {label: 'Modou khoulé', value: '/api/users/25'},
+      {label: 'Mbaye Traoré', value: '/api/users/26'},
+      {label: 'Ameth Gaye', value: '/api/users/27'},
+  ];
   }
 
   onGetDistributeur(id: string){

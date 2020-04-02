@@ -134,7 +134,11 @@ export class ListStockComponent implements OnInit {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = 'Mettre à jour le Stock';
+    if(oldData){
+      this.modalTitle = 'Mettre à jour le Stock';
+    }else{
+      this.modalTitle = 'Ajout de Stock';
+    }
   }
 
   showDetailsDialog(data) {

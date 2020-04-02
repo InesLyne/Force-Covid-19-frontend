@@ -130,7 +130,11 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = 'Ajout d\'un bénéficiaire';
+    if(oldData){
+      this.modalTitle = 'Modifier d\'un bénéficiaire';
+    }else{
+      this.modalTitle = 'Ajout d\'un bénéficiaire';
+    }
   }
 
   showDetailsDialog(data) {
