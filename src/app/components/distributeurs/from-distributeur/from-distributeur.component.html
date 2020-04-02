@@ -1,28 +1,28 @@
-<form (ngSubmit)="onSubmit()" class="form-wrapper">
-    <div class="p-grid">
+<form #f="ngForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+    <div *ngIf="distributeur"  class="p-grid">
       <div class="p-col-12 p-md-6 p-lg-3">
         <label class="form-label" for="">Adresse</label>
-        <input class="form-input" [(ngModel)]="distributeur.address" type="text" name="address">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.address" type="text" name="address">
       </div>
       <div class="p-col-12 p-md-6 p-lg-3">
         <label class="form-label" for="">Zone geographique</label>
-        <input class="form-input" [(ngModel)]="distributeur.geographicalArea" type="text" name="geographicalArea">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.geographicalArea" type="text" name="geographicalArea">
       </div>
       <div class="p-col-12 p-md-6 p-lg-3">
         <label class="form-label" for="">Capacité de stockage</label>
-        <input class="form-input" [(ngModel)]="distributeur.storageCapacity" type="text" name="storageCapacity">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.storageCapacity" type="text" name="storageCapacity">
       </div>
       <div class="p-col-12 p-md-6 p-lg-3">
         <label class="form-label" for="">Latitude</label>
-        <input class="form-input" [(ngModel)]="distributeur.latitude" type="text" name="latitude">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.latitude" type="text" name="latitude">
       </div>
       <div class="p-col-12 p-md-6 p-lg-4">
         <label class="form-label" for="">Longitude</label>
-        <input class="form-input" [(ngModel)]="distributeur.longitude" type="text" name="longitude">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.longitude" type="text" name="longitude">
       </div>
       <div class="p-col-12 p-md-6 p-lg-4">
         <label class="form-label" for="">Manager</label>
-        <input class="form-input" [(ngModel)]="distributeur.manager" type="text" name="manager">
+        <input class="form-input" [required]="true" [(ngModel)]="distributeur.manager" type="text" name="manager">
       </div>
       <!-- <div class="p-col-12 p-md-6 p-lg-4">
         <label class="form-label" for="">Adresse</label>
@@ -37,7 +37,7 @@
         </p-checkbox>
       </div> -->
       <div class="p-col-12 txt-align-center">
-        <button type="submit" class="button bgColor-secondary">Enregistrer</button>
+        <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
       </div>
     </div>
   </form>
