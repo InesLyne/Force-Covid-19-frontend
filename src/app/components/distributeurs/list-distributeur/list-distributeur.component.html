@@ -7,18 +7,6 @@
     </div>
   </div>
 </section>
-<section class="page-section first">
-  <div class="page-actions">
-    <form action="" class="form-filter">
-      <button type="button" class="button bgColor-yellow">
-        Filtrer
-      </button>
-    </form>
-    <button (click)="showFormDialog()" type="button" class="button bgColor-primary">
-      Ajouter un distributeur
-    </button>
-  </div>
-</section>
 
 <section class="page-section first">
   <div class="page-actions">
@@ -46,14 +34,15 @@
       <p-table #dt [columns]="cols" 
                     [value]="listItems" 
                     selectionMode="multiple" 
-                    [lazy]="true" 
                     [(selection)]="selectedItems" 
                     [loading]="loading" 
                     [totalRecords]="totalRecords" 
-                    [paginator]="true" 
+                    [paginator]="true"
                     [rows]="searchCriteria.size"
                     [responsive]="true"
-                    (onLazyLoad)="loadItemLazy($event)">
+                    [rowHover]="true"
+                    (onLazyLoad)="loadItemLazy($event)"
+                    [resizableColumns]="true">
           <ng-template pTemplate="caption">
               <div style="text-align: right">        
                   <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -63,7 +52,10 @@
           </ng-template>
           <ng-template pTemplate="header" let-columns>
               <tr>
-                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                <th>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
                       {{col.header}}
                       <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
                   </th>
@@ -72,6 +64,9 @@
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
               <tr [pSelectableRow]="rowData">
+                <td>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
                   <td *ngFor="let col of columns">
                       {{rowData[col.field]}}
                   </td>
