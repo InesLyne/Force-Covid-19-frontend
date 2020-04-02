@@ -1,0 +1,22 @@
+::ng-deep body .ui-dropdown {
+    width: 100%;
+}
+
+::ng-deep .form-wrapper input{
+    width: 100%;
+    border: 2px solid #000000 !important;
+}
+
+.action{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.action button:first-child{
+    margin-right: 10px;
+}
+
+.action button{
+    width: 200px;
+}

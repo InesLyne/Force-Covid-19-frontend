@@ -86,11 +86,11 @@ body {
   color: white !important;
 }
 
-.bgColor-yellow{
+.bgColor-yellow {
   background-color: var(--colors-yellow) !important;
 }
 
-.button.bgColor-yellow{
+.button.bgColor-yellow {
   color: #fff;
 }
 
@@ -118,7 +118,7 @@ body {
   justify-content: flex-end;
 }
 
-.hero-image img{
+.hero-image img {
   height: 292px;
 }
 
@@ -156,25 +156,45 @@ thead tr th {
 }
 tbody tr td {
   background-color: #eee !important;
+  font-size: 16px;
 }
 
-body .ui-table .ui-table-tbody > tr.ui-state-highlight td {
-  background-color: var(--colors-yellow) !important;
-  color: #ffffff;
+tbody tr td a,
+tbody tr td a:hover {
+  color: #000000;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
 }
-body .ui-table .ui-table-caption{
+
+tbody tr td a i {
+  margin-right: 5px;
+}
+
+tbody tr td div {
+  display: flex;
+}
+
+body .ui-table .ui-table-tbody > tr.ui-state-highlight td,
+body .ui-table .ui-table-tbody > tr.ui-state-highlight td a,
+body .ui-table .ui-table-tbody > tr.ui-state-highlight td i {
+  background-color: var(--colors-yellow) !important;
+  color: #ef255f;
+  font-weight: bold;
+}
+body .ui-table .ui-table-caption {
   background-color: transparent;
   border: 0;
   position: relative;
 }
 
-body .ui-table .ui-table-caption .pi{
+body .ui-table .ui-table-caption .pi {
   position: absolute;
   right: 20px;
   top: 20px;
 }
 
-input{
+input {
   height: 50px;
   border: 2px solid #979797 !important;
   border-radius: 4px !important;
@@ -185,33 +205,57 @@ input{
   line-height: 1.5;
 }
 
-.page-actions{
+.page-actions {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.form-filter{
+.form-filter {
   display: flex;
   align-items: flex-end;
 }
 
-.form-filter .form-group{
+.form-filter .form-group {
   margin-right: 20px;
 }
 
-body .ui-dropdown{
-  height: 50px;
-  border: 2px solid #000;
+body .form-filter .ui-dropdown{
   width: 220px;
 }
-body .ui-dropdown .ui-dropdown-label{
+
+body .ui-dropdown {
+  height: 50px;
+  border: 2px solid #000;
+}
+body .ui-dropdown .ui-dropdown-label {
   padding-top: 15px;
 }
 
-.form-group .form-label{
+.form-group .form-label {
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+body .ui-chkbox .ui-chkbox-box.ui-state-active,
+body .ui-chkbox .ui-chkbox-box.ui-state-active:not(.ui-state-disabled):hover {
+  background-color: #ffc85b !important;
+  border-color: #ffc85b !important;
+}
+
+tr td:first-child,
+tr th:first-child {
+  width: 50px;
+  background-color: #fff !important;
+}
+
+body .ui-table .ui-table-tbody > tr.ui-state-highlight td:first-child {
+  background-color: #fff !important;
+}
+
+.form-input{
+  border: 2px solid #000 !important;
+  height: 50px !important;
 }
 
 @media (min-width: 62rem) {
