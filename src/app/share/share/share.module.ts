@@ -17,6 +17,11 @@ import { SliderModule } from 'primeng/slider';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
 
+import { ToastModule } from 'primeng/toast';
+import { PanelModule } from 'primeng/panel';
+import { MessageModule } from 'primeng/message';
+import {FocusTrapModule} from 'primeng/focustrap';
+
 
 @NgModule({
   declarations: [],
@@ -34,6 +39,10 @@ import { DialogModule } from 'primeng/dialog';
     SliderModule,
     MultiSelectModule,
     DialogModule,
+    PanelModule,
+    MessageModule,
+    ToastModule,
+    FocusTrapModule
   ],
   exports: [
     FormsModule,
@@ -48,6 +57,10 @@ import { DialogModule } from 'primeng/dialog';
     SliderModule,
     MultiSelectModule,
     DialogModule,
+    PanelModule,
+    MessageModule,
+    ToastModule,
+    FocusTrapModule
   ]
 })
 export class ShareModule { }

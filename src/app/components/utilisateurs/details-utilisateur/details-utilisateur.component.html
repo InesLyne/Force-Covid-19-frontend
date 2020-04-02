@@ -1,1 +1,127 @@
-<p>details-utilisateur works!</p>
+<section class="container">
+  <!-- informations personnelles -->
+  <button type="button" (click)="showInfos()" pButton label="Informations Personnelles" icon="pi pi-eye">
+  </button>
+  <p-dialog header="Informations personnelles" [(visible)]="visible" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <p> <span class="lbl">Prenom: </span> <span class="dt">{{ user.firstName }}</span> </p>
+    <p> <span class="lbl">Nom: </span> <span class="dt">{{ user.lastName }}</span> </p>
+    <p> <span class="lbl">Telephone: </span> <span class="dt">{{ user.phoneNumber }}</span> </p>
+    <p> <span class="lbl">Numéro CNI: </span> <span class="dt">{{ user.identityNumber }}</span> </p>
+    <p> <span class="lbl">Email: </span> <span class="dt">{{ user.email }}</span> </p>
+    <p> <span class="lbl">Nom d'utilisateur: </span> <span class="dt">{{ user.username }}</span> </p>
+    <p> <span class="lbl">Mot de passe: </span> <span class="dt">{{ user.password }}</span> </p>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="clickModifier()" label="modifier"
+        class="ui-button-success"></button>
+      <button type="button" pButton icon="pi pi-times" (click)="visible=false" label="fermer"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </p-dialog>
+  <!-- formulaire de modification des données de l'utilisateur -->
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+  <form  [hidden]="visibleForm" [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+    <p-panel header="Modification des informations personnelles.">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Prenom *:
+          </div>
+          <div class="ui-grid-col-4 ">
+            <input pInputText type="text" id="float-input" formControlName="firstName"  [ngModel]="user.firstName" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Prenom is required"
+              *ngIf="!userform.controls['firstName'].valid&&userform.controls['firstName'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Nom *:
+          </div>
+          <div class="ui-grid-col-4 ">
+            <input pInputText type="text" formControlName="lastName" [ngModel]="user.lastName" />
+          </div>
+           <div class="ui-grid-col-4">
+            <p-message severity="error" text="Nom is required"
+              *ngIf="!userform.controls['lastName'].valid&&userform.controls['lastName'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Telephone *:
+          </div>
+          <div class="ui-grid-col-4 ">
+            <input pInputText type="text" formControlName="phoneNumber" [ngModel]="user.phoneNumber" />
+          </div>
+           <div class="ui-grid-col-4">
+            <p-message severity="error" text="Telephone is required"
+              *ngIf="!userform.controls['phoneNumber'].valid&&userform.controls['phoneNumber'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Numéro CNI *:
+          </div>
+          <div class="ui-grid-col-4 ">
+            <input pInputText type="text" formControlName="identityNumber" [ngModel]="user.identityNumber" />
+          </div>
+           <div class="ui-grid-col-4">
+            <p-message severity="error" text="Numéro CNI is required"
+              *ngIf="!userform.controls['identityNumber'].valid&&userform.controls['identityNumber'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Email *:
+          </div>
+          <div class="ui-grid-col-4 ">
+            <input pInputText type="email" formControlName="email" [ngModel]="user.email" />
+          </div>
+           <div class="ui-grid-col-4">
+            <p-message severity="error" text="email is required"
+              *ngIf="!userform.controls['email'].valid&&userform.controls['email'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Nom d'utilisateur *:
+          </div>
+          <div class="ui-grid-col-4 ">
+            <input pInputText type="username" formControlName="username" [ngModel]="user.username" />
+          </div>
+           <div class="ui-grid-col-4">
+            <p-message severity="error" text="Nom d'utilisateur is required"
+              *ngIf="!userform.controls['username'].valid&&userform.controls['username'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Password *:
+          </div>
+          <div class="ui-grid-col-4 ">
+            <input pInputText type="password" formControlName="password" [ngModel]="user.password" />
+          </div>
+           <div class="ui-grid-col-4">
+            <p-message severity="error" [text]="userform.controls['password'].errors['required'] ? 'Password is required' : userform.controls['password'].errors['minlength'] ? 'Must be longer than 6 characters' : ''"
+              *ngIf="!userform.controls['password'].valid&&userform.controls['password'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"></div>
+          <div class="ui-grid-col-4">
+            <button pButton type="submit" label="Submit" [disabled]="!userform.valid"></button>
+          </div>
+          <div class="ui-grid-col-4"></div>
+        </div>
+
+      </div>
+    </p-panel>
+  </form>
+</section>

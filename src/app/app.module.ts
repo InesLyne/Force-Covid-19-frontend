@@ -35,11 +35,7 @@ import { StocksModule } from './components/stocks/stocks.module';
 import { UtilisateursModule } from './components/utilisateurs/utilisateurs.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DialogModule } from 'primeng/dialog';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { PanelModule } from 'primeng/panel';
-import { MessagesModule } from 'primeng/messages';
+
 
 
 
@@ -48,7 +44,7 @@ import { MessagesModule } from 'primeng/messages';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,16 +64,12 @@ import { MessagesModule } from 'primeng/messages';
     StocksModule,
     UtilisateursModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    DialogModule,
-    ToastModule,
-    PanelModule,
-    MessagesModule
+
   ],
   providers: [
     DatePipe,
     FileService,
     RequestCacheService,
-    MessageService,
    // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptorService, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],

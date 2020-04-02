@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { UtilisateursRoutingModule } from './utilisateurs-routing.module';
 import { ShareModule } from 'src/app/share/share/share.module';
 import { FormsModule } from '@angular/forms';
-import { CompteComponent } from './compte/compte.component';
+
 
 
 
@@ -16,14 +16,12 @@ import { CompteComponent } from './compte/compte.component';
     ListUtilisateurComponent,
     DetailsUtilisateurComponent,
     FormUtilisateurComponent,
-    LoginComponent,
-    CompteComponent
-  ],
+    LoginComponent  ],
   imports: [
     CommonModule,
     FormsModule,
     ShareModule,
-    UtilisateursRoutingModule
+    UtilisateursRoutingModule,
   ]
 })
 export class UtilisateursModule { }
