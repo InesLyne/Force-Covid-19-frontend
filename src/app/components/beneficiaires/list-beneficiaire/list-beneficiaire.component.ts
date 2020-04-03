@@ -141,7 +141,7 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDialog = false;
     this.selectedData = data;
     this.displayDetailsDialog = true;
-    this.modalTitle = 'Recap Bénéficiaire';
+    this.modalTitle = 'Récap Bénéficiaire';
   }
 
   onDialogHide(event) {

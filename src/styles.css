@@ -284,6 +284,15 @@ tbody tr td a:last-child{
   border-right: 0px !important;
 }
 
+.form-wrapper.detail{
+  font-size: 18px;
+  padding-top: 40px;
+}
+
+.form-wrapper.detail div{
+  margin-bottom: 5px;
+}
+
 @media (min-width: 62rem) {
   .grid-column {
     padding-left: 0.5rem;
