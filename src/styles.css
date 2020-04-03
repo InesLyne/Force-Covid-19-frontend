@@ -284,6 +284,26 @@ tbody tr td a:last-child{
   border-right: 0px !important;
 }
 
+.form-wrapper.detail{
+  font-size: 18px;
+  padding-top: 40px;
+}
+
+.form-wrapper.detail div{
+  margin-bottom: 5px;
+}
+
+body .ui-dialog .ui-dialog-titlebar{
+  background-color: #fff !important;
+  border: 0 !important;
+  padding-top: 30px !important;
+  font-size: 20px !important;
+}
+
+body .ui-dialog .ui-dialog-content{
+  border-top: 0px !important;
+}
+
 @media (min-width: 62rem) {
   .grid-column {
     padding-left: 0.5rem;

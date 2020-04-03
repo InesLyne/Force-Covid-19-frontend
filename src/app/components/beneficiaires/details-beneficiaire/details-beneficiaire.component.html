@@ -1,54 +1,21 @@
 
-<div class="form-wrapper">
-  <div *ngIf="beneficiaire"  class="p-grid">
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Prénom</label>
-      <span>{{beneficiaire.firstName}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Nom</label>
-      <span>{{beneficiaire.lastName}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Salaire mensuel</label>
-      <span>{{beneficiaire.monthlyIncome}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Nombre d'enfants</label>
-      <span>{{beneficiaire.numberOfChildren}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Nombre de personnes en charge</label>
-      <span>{{beneficiaire.numberOfPeopleInCharge}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Contact</label>
-      <span>{{beneficiaire.mobileNumber}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Adresse</label>
-      <span>{{beneficiaire.address}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Latitude</label>
-      <span>{{beneficiaire.latitude}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Longitude</label>
-      <span>{{beneficiaire.longitude}}</span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Allocation</label>
-      <span *ngFor="let alloc of beneficiaire.allocations" >{{alloc}} , </span>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Subdivision</label>
-      <span>{{beneficiaire.subdivision}}</span>
-    </div>
+<div class="form-wrapper detail">
+  <div *ngIf="beneficiaire">
+    <div>Nom : <strong>{{beneficiaire.firstName}} {{beneficiaire.lastName}}</strong></div>
+    <div>Salaire mensuel : <strong>{{beneficiaire.monthlyIncome}}</strong></div>
+    <div>Nbre d’enfants : <strong>{{beneficiaire.numberOfChildren}}</strong></div>
+    <div>Nbre personnes agées : <strong>{{beneficiaire.numberOfPeopleInCharge}}</strong></div>
+    <div>Contact : <strong>{{beneficiaire.mobileNumber}}</strong></div>
+    <div>Subdivision : <strong>{{beneficiaire.subdivision}}</strong></div>
+    <div>Adresse : <strong>{{beneficiaire.address}}</strong></div>
+    <div>Coordonnées GPS : <strong>{{beneficiaire.latitude}} {{beneficiaire.longitude}}</strong></div>
   </div>
+
+  <div class="alloc" *ngFor="let alloc of beneficiaire.allocations" >{{alloc}} , </div>
+
   <div class="p-grid p-justify-end">
-    <div class="p-col-12 txt-align-center">
-      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
+    <div class="p-col-12 action">
+      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="button ui-button-raised ui-button-secondary"></button>
     </div>
   </div>
 </div>
