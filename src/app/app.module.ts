@@ -38,6 +38,7 @@ import { DialogModule } from 'primeng/dialog';
 import { StatisticsModule } from './components/statistics/statistics.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

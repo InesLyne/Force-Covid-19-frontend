@@ -13,13 +13,14 @@
     <form action="" class="form-filter">
       <div class="form-group">
         <label for="" class="form-label">Nom</label>
-        <p-dropdown name="selectedCity1" [options]="cities1" [(ngModel)]="selectedCity1"></p-dropdown>
+        <p-autoComplete  name="selectedCity1"[(ngModel)]="selectName" [suggestions]="filteredNames" (completeMethod)="search($event)"
+          placeholder="Search" (ngModelChange)="onChange()"></p-autoComplete>
       </div>
       <div class="form-group">
-        <label for="" class="form-label">Nom</label>
-        <p-dropdown name="selectedCity2" [options]="cities2" [(ngModel)]="selectedCity2"></p-dropdown>
+        <label for="" class="form-label">Salaire</label>
+       <input type="number" name="salaire" id="salaire" [(ngModel)]="salaire" (ngModelChange)="onChange()">
       </div>
-      <button type="button" class="button bgColor-yellow">
+      <button type="button" class="button bgColor-yellow" (click)="onFilter()" [disabled]="!selectName && !salaire">
         Filtrer
       </button>
     </form>
@@ -81,20 +82,19 @@
                         <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
                           <i class="pi pi-trash"></i>
                         </a> -->
-    
-                      </div>
-                    </td>
-              </tr>
-          </ng-template>
-      </p-table>
+
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </section>
 
 <p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true"
   [style]="{width: '60vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]='false'>
-    <app-form-beneficiaire [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
-    </app-form-beneficiaire>
-    <app-details-beneficiaire [id]="selectedData" *ngIf="displayDetailsDialog"
-      (displayChange)="onDialogHide($event)">
-    </app-details-beneficiaire>
+  <app-form-beneficiaire [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
+  </app-form-beneficiaire>
+  <app-details-beneficiaire [id]="selectedData" *ngIf="displayDetailsDialog" (displayChange)="onDialogHide($event)">
+  </app-details-beneficiaire>
 </p-dialog>
