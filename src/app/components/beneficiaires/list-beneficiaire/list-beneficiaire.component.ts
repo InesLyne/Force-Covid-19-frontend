@@ -63,13 +63,13 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cols = [
-      { field: 'firstName', header: 'Prénom' },
-      { field: 'lastName', header: 'Nom' },
+      { field: 'firstName', header: 'Nom Bénéficiaire' },
       { field: 'monthlyIncome', header: 'Salaire mensuel' },
       { field: 'numberOfChildren', header: "Nombre d'enfants" },
       { field: 'numberOfPeopleInCharge', header: 'Nombre de personnes en charge' },
       { field: 'mobileNumber', header: 'Contact' },
-      { field: 'address', header: 'Adresse' }
+      { field: 'address', header: 'Adresse' },
+      { field: 'address', header: 'Coordonnées GPS' }
     ];
 
     this.beneficiairesSubscription=this.beneficiaireService.beneficiairessSubject.subscribe(
@@ -130,7 +130,11 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = 'Ajout d\'un bénéficiaire';
+    if(oldData){
+      this.modalTitle = 'Modifier d\'un bénéficiaire';
+    }else{
+      this.modalTitle = 'Ajout d\'un bénéficiaire';
+    }
   }
 
   showDetailsDialog(data) {

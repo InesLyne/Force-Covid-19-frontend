@@ -1,3 +1,5 @@
+import { UtilisateursModule } from '../components/utilisateurs/utilisateurs.module';
+
 export class Distributeur {
     id: number;
     storageCapacity: string;
@@ -5,6 +7,7 @@ export class Distributeur {
     address: string;
     latitude: number;
     longitude: number;
+    manager: UtilisateursModule;
 
     constructor(){}
 }

@@ -65,11 +65,12 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {  
     this.cols = [
-      { field: 'address', header: 'Adresse' },
-      { field: 'geographicalArea', header: 'Zone geographique' },
-      { field: 'storageCapacity', header: 'Capacité de stockage' },
-      { field: 'latitude', header: 'Latitude' },
-      { field: 'longitude', header: 'Longitude' }
+      { field: 'manager?.firstName', header: 'Nom & Prenom' },
+      { field: 'manager?.identityNumber', header: 'N° CNI' },
+      { field: 'geographicalArea', header: 'Magazin' },
+      { field: 'geographicalArea', header: 'Zone Octroyée' },
+      { field: 'longitude', header: 'Bénéficiaire Octroyé' },
+      { field: 'longitude', header: 'Coordonnées GPS' }
     ];
 
     this.distributeurSubscription=this.distributeurService.distributeursSubject.subscribe(
@@ -130,7 +131,7 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = 'Ajout un distributeur';
+    this.modalTitle = oldData?'Modifier un distributeur':'Ajout un distributeur';
   }
 
   showDetailsDialog(data) {
@@ -143,6 +144,7 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
   onDialogHide(event) {
     this.displayDialog = event;
     this.displayDetailsDialog = event;
+    console.log('Here')
     this.selectedData = null;
   }
 

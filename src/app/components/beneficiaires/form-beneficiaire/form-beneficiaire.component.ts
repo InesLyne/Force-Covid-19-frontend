@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 
 import { BeneficiaireService } from '../../../services/beneficiaire.service';
 import { Beneficiaire } from 'src/app/models/beneficiaire';
@@ -12,35 +11,85 @@ import { Beneficiaire } from 'src/app/models/beneficiaire';
   styleUrls: ['./form-beneficiaire.component.css']
 })
 export class FormBeneficiaireComponent implements OnInit {
-  form: FormGroup;
   beneficiaire: Beneficiaire;
   @Input() id: any;
-  @Output() displayChange = new EventEmitter();
+  @Output() displayChange = new EventEmitter<boolean>();
   errorMsg: any;
+  successMsg: any;
+
+  allocations: any;
+  selectedAllocations: any;
+  subdivisions: any;
   
-  constructor(private beneficiaireService: BeneficiaireService, private fb: FormBuilder) { }
+  constructor(private beneficiaireService: BeneficiaireService) { }
 
   ngOnInit(): void {
-
-    this.form = this.fb.group({
-      lastname: [''],
-      firstname: [''],
-      pieceDIdentite: [''],
-      phoneNumber: [''],
-      email: [''],
-    });
-
     if(this.id){
-      this.onGetBeneficiaire(this.id);
+      this.onGetBenefiaire(this.id);
     } else {
       this.beneficiaire = new Beneficiaire();
     }
+
+    this.allocations = [
+      {label: 'Allocation 1', value: '/api/allocations/1'},
+      {label: 'Allocation 2', value: '/api/allocations/2'},
+      {label: 'Allocation 3', value: '/api/allocations/3'},
+      {label: 'Allocation 4', value: '/api/allocations/4'},
+      {label: 'Allocation 5', value: '/api/allocations/5'},
+      {label: 'Allocation 6', value: '/api/allocations/6'},
+      {label: 'Allocation 7', value: '/api/allocations/7'},
+      {label: 'Allocation 8', value: '/api/allocations/8'},
+      {label: 'Allocation 9', value: '/api/allocations/9'},
+      {label: 'Allocation 10', value: '/api/allocations/10'},
+  ];
+
+  this.subdivisions = [
+    {label: 'Selectionnner subdivision', value: null},
+    {label: 'Subdivision 1', value: '/api/subdivisions/450'},
+    {label: 'Subdivision 2', value: '/api/subdivisions/483'},
+    {label: 'Subdivision 3', value: '/api/subdivisions/496'},
+    {label: 'Subdivision 4', value: '/api/subdivisions/423'},
+    {label: 'Subdivision 5', value: '/api/subdivisions/480'}
+];
   }
 
-  onGetBeneficiaire(id: string){
+  onGetBenefiaire(id: string){
     this.beneficiaireService.getBeneficiaire(id).then(
-      (result: Beneficiaire)=>{
-        this.beneficiaire=result;
+      (beneficiaire: Beneficiaire)=>{
+        this.beneficiaire=beneficiaire;
+        if(this.beneficiaire && this.beneficiaire.allocations && this.allocations.length>0){
+          this.selectedAllocations=this.beneficiaire.allocations.join(',');
+        }
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onAddBeneficiaire(){
+    if(this.selectedAllocations){
+      this.beneficiaire.allocations=this.selectedAllocations.split(',');
+    }
+    this.beneficiaireService.addBeneficiaire(this.beneficiaire).then(
+      (response: any)=>{
+        this.successMsg= response;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onUpdateBeneficiaire(){
+    if(this.selectedAllocations){
+      this.beneficiaire.allocations=this.selectedAllocations.split(',');
+    }
+    this.beneficiaireService.updateBeneficiaire(this.beneficiaire).then(
+      (response: any)=>{
+        this.successMsg= response;
       }
     ).catch(
       (error: any)=>{
@@ -50,17 +99,13 @@ export class FormBeneficiaireComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.beneficiaire) {
-      console.log("Update");
-      console.log(this.beneficiaire);
-      this.beneficiaire = null;
+    if (this.id) {
+      this.onUpdateBeneficiaire();
     } else {
-      console.log("New")
+      this.onAddBeneficiaire();
     }
-    // this.beneficiaireService.addBeneficiaire(this.form.value);
   }
 
- 
   onDialogHide() {
     this.beneficiaire = null;
     this.displayChange.emit(false);
@@ -69,5 +114,4 @@ export class FormBeneficiaireComponent implements OnInit {
   ngOnDestroy() {
     this.displayChange.unsubscribe();
   }
-
 }

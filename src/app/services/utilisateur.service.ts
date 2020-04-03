@@ -88,7 +88,7 @@ export class UtilisateurService {
   async updateUtilisateur(utilisateur: User) {
     return new Promise(
       (resolve, reject) => {
-        this.http.put<any>(this.baseUrl + utilisateur.id, JSON.stringify(utilisateur)).subscribe(
+        this.http.put<any>(this.baseUrl + '/' + utilisateur.id, JSON.stringify(utilisateur)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -108,7 +108,7 @@ export class UtilisateurService {
   async patchUtilisateur(utilisateur: User) {
     return new Promise(
       (resolve, reject) => {
-        this.http.patch<any>(this.baseUrl + utilisateur.id, JSON.stringify(utilisateur)).subscribe(
+        this.http.patch<any>(this.baseUrl+ '/'  + utilisateur.id, JSON.stringify(utilisateur)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
@@ -128,7 +128,7 @@ export class UtilisateurService {
   async deleteUtilisateur(id: number) {
     return new Promise(
       (resolve, reject) => {
-        this.http.delete<any>(this.baseUrl + id).subscribe(
+        this.http.delete<any>(this.baseUrl+ '/'  + id).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

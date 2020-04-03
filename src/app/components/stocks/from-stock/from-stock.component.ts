@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { StockService } from 'src/app/services/stock.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { GlobalService } from 'src/app/global.service';
+import {CalendarModule} from 'primeng/calendar';
 
 @Component({
   selector: 'app-from-stock',
@@ -14,8 +16,13 @@ export class FromStockComponent implements OnInit {
   @Input() id: any;
   @Output() displayChange = new EventEmitter();
   errorMsg: any;
+  successMsg: any;
+
+  users: any;
+  welfares: any;
+  value: Date;
   
-  constructor(private stockService: StockService, private fb: FormBuilder) { }
+  constructor(private stockService: StockService, private global: GlobalService) { }
 
   ngOnInit(): void {
     if(this.id){
@@ -23,6 +30,21 @@ export class FromStockComponent implements OnInit {
     } else {
       this.stock = new Stock();
     }
+
+    this.users= [
+        {label: 'Selectionnner un utilisateur', value: null},
+        {label: 'Modou khoulé', value: '/api/users/25'},
+        {label: 'Mbaye Traoré', value: '/api/users/26'},
+        {label: 'Ameth Gaye', value: '/api/users/27'},
+    ];
+
+    this.welfares= [
+        {label: 'Selectionnner un bien', value: null},
+        {label: 'Riz', value: '/api/welfares/601'},
+        {label: 'Gnambi', value: '/api/welfares/602'},
+        {label: 'Diakhatou', value: '/api/welfares/603'},
+    ];
+
   }
 
   onGetStock(id: string){
@@ -37,6 +59,41 @@ export class FromStockComponent implements OnInit {
     )
   }
 
+
+  onAddStock(){
+    this.stock.created= this.global.formatedCurentDate();
+    this.stock.updated= this.global.formatedCurentDate();
+    this.stockService.addStock(this.stock).then(
+      (response: any)=>{
+        this.successMsg= response;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onUpdateStock(){
+    this.stock.updated= this.global.formatedCurentDate();
+    this.stockService.updateStock(this.stock).then(
+      (response: any)=>{
+        this.successMsg= response;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onSubmit() {
+    if (this.id) {
+      this.onUpdateStock();
+    } else {
+      this.onAddStock();
+    }
+  }
 
   onDialogHide() {
     this.stock = null;

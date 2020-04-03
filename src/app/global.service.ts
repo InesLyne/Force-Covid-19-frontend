@@ -15,18 +15,18 @@ export class GlobalService {
   /* USER_REGISTER_URL = this.BASE_API_URL + '/auth/register'; */
   USER_LOGIN_URL = (this.BASE_API_URL.substring(0,this.BASE_API_URL.length - 4) )+ '/authentication_token';
   USER_LOGOUT_URL = this.BASE_API_URL + '/users/logout';
-  ALLOCATION_URL=this.BASE_API_URL+'/allocations/';
-  BENEFICIAIRE_URL=this.BASE_API_URL+'/beneficiaries/';
-  BIEN_URL=this.BASE_API_URL+'/welfares/';
-  CATEGORY_URL=this.BASE_API_URL+'/categories/';
-  DEPARTEMENT_URL=this.BASE_API_URL+'/departments/';
-  DISTRIBUTEUR_URL=this.BASE_API_URL+'/distributors/';
-  LINE_ALLOCATION_URL=this.BASE_API_URL+'/line_allocations/';
-  LIVREUR_URL=this.BASE_API_URL+'/delivery_men/';
-  REGION_URL=this.BASE_API_URL+'/regions/';
-  STOCK_URL=this.BASE_API_URL+'/stocks/';
-  SUBDIVISION_URL=this.BASE_API_URL+'/subdivisions/';
-  UTILISATEUR_URL=this.BASE_API_URL+'/users/';
+  ALLOCATION_URL=this.BASE_API_URL+'/allocations';
+  BENEFICIAIRE_URL=this.BASE_API_URL+'/beneficiaries';
+  BIEN_URL=this.BASE_API_URL+'/welfares';
+  CATEGORY_URL=this.BASE_API_URL+'/categories';
+  DEPARTEMENT_URL=this.BASE_API_URL+'/departments';
+  DISTRIBUTEUR_URL=this.BASE_API_URL+'/distributors';
+  LINE_ALLOCATION_URL=this.BASE_API_URL+'/line_allocations';
+  LIVREUR_URL=this.BASE_API_URL+'/delivery_men';
+  REGION_URL=this.BASE_API_URL+'/regions';
+  STOCK_URL=this.BASE_API_URL+'/stocks';
+  SUBDIVISION_URL=this.BASE_API_URL+'/subdivisions';
+  UTILISATEUR_URL=this.BASE_API_URL+'/users';
 
 
   UPLOAD_FILE = '/upload/images';
@@ -55,6 +55,7 @@ export class GlobalService {
 
   public prepareSearchCriteria(event: any, searchCriteria: SearchCriteria): SearchCriteria{
     if(event){
+      console.log(event);
       if(event.sortField){
         searchCriteria.orderBy=event.sortField;
       }
@@ -62,12 +63,17 @@ export class GlobalService {
         searchCriteria.orderDirection=event.sortOrder;
       }
       if(event.first){
+        searchCriteria.page=(event.first / searchCriteria.size)+1;
       }
       if(event.rows){
   
       }
     }
     return searchCriteria;
+  }
+
+  public formatedCurentDate():string{
+    return (new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])+'+00:00'
   }
 
   

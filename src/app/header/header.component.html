@@ -1,11 +1,36 @@
-<div class="p-grid header">
-  <div class="p-col-4">
-    <img class="logo" width="220" src="assets/icons/Logo-ForceCovid19-extended.svg" />
-  </div>
-  <div class="p-col-6" styl>
-    <p-menubar [model]="items"> </p-menubar>
-  </div>
-  <div class="p-col-2 user">
+<div class="header">
+  <a routerLink="" class="logo">
+    <img width="220" src="assets/icons/Logo-ForceCovid19-extended.svg" />
+  </a>
+  
+  <div class="herder-links">
+    <div class="pages-links">
+      <!-- <a routerLink="">
+        <img width="220" src="assets/images/home.svg" />
+        <div>Accueil</div>
+      </a> -->
+      <a routerLinkActive="active" routerLink="stocks">
+        <img width="220" src="assets/images/stocks.svg" />
+        <img class="active" width="220" src="assets/images/stocks-active.svg" />
+        <div>Mon Stock</div>
+      </a>
+      <a routerLinkActive="active" routerLink="distributeurs">
+        <img width="220" src="assets/images/antenna.svg" />
+        <img class="active" width="220" src="assets/images/antenna-active.svg" />
+        <div>Distributeurs</div>
+      </a>
+      <a routerLinkActive="active" routerLink="beneficiaires">
+        <img width="220" src="assets/images/alias-numbers.svg" />
+        <img class="active" width="220" src="assets/images/alias-numbers-active.svg" />
+        <div>Bénéficiaires</div>
+      </a>
+      <a routerLinkActive="active" routerLink="statistics">
+        <img width="220" src="assets/images/statistics.svg" />
+        <img class="active" width="220" src="assets/images/stocks-active.svg" />
+        <div>Statistiques</div>
+      </a>
+    </div>
+    <div class=" user">
       <div *ngIf="user != null; then thenBlock else elseBlock"></div>
       <ng-template #thenBlock>
           <img class="avatar" src="assets/images/avatar.png" />
@@ -24,5 +49,6 @@
       <ng-template #elseBlock> 
           <button pButton type="button" icon="pi pi-lock" (click)="redirectToLogin()" label="Me connecter" class="login-btn bgColor-primary ui-button-raised"></button>
       </ng-template>
+    </div>
   </div>
 </div>

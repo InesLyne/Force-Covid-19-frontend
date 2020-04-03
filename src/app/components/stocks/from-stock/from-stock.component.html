@@ -1,1 +1,37 @@
-<p>from-stock works!</p>
+
+<form #f="ngForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+    <div *ngIf="stock"  class="p-grid">
+      <div class="p-col-4 p-md-6 p-lg-4">
+        <label class="form-label" for="">Nom Produit</label>
+        <input class="form-input" [required]="true" [(ngModel)]="stock.quantity" type="text" name="quantity">
+      </div>
+      <div class="p-col-4 p-md-6 p-lg-4">
+        <label class="form-label" for="">Descriptif</label>
+        <input class="form-input" type="text" name="quantity">
+      </div>
+      <div class="p-col-4 p-md-6 p-lg-4">
+        <label class="form-label" for="">Catégorie</label>
+        <p-dropdown [options]="users" [(ngModel)]="stock.userId" name="userId"></p-dropdown>
+      </div>
+      <div class="p-col-4 p-md-6 p-lg-3">
+        <label class="form-label" for="">Quantité</label>
+        <input class="form-input" [required]="true" [(ngModel)]="stock.quantity" type="number" name="quantity">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Unité</label>
+        <p-dropdown [options]="welfares" [(ngModel)]="stock.welfare" name="welfare"></p-dropdown>
+      </div>
+      <div class="p-col-4 p-md-6 p-lg-3">
+        <label class="form-label" for="">Quantité</label>
+        <input class="form-input" [required]="true" [(ngModel)]="stock.quantity" type="number" name="quantity">
+      </div>
+      <div class="p-col-4 p-md-6 p-lg-3">
+        <label class="form-label" for="">Date</label>
+        <p-calendar [(ngModel)]="value"></p-calendar>
+      </div>
+      <div class="p-col-12 action">
+        <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
+        <button pButton type="button" (click)="onDialogHide()" label="Annuler" class="ui-button-raised ui-button-secondary"></button>
+      </div>
+    </div>
+  </form>

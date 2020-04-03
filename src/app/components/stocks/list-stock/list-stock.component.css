@@ -1,8 +1,20 @@
 .hero {
   position: relative;
-  background-color: #ffc85b;
+  background-color: #FFC85B;
 }
 
 ::ng-deep footer{
   background-color: #ffc85b !important;
+}
+
+::ng-deep tbody tr td a.detail{
+  color: #ef255f;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+::ng-deep tbody tr td a.maj{
+  color: #379956;
+  font-weight: bold;
+  font-size: 14px;
 }

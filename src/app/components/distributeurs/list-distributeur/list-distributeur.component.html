@@ -34,14 +34,16 @@
       <p-table #dt [columns]="cols" 
                     [value]="listItems" 
                     selectionMode="multiple" 
-                    [lazy]="true" 
                     [(selection)]="selectedItems" 
                     [loading]="loading" 
                     [totalRecords]="totalRecords" 
-                    [paginator]="true" 
+                    [paginator]="true"
                     [rows]="searchCriteria.size"
                     [responsive]="true"
-                    (onLazyLoad)="loadItemLazy($event)">
+                    [rowHover]="true"
+                    [lazy]="true"
+                    (onLazyLoad)="loadItemLazy($event)"
+                    [resizableColumns]="true">
           <ng-template pTemplate="caption">
               <div style="text-align: right">        
                   <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -51,7 +53,10 @@
           </ng-template>
           <ng-template pTemplate="header" let-columns>
               <tr>
-                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                <th>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
                       {{col.header}}
                       <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
                   </th>
@@ -60,20 +65,24 @@
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
               <tr [pSelectableRow]="rowData">
+                <td>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
                   <td *ngFor="let col of columns">
                       {{rowData[col.field]}}
                   </td>
                   <td>
                       <div class="table_actions">
-                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
-                          <i class="pi pi-eye"></i>
+                        <a class="detail-dark" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
+                          <i class="pi pi-info-circle"></i>
+                          Voir Détail
                         </a>
-                        <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
+                        <!-- <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
                           <i class="pi pi-pencil"></i>
                         </a>
                         <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
                           <i class="pi pi-trash"></i>
-                        </a>
+                        </a> -->
     
                       </div>
                     </td>
@@ -85,7 +94,7 @@
 
 
 <p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true"
-  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  [style]="{width: '60vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]='false'>
   <app-from-distributeur [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
   </app-from-distributeur>
   <app-details-distributeur [id]="selectedData" *ngIf="displayDetailsDialog" (displayChange)="onDialogHide($event)">

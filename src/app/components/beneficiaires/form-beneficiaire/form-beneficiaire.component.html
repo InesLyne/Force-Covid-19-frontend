@@ -1,39 +1,53 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="form" class="form-wrapper">
-  <div class="p-grid">
+
+<form #f="ngForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+  <div *ngIf="beneficiaire"  class="p-grid">
     <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Nom Bénéficiaire</label>
-      <input class="form-input" type="text" formControlName="firstname">
+      <label class="form-label" for="">Prénom</label>
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.firstName" type="text" name="firstName">
     </div>
     <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Salaire Mensuel</label>
-      <input class="form-input" type="text" formControlName="firstname">
+      <label class="form-label" for="">Nom</label>
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.lastName" type="text" name="lastName">
     </div>
     <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Nbre d'enfants</label>
-      <input class="form-input" type="text" formControlName="firstname">
+      <label class="form-label" for="">Salaire mensuel</label>
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.monthlyIncome" type="number" name="monthlyIncome">
     </div>
     <div class="p-col-12 p-md-6 p-lg-3">
-      <label class="form-label" for="">Nbre personnes agées</label>
-      <input class="form-input" type="text" formControlName="firstname">
+      <label class="form-label" for="">Nombre d'enfants</label>
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.numberOfChildren" type="number" name="numberOfChildren">
     </div>
-    <div class="p-col-12 p-md-6 p-lg-4">
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Nombre de personnes en charge</label>
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.numberOfPeopleInCharge" type="number" name="numberOfPeopleInCharge">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
       <label class="form-label" for="">Contact</label>
-      <input class="form-input" type="text" formControlName="phoneNumber">
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.mobileNumber" type="text" name="mobileNumber">
     </div>
-    <div class="p-col-12 p-md-6 p-lg-4">
+    <div class="p-col-12 p-md-6 p-lg-3">
       <label class="form-label" for="">Adresse</label>
-      <input class="form-input" type="text" formControlName="firstname">
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.address" type="text" name="address">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Latitude</label>
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.latitude" type="number" name="latitude">
     </div>
     <div class="p-col-12 p-md-6 p-lg-4">
-      <label class="form-label" for="">Coordonnées GPS</label>
-      <input class="form-input" type="text" formControlName="firstname">
+      <label class="form-label" for="">Longitude</label>
+      <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.longitude" type="number" name="longitude">
     </div>
-    <div class="p-col-12">
-      <p-checkbox name="groupname" value="val1" formControlName="firstname" label="Activez la géolocalisation">
-      </p-checkbox>
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <label class="form-label" for="">Allocation</label>
+      <p-multiSelect [options]="allocations" [(ngModel)]="selectedAllocations" [filter]="true" name="allocations"></p-multiSelect>
     </div>
-    <div class="p-col-12 txt-align-center">
-      <button type="submit" class="button bgColor-secondary">{{beneficiaire ? 'Modifier' : 'Ajouter'}} </button>
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <label class="form-label" for="">Subdivision</label>
+      <p-dropdown [options]="subdivisions" [(ngModel)]="beneficiaire.subdivision" name="subdivision"></p-dropdown>
+    </div>
+    <div class="p-col-12 action">
+      <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
+      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
     </div>
   </div>
 </form>

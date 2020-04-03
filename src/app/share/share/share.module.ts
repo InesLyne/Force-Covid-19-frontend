@@ -16,7 +16,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { SliderModule } from 'primeng/slider';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
-
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [],
@@ -34,6 +34,7 @@ import { DialogModule } from 'primeng/dialog';
     SliderModule,
     MultiSelectModule,
     DialogModule,
+    ChartModule,
   ],
   exports: [
     FormsModule,
@@ -48,6 +49,7 @@ import { DialogModule } from 'primeng/dialog';
     SliderModule,
     MultiSelectModule,
     DialogModule,
+    ChartModule,
   ]
 })
 export class ShareModule { }

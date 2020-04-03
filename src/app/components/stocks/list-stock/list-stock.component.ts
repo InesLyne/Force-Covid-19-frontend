@@ -67,11 +67,13 @@ export class ListStockComponent implements OnInit {
   ngOnInit(): void {
 
     this.cols = [
-      { field: 'welfare', header: 'Nom' },
-      { field: 'quantity', header: 'Quantité' },
-      { field: 'created', header: 'Date creation' },
-      { field: 'updated', header: 'Date mise à jour' },
-      { field: 'userId', header: 'Utilisateur' }
+      { field: 'welfare', header: 'Nom Produit' },
+      { field: 'quantity', header: 'Description' },
+      { field: 'created', header: 'Catégorie' },
+      { field: 'updated', header: 'Poids' },
+      { field: 'userId', header: 'Unté' },
+      { field: 'userId', header: 'Quantité' },
+      { field: 'userId', header: 'Dernière Mise à jour' }
     ];
 
     this.itemSubscription=this.stockService.stocksSubject.subscribe(
@@ -134,7 +136,11 @@ export class ListStockComponent implements OnInit {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = 'Mettre à jour le Stock';
+    if(oldData){
+      this.modalTitle = 'Mettre à jour le Stock';
+    }else{
+      this.modalTitle = 'Ajout de Stock';
+    }
   }
 
   showDetailsDialog(data) {
