@@ -50,11 +50,12 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {  
     this.cols = [
-      { field: 'address', header: 'Adresse' },
-      { field: 'geographicalArea', header: 'Zone geographique' },
-      { field: 'storageCapacity', header: 'Capacité de stockage' },
-      { field: 'latitude', header: 'Latitude' },
-      { field: 'longitude', header: 'Longitude' }
+      { field: 'manager?.firstName', header: 'Nom & Prenom' },
+      { field: 'manager?.identityNumber', header: 'N° CNI' },
+      { field: 'geographicalArea', header: 'Magazin' },
+      { field: 'geographicalArea', header: 'Zone Octroyée' },
+      { field: 'longitude', header: 'Bénéficiaire Octroyé' },
+      { field: 'longitude', header: 'Coordonnées GPS' }
     ];
 
     this.distributeurSubscription=this.distributeurService.distributeursSubject.subscribe(

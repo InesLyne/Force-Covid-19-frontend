@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~9.0.2",
     "@angular/router": "~9.0.2",
     "@angular/service-worker": "~9.0.2",
+    "chart.js": "^2.9.3",
     "jwt-decode": "^2.2.0",
     "nodejs": "0.0.0",
     "primeflex": "^1.0.0",

@@ -10,18 +10,18 @@ import { FormsModule } from '@angular/forms';
 
 
 
+
 @NgModule({
   declarations: [
     ListUtilisateurComponent,
     DetailsUtilisateurComponent,
     FormUtilisateurComponent,
-    LoginComponent
-  ],
+    LoginComponent  ],
   imports: [
     CommonModule,
     FormsModule,
     ShareModule,
-    UtilisateursRoutingModule
+    UtilisateursRoutingModule,
   ]
 })
 export class UtilisateursModule { }
