@@ -1,11 +1,11 @@
 import { GlobalService } from 'src/app/global.service';
 import { Subscription, Subject } from 'rxjs';
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 
 interface City {
@@ -21,9 +21,9 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   listItems: Beneficiaire[];
   cols: any[];
   selectedItems: Beneficiaire[];
-  searchCriteria: SearchCriteria= new SearchCriteria();
-  totalRecords: number=0;
-  searchCriteriaSubject=new Subject<SearchCriteria>();
+  searchCriteria: SearchCriteria = new SearchCriteria();
+  totalRecords: number = 0;
+  searchCriteriaSubject = new Subject<SearchCriteria>();
   beneficiairesSubscription: Subscription;
   searchCriteriaSubscription: Subscription;
   totalRecordsSubscription: Subscription;
@@ -36,30 +36,14 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
 
   errorMsg: any;
 
-  cities1: SelectItem[];
-  cities2: SelectItem[];
   selectedCity1: City;
   selectedCity2: City;
-  
-  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) {
-    this.cities1 = [
-      {label:'Select City', value:null},
-      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-    ];
+  BeneficiaresFullName: string[] = [];
+  filteredNames: string[];
+  selectName: string;
+  salaire : number; 
 
-    this.cities2 = [
-      {label:'Select City', value:null},
-      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-    ];
-  }
+  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) {}
 
   ngOnInit(): void {
     this.cols = [
@@ -72,20 +56,25 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
       { field: 'address', header: 'Coordonnées GPS' }
     ];
 
-    this.beneficiairesSubscription=this.beneficiaireService.beneficiairessSubject.subscribe(
-      (beneficiaires: Beneficiaire[])=>{
-        this.listItems=beneficiaires;
-        this.loading=false;
+    this.beneficiairesSubscription = this.beneficiaireService.beneficiairessSubject.subscribe(
+      (beneficiaires: Beneficiaire[]) => {
+        this.listItems = beneficiaires;
+        this.loading = false;
+        if(this.BeneficiaresFullName.length <= 0){
+          for (let beneficiaire of beneficiaires) {
+            this.BeneficiaresFullName.push(`${beneficiaire.firstName} ${beneficiaire.lastName}`);
+          }
+        }
       }
     );
-    this.totalRecordsSubscription=this.beneficiaireService.totalRecordsSubject.subscribe(
-      (totalRecords: number)=>{
-        this.totalRecords=totalRecords;
+    this.totalRecordsSubscription = this.beneficiaireService.totalRecordsSubject.subscribe(
+      (totalRecords: number) => {
+        this.totalRecords = totalRecords;
       }
     );
     //pipe(debounceTime(500),distinctUntilChanged()).
-    this.searchCriteriaSubscription=this.searchCriteriaSubject.subscribe(
-      (searchCriteria: SearchCriteria)=>{
+    this.searchCriteriaSubscription = this.searchCriteriaSubject.subscribe(
+      (searchCriteria: SearchCriteria) => {
         console.log(this.searchCriteria)
         this.beneficiaireService.getBeneficiaires(searchCriteria);
       }
@@ -93,35 +82,35 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.beneficiaireService.getBeneficiaires(this.searchCriteria);
   }
 
-  ngOnDestroy(){
-    if(this.beneficiairesSubscription){
+  ngOnDestroy() {
+    if (this.beneficiairesSubscription) {
       this.beneficiairesSubscription.unsubscribe();
     }
-    if(this.searchCriteriaSubscription){
+    if (this.searchCriteriaSubscription) {
       this.searchCriteriaSubscription.unsubscribe();
     }
-    if(this.totalRecordsSubscription){
+    if (this.totalRecordsSubscription) {
       this.totalRecordsSubscription.unsubscribe();
     }
   }
 
   //Call this method in form filter template
-  onSetSearchCriteria(){
+  onSetSearchCriteria() {
     this.searchCriteriaSubject.next(this.searchCriteria);
   }
 
-  loadItemLazy(event: any){
-    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event,this.searchCriteria));
+  loadItemLazy(event: any) {
+    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event, this.searchCriteria));
   }
 
-  removeItme(id: number){
+  removeItme(id: number) {
     this.beneficiaireService.deleteBeneficiaire(id).then(
-      (response: any)=>{
+      (response: any) => {
         //continued!!!
       }
     ).catch(
-      (error: any)=>{
-        this.errorMsg=error;
+      (error: any) => {
+        this.errorMsg = error;
       }
     )
   }
@@ -130,9 +119,9 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    if(oldData){
+    if (oldData) {
       this.modalTitle = 'Modifier d\'un bénéficiaire';
-    }else{
+    } else {
       this.modalTitle = 'Ajout d\'un bénéficiaire';
     }
   }
@@ -148,5 +137,36 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDialog = event;
     this.displayDetailsDialog = event;
     this.selectedData = null;
+  }
+
+  search(event) {
+    console.log('event', event);
+    this.filteredNames = this.BeneficiaresFullName.filter(c =>  c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
+
+  onFilter(){
+    console.log("Name: "+this.selectName);
+    console.log('Salaire: '+ this.salaire);
+    if(this.selectName && this.selectName != null){
+      const [firstName, lastName] = this.selectName.split(" ");
+      if(this.salaire){
+        console.log('Salaire: '+ this.salaire);
+        this.beneficiaireService.getBeneficiairesByFilter(firstName, lastName, this.salaire);
+      } else {
+        this.beneficiaireService.getBeneficiairesByFilter(firstName, lastName);
+      }
+    } else {
+      this.beneficiaireService.getBeneficiaires();
+    }
+  }
+  onChange(){
+    console.log("Change!");
+    console.log("Names: "+this.selectName);
+    if(this.selectName == null || this.selectName == ''){
+      console.log("Names: "+this.selectName);
+      if(this.salaire == null || !this.salaire){
+        this.beneficiaireService.getBeneficiaires();
+      }
+    }
   }
 }
