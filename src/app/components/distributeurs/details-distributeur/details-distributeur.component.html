@@ -1,33 +1,17 @@
-<div class="form-wrapper">
-    <div *ngIf="distributeur"  class="p-grid">
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Adresse</label>
-        <span>{{distributeur.address}}</span>
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Zone geographique</label>
-        <span>{{distributeur.geographicalArea}}</span>
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Capacité de stockage</label>
-        <span>{{distributeur.storageCapacity}}</span>
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Latitude</label>
-        <span>{{distributeur.latitude}}</span>
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-4">
-        <label class="form-label" for="">Longitude</label>
-        <span>{{distributeur.longitude}}</span>
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-4">
-        <label class="form-label" for="">Manager</label>
-        <span>{{distributeur.manager}}</span>
-      </div>
+
+<div class="form-wrapper detail">
+  <div *ngIf="distributeur">
+    <div>Adresse : <strong>{{distributeur.address}}</strong></div>
+    <div>Zone geographique : <strong>{{distributeur.geographicalArea}}</strong></div>
+    <div>Capacité de stockage : <strong>{{distributeur.storageCapacity}}</strong></div>
+    <div>Manager : <strong>{{distributeur.manager}}</strong></div>
+    
+    <div>Coordonnées GPS : <strong>{{distributeur.latitude}} {{distributeur.longitude}}</strong></div>
+  </div>
+
+  <div class="p-grid p-justify-end">
+    <div class="p-col-12 action">
+      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="button ui-button-raised ui-button-secondary"></button>
     </div>
-    <div class="p-grid p-justify-end">
-      <div class="p-col-12 txt-align-center">
-        <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
-      </div>
-    </div>
+  </div>
 </div>
