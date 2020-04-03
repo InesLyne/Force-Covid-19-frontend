@@ -43,7 +43,7 @@ import { ChartModule } from 'primeng/chart';
     MessageModule,
     ToastModule,
     FocusTrapModule,
-    KeyFilterModule
+    KeyFilterModule,
     ChartModule,
   ],
   exports: [
@@ -63,7 +63,7 @@ import { ChartModule } from 'primeng/chart';
     MessageModule,
     ToastModule,
     FocusTrapModule,
-    KeyFilterModule
+    KeyFilterModule,
     ChartModule,
   ]
 })
