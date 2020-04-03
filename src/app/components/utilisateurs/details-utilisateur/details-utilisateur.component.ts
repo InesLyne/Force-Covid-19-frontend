@@ -49,7 +49,7 @@ export class DetailsUtilisateurComponent implements OnInit {
       'lastName': new FormControl('', Validators.required),
       'phoneNumber': new FormControl('', Validators.required),
       'identityNumber': new FormControl('', Validators.required),
-      'email': new FormControl('', Validators.required),
+      'email': new FormControl('bad@', Validators.email),
       'username': new FormControl('', Validators.required),
       'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)]))
   });
