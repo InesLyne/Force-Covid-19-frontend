@@ -7,7 +7,7 @@ import { DistributeurService } from 'src/app/services/distributeur.service';
   templateUrl: './from-distributeur.component.html',
   styleUrls: ['./from-distributeur.component.css']
 })
-export class FromDistributeurComponent implements OnInit, OnDestroy {
+export class FromDistributeurComponent implements OnInit {
   distributeur: Distributeur;
   @Input() id: any;
   @Output() displayChange = new EventEmitter<boolean>();
@@ -78,7 +78,6 @@ export class FromDistributeurComponent implements OnInit, OnDestroy {
   }
 
   onDialogHide() {
-    this.distributeur = null;
     this.displayChange.emit(false);
   }
   

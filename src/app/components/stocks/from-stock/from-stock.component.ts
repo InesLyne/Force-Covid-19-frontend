@@ -3,13 +3,14 @@ import { Stock } from 'src/app/models/stock';
 import { StockService } from 'src/app/services/stock.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalService } from 'src/app/global.service';
+import {CalendarModule} from 'primeng/calendar';
 
 @Component({
   selector: 'app-from-stock',
   templateUrl: './from-stock.component.html',
   styleUrls: ['./from-stock.component.css']
 })
-export class FromStockComponent implements OnInit , OnDestroy{
+export class FromStockComponent implements OnInit {
   form: FormGroup;
   stock: Stock;
   @Input() id: any;
@@ -19,6 +20,7 @@ export class FromStockComponent implements OnInit , OnDestroy{
 
   users: any;
   welfares: any;
+  value: Date;
   
   constructor(private stockService: StockService, private global: GlobalService) { }
 

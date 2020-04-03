@@ -55,6 +55,7 @@ export class GlobalService {
 
   public prepareSearchCriteria(event: any, searchCriteria: SearchCriteria): SearchCriteria{
     if(event){
+      console.log(event);
       if(event.sortField){
         searchCriteria.orderBy=event.sortField;
       }
@@ -62,6 +63,7 @@ export class GlobalService {
         searchCriteria.orderDirection=event.sortOrder;
       }
       if(event.first){
+        searchCriteria.page=(event.first / searchCriteria.size)+1;
       }
       if(event.rows){
   
