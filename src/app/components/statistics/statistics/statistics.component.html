@@ -1,5 +1,29 @@
-<div class="p-grid">
-    <div class="p-col">
-        <p-chart type="pie" [data]="data"></p-chart>
+<div class="container">
+    <div class="p-grid p-justify-center">
+        <div class="p-col-12 p-md-6 p-lg-5">
+            <p-chart type="bar" [data]="dataBeneficiairesParRegions"></p-chart>
+            <label>Nombre de distributeurs par région</label>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-5">
+            <p-chart type="pie" [data]="dataStockCategories"></p-chart>
+            <label>Quantité de stock disponible par catégorie de produit</label>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="p-grid p-justify-center">
+
+        <div class="p-col-12 p-md-6 p-lg-5">
+            <p-chart type="polarArea" [data]="dataPolarArea"></p-chart>
+            <label>Nombre d'allocation</label>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-5">
+            <p-chart type="line" [data]="dataSuiviStocks"></p-chart>
+            <label>Suivi des entrées/sorties de stock en fonction du temps</label>
+        </div>
+        
     </div>
 </div>
