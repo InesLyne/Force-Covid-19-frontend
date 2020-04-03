@@ -1,0 +1,8 @@
+.pushAllocation{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pushAllocation img{
+    width: 35px;
+}

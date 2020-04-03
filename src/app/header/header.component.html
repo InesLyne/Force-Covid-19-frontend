@@ -5,6 +5,10 @@
   
   <div class="herder-links">
     <div class="pages-links">
+      <a routerLink="">
+        <img width="220" src="assets/images/home.svg" />
+        <div>Accueil</div>
+      </a>
       <a routerLinkActive="active" routerLink="stocks">
         <img width="220" src="assets/images/stocks.svg" />
         <img class="active" width="220" src="assets/images/stocks-active.svg" />
@@ -34,7 +38,8 @@
             <div *ngIf="user.firstName !== undefined && user.lastName !== undefined; then firstAndLastName else adminName"></div>
             <ng-template #firstAndLastName><span class="name">{{ user.firstName + ' ' + user.lastName}}</span></ng-template>
             <ng-template #adminName><span class="name">{{ user.username}}</span></ng-template>
-            <span class="role">{{ user.type }} <span class="ui-submenu-icon pi pi-fw pi-caret-down"></span></span>
+            <span class="role">{{ user.type }}</span>
+            <span class="ui-submenu-icon pi pi-fw pi-caret-down"></span>
           </div>
           <a class="logout" href="#" (click)="logout()" hidden>
             <span class="ui-menuitem-icon pi pi-unlock" >Déconnexion</span>

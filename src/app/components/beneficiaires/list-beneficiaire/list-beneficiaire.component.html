@@ -103,10 +103,10 @@
     </app-list-allocation>
 </p-dialog>
 
-<section *ngIf="selectedItems && selectedItems.length>0"  class="page-section first">
+<section *ngIf="selectedItems && selectedItems.length>0"  class="page-section">
     <div class="page-actions">
-      <button (click)="showAllocationDialog()" type="button" class="button bgColor-primary">
-        Allouer un stock
+      <button (click)="showAllocationDialog()" type="button" class="button bgColor-secondary">
+        <i class="pi pi-shop"></i> Allouer un stock
       </button>
     </div>
-  </section>
+</section>
