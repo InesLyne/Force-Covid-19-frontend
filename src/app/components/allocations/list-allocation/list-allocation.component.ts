@@ -1,9 +1,13 @@
+import { BienService } from 'src/app/services/bien.service';
+import { Bien } from './../../../models/bien';
+import { Stock } from './../../../models/stock';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Allocation } from 'src/app/models/allocation';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { AllocationService } from 'src/app/services/allocation.service';
 import { Subject, Subscription } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
+import { LineAllocationModel } from 'src/app/models/line-allocation.model';
 
 @Component({
   selector: 'app-list-allocation',
@@ -17,21 +21,23 @@ export class ListAllocationComponent implements OnInit {
   loading: boolean = true;
   errorMsg: any;
   successMsg: any;
-  allocations: Allocation[]=[];
-  subdivisions: any;
+  allocation: Allocation= new Allocation();
+  lineAllocations: LineAllocationModel[]=[];
+  biens: any;
 
-  constructor(private allocationService: AllocationService, private global: GlobalService) { }
+  constructor(private allocationService: AllocationService, private global: GlobalService, private bienService: BienService) { }
 
   ngOnInit(): void {
     console.log(this.selectedRows)
-    this.subdivisions = [
+    this.onGetBiens();
+    /* this.subdivisions = [
       {label: 'Selectionnner item', value: null},
       {label: 'Item 1', value: '/api/subdivisions/450'},
       {label: 'Item 2', value: '/api/subdivisions/483'},
       {label: 'Item 3', value: '/api/subdivisions/496'},
       {label: 'Item 4', value: '/api/subdivisions/423'},
       {label: 'Item 5', value: '/api/subdivisions/480'}
-  ];
+  ]; */
   }
 
 
@@ -40,13 +46,27 @@ export class ListAllocationComponent implements OnInit {
 
   }
 
-  onPushAllocation(){
-    let allocation: Allocation= new Allocation();
-    this.allocations.push(allocation);
+  onGetBiens(){
+    this.bienService.getBiensForDropdown().then(
+      (biens: any[])=>{
+        this.biens=biens;
+      }
+    ).catch(
+      (error: any)=>{
+        console.log(error);
+      }
+    )
   }
 
-  onRemoveAllocation(index: number){
-    this.allocations.splice(index,1);
+  onPushLineAllocation(){
+    let lineAllocation: LineAllocationModel= new LineAllocationModel();
+    let welfare: Bien= new Bien();
+    lineAllocation.welfare=welfare;
+    this.lineAllocations.push(lineAllocation);
+  }
+
+  onRemoveLineAllocation(index: number){
+    this.lineAllocations.splice(index,1);
   }
 
   onDialogHide() {
@@ -54,7 +74,7 @@ export class ListAllocationComponent implements OnInit {
   }
   
   ngOnDestroy() {
-    this.allocations=[];
+    this.lineAllocations=[];
     this.displayChange.unsubscribe();
   }
 
