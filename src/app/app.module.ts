@@ -34,8 +34,8 @@ import { DistributeursModule } from './components/distributeurs/distributeurs.mo
 import { StocksModule } from './components/stocks/stocks.module';
 import { UtilisateursModule } from './components/utilisateurs/utilisateurs.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { DialogModule } from 'primeng/dialog';
+import { StatisticsModule } from './components/statistics/statistics.module';
 
 
 
@@ -44,7 +44,7 @@ import { DialogModule } from 'primeng/dialog';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,8 +63,9 @@ import { DialogModule } from 'primeng/dialog';
     DistributeursModule,
     StocksModule,
     UtilisateursModule,
+    StatisticsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    DialogModule
+
   ],
   providers: [
     DatePipe,

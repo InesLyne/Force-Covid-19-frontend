@@ -33,21 +33,21 @@
       <label class="form-label" for="">Latitude</label>
       <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.latitude" type="number" name="latitude">
     </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
+    <div class="p-col-12 p-md-6 p-lg-4">
       <label class="form-label" for="">Longitude</label>
       <input class="form-input" [required]="true" [(ngModel)]="beneficiaire.longitude" type="number" name="longitude">
     </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
+    <div class="p-col-12 p-md-6 p-lg-4">
       <label class="form-label" for="">Allocation</label>
       <p-multiSelect [options]="allocations" [(ngModel)]="selectedAllocations" [filter]="true" name="allocations"></p-multiSelect>
     </div>
-    <div class="p-col-12 p-md-6 p-lg-3">
+    <div class="p-col-12 p-md-6 p-lg-4">
       <label class="form-label" for="">Subdivision</label>
       <p-dropdown [options]="subdivisions" [(ngModel)]="beneficiaire.subdivision" name="subdivision"></p-dropdown>
     </div>
-    <div class="p-col-12 txt-align-center">
-      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
+    <div class="p-col-12 action">
       <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
+      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
     </div>
   </div>
 </form>

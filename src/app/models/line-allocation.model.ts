@@ -1,8 +1,9 @@
+import { Bien } from 'src/app/models/bien';
 export class LineAllocationModel{
     id: number;
-    welfare: string
+    welfare: Bien;
     quantity: string;
-    allocation: string;
+    //allocation: string;
 
     constructor(){}
 

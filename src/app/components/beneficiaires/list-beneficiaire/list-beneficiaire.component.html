@@ -13,13 +13,14 @@
     <form action="" class="form-filter">
       <div class="form-group">
         <label for="" class="form-label">Nom</label>
-        <p-dropdown name="selectedCity1" [options]="cities1" [(ngModel)]="selectedCity1"></p-dropdown>
+        <p-autoComplete  name="selectedCity1"[(ngModel)]="selectName" [suggestions]="filteredNames" (completeMethod)="search($event)"
+          placeholder="Search" (ngModelChange)="onChange()"></p-autoComplete>
       </div>
       <div class="form-group">
-        <label for="" class="form-label">Nom</label>
-        <p-dropdown name="selectedCity2" [options]="cities2" [(ngModel)]="selectedCity2"></p-dropdown>
+        <label for="" class="form-label">Salaire</label>
+       <input type="number" name="salaire" id="salaire" [(ngModel)]="salaire" (ngModelChange)="onChange()">
       </div>
-      <button type="button" class="button bgColor-yellow">
+      <button type="button" class="button bgColor-yellow" (click)="onFilter()" [disabled]="!selectName && !salaire">
         Filtrer
       </button>
     </form>
@@ -71,21 +72,22 @@
                   </td>
                   <td>
                       <div class="table_actions">
-                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
-                          <i class="pi pi-eye"></i>
+                        <a class="detail-dark" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
+                          <i class="pi pi-info-circle"></i>
+                          Voir Détail
                         </a>
-                        <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
+                        <!-- <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
                           <i class="pi pi-pencil"></i>
                         </a>
                         <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
                           <i class="pi pi-trash"></i>
-                        </a>
-    
-                      </div>
-                    </td>
-              </tr>
-          </ng-template>
-      </p-table>
+                        </a> -->
+
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </section>
 

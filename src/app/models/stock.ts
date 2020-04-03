@@ -1,7 +1,9 @@
+import { Bien } from './bien';
+
 export class Stock {
     id: number;
     userId: number;
-    welfare: string;
+    welfare: Bien;
     quantity: number;
     created: string;
     updated: string;

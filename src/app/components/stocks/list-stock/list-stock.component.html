@@ -12,11 +12,11 @@
   <div class="page-actions">
     <form action="" class="form-filter">
       <div class="form-group">
-        <label for="" class="form-label">Nom</label>
+        <label for="" class="form-label">Nom Produit</label>
         <p-dropdown name="selectedCity1" [options]="cities1" [(ngModel)]="selectedCity1"></p-dropdown>
       </div>
       <div class="form-group">
-        <label for="" class="form-label">Nom</label>
+        <label for="" class="form-label">Catégorie</label>
         <p-dropdown name="selectedCity2" [options]="cities2" [(ngModel)]="selectedCity2"></p-dropdown>
       </div>
       <button type="button" class="button bgColor-yellow">
@@ -74,15 +74,17 @@
           </td>
           <td>
             <div class="table_actions">
-              <a class="dropdown-item show" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
-                <i class="pi pi-eye"></i>
-              </a>
-              <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
-                <i class="pi pi-pencil"></i>
-              </a>
-              <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
-                <i class="pi pi-trash"></i>
-              </a>
+              <div>
+                <a class="detail" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
+                  Voir Détails
+                </a>
+                <a class="maj" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
+                  MAJ Quantité
+                </a>
+                <!-- <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
+                  <i class="pi pi-trash"></i>
+                </a> -->
+              </div>
 
             </div>
           </td>
