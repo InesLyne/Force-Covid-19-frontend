@@ -1,45 +1,45 @@
 <form #f="ngForm" (ngSubmit)="onSubmit()" class="form-wrapper">
-    <div class="p-grid">
-        <div class="p-col-12 pushAllocation">
-            <button (click)="onPushAllocation()" class="button">
-              <img width="220" src="assets/images/add.svg" /> Ajout de champ
-           </button>
-         </div>
-    </div>
-    <div *ngFor="let allocation of allocations; let i=index"   class="p-grid">
-      <div class="p-col-11">
-        <div class="p-grid">
-          <div class="p-col-12 p-md-6 p-lg-4">
-            <label class="form-label" for="">Produit</label>
-            <div class="form-group">
-              <p-dropdown [options]="subdivisions" [(ngModel)]="allocation.beneficiary" name="item1"></p-dropdown>
-            </div>
-          </div>
-          <div class="p-col-12 p-md-6 p-lg-4">
-            <label class="form-label" for="">Quantité</label>
-            <div class="form-group">
-              <p-dropdown [options]="subdivisions" [(ngModel)]="allocation.deliverer" name="item2"></p-dropdown>
-            </div>
-          </div>
-          <div class="p-col-12 p-md-6 p-lg-4">
-            <label class="form-label" for="">Unité</label>
-            <div class="form-group">
-              <p-dropdown [options]="subdivisions" [(ngModel)]="allocation.distributor" name="item3"></p-dropdown>
-            </div>
+  <div class="p-grid">
+      <div class="p-col-12 pushAllocation">
+          <button (click)="onPushLineAllocation()" class="button">
+            <img width="220" src="assets/images/add.svg" /> Ajout de champ
+         </button>
+       </div>
+  </div>
+  <div *ngFor="let lineAllocation of lineAllocations; let i=index"   class="p-grid">
+    <div class="p-col-11">
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-4">
+          <label class="form-label" for="">Produit</label>
+          <div class="form-group">
+            <p-dropdown [options]="biens" [filter]="true" [(ngModel)]="lineAllocation.welfare" name="welfare-{{i}}"></p-dropdown>
           </div>
         </div>
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-1 moins">
-         <button (click)="onRemoveAllocation(i)" type="submit" class="button">
-          <img width="35" src="assets/images/moins.svg" />
-        </button>
+        <div class="p-col-12 p-md-6 p-lg-4">
+          <label class="form-label" for="">Quantité</label>
+          <div class="form-group">
+            <input class="form-input" [required]="true" [(ngModel)]="lineAllocation.quantity" type="number" name="quantity-{{i}}">
+          </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+          <label class="form-label" for="">Unité</label>
+          <div class="form-group">
+            <input class="form-input" [required]="true" [(ngModel)]="lineAllocation.welfare.category" type="text" name="welfare-category-{{i}}" readonly>
+          </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-1 moins">
+          <button (click)="onRemoveLineAllocation(i)" type="submit" class="button">
+           <img width="35" src="assets/images/moins.svg" />
+         </button>
+       </div>
       </div>
     </div>
+  </div>
 
-    <div class="p-grid">
-        <div class="p-col-12 action">
-          <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
-          <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
-        </div>
+  <div class="p-grid">
+      <div class="p-col-12 action">
+        <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
+        <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
       </div>
-  </form>
+    </div>
+</form>
