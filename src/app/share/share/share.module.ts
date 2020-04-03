@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { SliderModule } from 'primeng/slider';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -30,6 +31,7 @@ import { DialogModule } from 'primeng/dialog';
     TableModule,
     ProgressBarModule,
     DropdownModule,
+    AutoCompleteModule,
     CalendarModule,
     SliderModule,
     MultiSelectModule,
@@ -44,6 +46,7 @@ import { DialogModule } from 'primeng/dialog';
     TableModule,
     ProgressBarModule,
     DropdownModule,
+    AutoCompleteModule,
     CalendarModule,
     SliderModule,
     MultiSelectModule,
