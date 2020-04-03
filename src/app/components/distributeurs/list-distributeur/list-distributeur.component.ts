@@ -37,31 +37,16 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
   modalTitle: string;
 
   errorMsg: any;
-
-  cities1: SelectItem[];
-  cities2: SelectItem[];
   selectedCity1: City;
   selectedCity2: City;
+  DistributeurFullName: string[] = [];
+  filteredNames: string[];
+  selectName: string;
+  Zones: string[] = [];
+  filteredZones: string[];
+  selectZone: string;
 
-  constructor(private distributeurService: DistributeurService, private global: GlobalService) {
-    this.cities1 = [
-      {label:'Select City', value:null},
-      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-    ];
-
-    this.cities2 = [
-      {label:'Select City', value:null},
-      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-    ];
-  }
+  constructor(private distributeurService: DistributeurService, private global: GlobalService) {}
 
   ngOnInit(): void {  
     this.cols = [
@@ -70,13 +55,17 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
       { field: 'geographicalArea', header: 'Magazin' },
       { field: 'geographicalArea', header: 'Zone Octroyée' },
       { field: 'longitude', header: 'Bénéficiaire Octroyé' },
-      { field: 'longitude', header: 'Coordonnées GPS' }
+      { field: 'longitude', header: 'Coordonnées GPS', type: 'gps' }
     ];
 
     this.distributeurSubscription=this.distributeurService.distributeursSubject.subscribe(
       (distributeurs: Distributeur[])=>{
         this.listItems=distributeurs;
         this.loading=false;
+        for (let distributeur of distributeurs) {
+          this.DistributeurFullName.push(`${distributeur.address}`);
+          this.Zones.push(distributeur.geographicalArea);
+        }
       }
     );
     this.totalRecordsSubscription=this.distributeurService.totalRecordsSubject.subscribe(
@@ -146,6 +135,16 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = event;
     console.log('Here')
     this.selectedData = null;
+  }
+
+  search(event) {
+    console.log('event', event);
+    this.filteredNames = this.DistributeurFullName.filter(c =>  c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
+
+  searchZones(event) {
+    console.log('event', event);
+    this.filteredZones = this.Zones.filter(c =>  c.toLowerCase().startsWith(event.query.toLowerCase()));
   }
 
 }

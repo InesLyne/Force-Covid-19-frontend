@@ -67,13 +67,13 @@ export class ListStockComponent implements OnInit {
   ngOnInit(): void {
 
     this.cols = [
-      { field: 'welfare', header: 'Nom Produit' },
-      { field: 'quantity', header: 'Description' },
-      { field: 'created', header: 'Catégorie' },
-      { field: 'updated', header: 'Poids' },
-      { field: 'userId', header: 'Unté' },
-      { field: 'userId', header: 'Quantité' },
-      { field: 'userId', header: 'Dernière Mise à jour' }
+      { field: 'welfare.name', header: 'Nom Produit' },
+      { field: 'welfare.description', header: 'Description' },
+      { field: 'welfare.category', header: 'Catégorie' },
+      { field: 'welfare.weight', header: 'Poids' },
+      { field: 'welfare.unit', header: 'Unté' },
+      { field: 'quantity', header: 'Quantité' },
+      { field: 'updated', header: 'Dernière Mise à jour', type: 'date' }
     ];
 
     this.itemSubscription=this.stockService.stocksSubject.subscribe(

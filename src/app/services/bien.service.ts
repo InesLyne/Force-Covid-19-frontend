@@ -48,6 +48,30 @@ export class BienService {
     )
   }
 
+  async getBiensForDropdown() {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.get<any>(this.baseUrl).subscribe(
+          (response: any) => {
+            let biens=response['hydra:member'] as any[];
+            if(biens && biens.length>0){
+              biens=biens.map(
+                (bien: Bien)=>{
+                  return {label:bien.name, value:bien}
+                }
+              )
+            }
+            resolve(biens);
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+
+      }
+
+    );
+  }
+
   async getBien(id: string) {
     return new Promise(
       (resolve, reject) => {

@@ -27,6 +27,7 @@ export class GlobalService {
   STOCK_URL=this.BASE_API_URL+'/stocks';
   SUBDIVISION_URL=this.BASE_API_URL+'/subdivisions';
   UTILISATEUR_URL=this.BASE_API_URL+'/users';
+  STATISTIC_URL = this.BASE_API_URL+'/statistics';
 
 
   UPLOAD_FILE = '/upload/images';
@@ -41,7 +42,7 @@ export class GlobalService {
       url = url + '&key=' + filter.key.trim() +'&operator=' + filter.operation.trim()+ '&value=' + filter.value;
     }
     if(filter.orderBy && filter.orderBy.length){
-      url = url + '&orderBy=' + filter.orderBy.trim()+ '&orderDirection=' + filter.orderDirection.trim(); 
+      url = url + '&orderBy=' + filter.orderBy.trim()+ '&orderDirection=' + filter.orderDirection; 
     }
     if(filter.searchKey && filter.searchKey.length){
       url = url + '&searchKey=' + filter.searchKey.trim(); 

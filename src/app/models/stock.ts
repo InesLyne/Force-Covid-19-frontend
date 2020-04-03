@@ -3,9 +3,8 @@ import { Bien } from './bien';
 export class Stock {
     id: number;
     userId: number;
-    welfare: string;
+    welfare: Bien;
     quantity: number;
-    bien: Bien;
     created: string;
     updated: string;
 

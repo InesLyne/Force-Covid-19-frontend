@@ -12,6 +12,6 @@ export class User {
     email:string;
     lastLogin: string;
     isActive: string;
-    
+
     constructor(){}
 }

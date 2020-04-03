@@ -17,6 +17,7 @@ export class BeneficiaireService {
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.BENEFICIAIRE_URL;
+    this.getBeneficiaires();
   }
 
   emitBeneficiaires() {
@@ -143,5 +144,22 @@ export class BeneficiaireService {
       }
 
     );
+  }
+
+  getBeneficiairesByFilter(firstname: string, lastname:string, salaire?: number){
+    let url : string = `${this.baseUrl}?firstName=${firstname}&lastName=${lastname}`;
+    if(salaire){
+      url = `${this.baseUrl}?firstName=${firstname}&lastName=${lastname}&monthlyIncome=${salaire}`;
+    }
+    console.log("Url: "+url);
+    this.http.get<any>(url).subscribe(
+      (beneficiaires: any) => {
+        this.beneficiaires=beneficiaires['hydra:member'];
+        this.emitTotalRecordsSubject(beneficiaires['hydra:totalItems'] as number);
+        this.emitBeneficiaires();
+      }, (error: any) => {
+        console.log(error);
+      }
+    )
   }
 }

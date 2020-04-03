@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { BienService } from 'src/app/services/bien.service';
+import { Bien } from './../../../models/bien';
+import { Stock } from './../../../models/stock';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Allocation } from 'src/app/models/allocation';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { AllocationService } from 'src/app/services/allocation.service';
 import { Subject, Subscription } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
+import { LineAllocationModel } from 'src/app/models/line-allocation.model';
 
 @Component({
   selector: 'app-list-allocation',
@@ -11,114 +15,67 @@ import { GlobalService } from 'src/app/global.service';
   styleUrls: ['./list-allocation.component.css']
 })
 export class ListAllocationComponent implements OnInit {
-  
-  listItems: Allocation[];
-  cols: any[];
-
-  selectedItems: Allocation[];
-  totalRecords: number=0;
-  searchCriteriaSubject=new Subject<SearchCriteria>();
-  searchCriteria: SearchCriteria= new SearchCriteria();
-  itemSubscription: Subscription;
-  searchCriteriaSubscription: Subscription;
-  totalRecordsSubscription: Subscription;
-
+  //@Input() selectedItems: Allocation[];
+  @Input() selectedRows: any;
+  @Output() displayChange = new EventEmitter<boolean>();
   loading: boolean = true;
-
-  displayDialog: any;
-  selectedData: any;
-  displayDetailsDialog: boolean;
-  modalTitle: string;
-
   errorMsg: any;
+  successMsg: any;
+  allocation: Allocation= new Allocation();
+  lineAllocations: LineAllocationModel[]=[];
+  biens: any;
 
-  constructor(private allocationService: AllocationService, private global: GlobalService) { }
+  constructor(private allocationService: AllocationService, private global: GlobalService, private bienService: BienService) { }
 
   ngOnInit(): void {
-
-    this.cols = [
-      { field: 'welfare', header: 'Bien' },
-      { field: 'beneficiary', header: 'Bénéficiaire' },
-      { field: 'confirmationCode', header: 'Code de confirmation' },
-      { field: 'confirmationCode', header: 'Stock' },
-      { field: 'deliverer', header: 'Livreur' },
-      { field: 'status', header: 'Status' },
-      { field: 'updated', header: 'Date mise à jour' }
-    ];
-   
-    this.itemSubscription=this.allocationService.allocationsSubject.subscribe(
-      (results: Allocation[])=>{
-        this.listItems=results;
-        this.loading=false;
-      }
-    );
-    this.totalRecordsSubscription=this.allocationService.totalRecordsSubject.subscribe(
-      (totalRecords: number)=>{
-        this.totalRecords=totalRecords;
-      }
-    );
-    //pipe(debounceTime(500),distinctUntilChanged()).
-    this.searchCriteriaSubscription=this.searchCriteriaSubject.subscribe(
-      (searchCriteria: SearchCriteria)=>{
-        console.log(this.searchCriteria)
-        this.allocationService.getAllocations(searchCriteria);
-      }
-    );
-    this.allocationService.getAllocations(this.searchCriteria);
-  
+    console.log(this.selectedRows)
+    this.onGetBiens();
+    /* this.subdivisions = [
+      {label: 'Selectionnner item', value: null},
+      {label: 'Item 1', value: '/api/subdivisions/450'},
+      {label: 'Item 2', value: '/api/subdivisions/483'},
+      {label: 'Item 3', value: '/api/subdivisions/496'},
+      {label: 'Item 4', value: '/api/subdivisions/423'},
+      {label: 'Item 5', value: '/api/subdivisions/480'}
+  ]; */
   }
 
 
-  ngOnDestroy(){
-    if(this.itemSubscription){
-      this.itemSubscription.unsubscribe();
-    }
-    if(this.searchCriteriaSubscription){
-      this.searchCriteriaSubscription.unsubscribe();
-    }
-    if(this.totalRecordsSubscription){
-      this.totalRecordsSubscription.unsubscribe();
-    }
+
+  onSubmit(){
+
   }
 
-  //Call this method in form filter template
-  onSetSearchCriteria(){
-    this.searchCriteriaSubject.next(this.searchCriteria);
-  }
-
-  loadItemLazy(event: any){
-    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event,this.searchCriteria));
-  }
-
-  removeItme(id: number){
-    this.allocationService.deleteAllocation(id).then(
-      (response: any)=>{
-        //continued!!!
+  onGetBiens(){
+    this.bienService.getBiensForDropdown().then(
+      (biens: any[])=>{
+        this.biens=biens;
       }
     ).catch(
       (error: any)=>{
-        this.errorMsg=error;
+        console.log(error);
       }
     )
   }
-    
-  showFormDialog(oldData = null) {
-    this.displayDetailsDialog = false;
-    this.selectedData = oldData;
-    this.displayDialog = true;
-    this.modalTitle = 'faire une allocation';
+
+  onPushLineAllocation(){
+    let lineAllocation: LineAllocationModel= new LineAllocationModel();
+    let welfare: Bien= new Bien();
+    lineAllocation.welfare=welfare;
+    this.lineAllocations.push(lineAllocation);
   }
 
-  showDetailsDialog(data) {
-    this.displayDialog = false;
-    this.selectedData = data;
-    this.displayDetailsDialog = true;
-    this.modalTitle = 'Détails du l\'allocation';
+  onRemoveLineAllocation(index: number){
+    this.lineAllocations.splice(index,1);
   }
 
-  onDialogHide(event) {
-    this.displayDialog = event;
-    this.displayDetailsDialog = event;
-    this.selectedData = null;
+  onDialogHide() {
+    this.displayChange.emit(false);
   }
+  
+  ngOnDestroy() {
+    this.lineAllocations=[];
+    this.displayChange.unsubscribe();
+  }
+
 }

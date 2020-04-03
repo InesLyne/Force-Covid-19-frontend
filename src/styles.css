@@ -224,9 +224,13 @@ body .form-filter .ui-dropdown{
   width: 220px;
 }
 
+.form-wrapper .ui-dropdown{
+  width: 100% !important;
+}
+
 body .ui-dropdown {
   height: 50px;
-  border: 2px solid #000;
+  border: 2px solid #000 !important;
 }
 body .ui-dropdown .ui-dropdown-label {
   padding-top: 15px;
@@ -282,6 +286,26 @@ tbody tr td a{
 
 tbody tr td a:last-child{
   border-right: 0px !important;
+}
+
+.form-wrapper.detail{
+  font-size: 18px;
+  padding-top: 40px;
+}
+
+.form-wrapper.detail div{
+  margin-bottom: 5px;
+}
+
+body .ui-dialog .ui-dialog-titlebar{
+  background-color: #fff !important;
+  border: 0 !important;
+  padding-top: 30px !important;
+  font-size: 20px !important;
+}
+
+body .ui-dialog .ui-dialog-content{
+  border-top: 0px !important;
 }
 
 @media (min-width: 62rem) {
@@ -392,7 +416,7 @@ tbody tr td a:last-child{
   cursor: pointer;
   margin: 0;
   display: inline-flex;
-  outline: 0;
+  outline: 0 !important;
   position: relative;
   align-items: center;
   user-select: none;
