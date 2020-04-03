@@ -19,6 +19,8 @@ interface City {
 export class ListStockComponent implements OnInit {
   listItems: Stock[];
   cols: any[];
+  public static STRING_TYPE = 0;
+  public static DATE_TYPE = 1;
 
   selectedItems: Stock[];
   totalRecords: number=0;
@@ -67,13 +69,13 @@ export class ListStockComponent implements OnInit {
   ngOnInit(): void {
 
     this.cols = [
-      { field: 'welfare', header: 'Nom Produit' },
-      { field: 'quantity', header: 'Description' },
-      { field: 'created', header: 'Catégorie' },
-      { field: 'updated', header: 'Poids' },
-      { field: 'userId', header: 'Unté' },
-      { field: 'userId', header: 'Quantité' },
-      { field: 'userId', header: 'Dernière Mise à jour' }
+      { field: 'welfare', header: 'Nom Produit', type: "string"},
+      { field: 'quantity', header: 'Description', type: "string" },
+      { field: 'created', header: 'Catégorie',type: "date" },
+      { field: 'updated', header: 'Poids',type: "type" },
+      { field: 'userId', header: 'Unté',type: "string" },
+      { field: 'userId', header: 'Quantité',type: "number" },
+      { field: 'userId', header: 'Dernière Mise à jour', type: "string" }
     ];
 
     this.itemSubscription=this.stockService.stocksSubject.subscribe(
