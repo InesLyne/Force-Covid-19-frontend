@@ -73,15 +73,16 @@
                   </td>
                   <td>
                       <div class="table_actions">
-                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
-                          <i class="pi pi-eye"></i>
+                        <a class="detail-dark" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
+                          <i class="pi pi-info-circle"></i>
+                          Voir Détail
                         </a>
-                        <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
+                        <!-- <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
                           <i class="pi pi-pencil"></i>
                         </a>
                         <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
                           <i class="pi pi-trash"></i>
-                        </a>
+                        </a> -->
     
                       </div>
                     </td>
