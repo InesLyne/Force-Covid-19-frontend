@@ -41,7 +41,7 @@ export class GlobalService {
       url = url + '&key=' + filter.key.trim() +'&operator=' + filter.operation.trim()+ '&value=' + filter.value;
     }
     if(filter.orderBy && filter.orderBy.length){
-      url = url + '&orderBy=' + filter.orderBy.trim()+ '&orderDirection=' + filter.orderDirection.trim(); 
+      url = url + '&orderBy=' + filter.orderBy.trim()+ '&orderDirection=' + filter.orderDirection; 
     }
     if(filter.searchKey && filter.searchKey.length){
       url = url + '&searchKey=' + filter.searchKey.trim(); 
