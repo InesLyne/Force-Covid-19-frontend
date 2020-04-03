@@ -6,7 +6,6 @@ import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { SelectItem } from 'primeng/api';
-import { type } from 'os';
 
 
 interface City {
