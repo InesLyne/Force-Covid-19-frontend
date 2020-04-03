@@ -71,7 +71,8 @@
                     <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
                   <td *ngFor="let col of columns">
-                      {{rowData[col.field]}}
+                    <div *ngIf="col.type != 'gps'">{{rowData[col.field]}}</div>
+                    <div *ngIf="col.type == 'gps'">L: {{rowData.longitude}} l: {{rowData.latitude}}</div> 
                   </td>
                   <td>
                       <div class="table_actions">

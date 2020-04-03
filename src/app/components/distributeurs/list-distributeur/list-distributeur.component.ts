@@ -55,7 +55,7 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
       { field: 'geographicalArea', header: 'Magazin' },
       { field: 'geographicalArea', header: 'Zone Octroyée' },
       { field: 'longitude', header: 'Bénéficiaire Octroyé' },
-      { field: 'longitude', header: 'Coordonnées GPS' }
+      { field: 'longitude', header: 'Coordonnées GPS', type: 'gps' }
     ];
 
     this.distributeurSubscription=this.distributeurService.distributeursSubject.subscribe(

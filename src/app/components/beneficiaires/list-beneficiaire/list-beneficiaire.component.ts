@@ -6,6 +6,7 @@ import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { SelectItem } from 'primeng/api';
+import { type } from 'os';
 
 
 interface City {
@@ -54,7 +55,7 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
       { field: 'numberOfPeopleInCharge', header: 'Nombre de personnes en charge' },
       { field: 'mobileNumber', header: 'Contact' },
       { field: 'address', header: 'Adresse' },
-      { field: 'address', header: 'Coordonnées GPS' }
+      { field: 'longitude', header: 'Coordonnées GPS', type: 'gps'}
     ];
 
     this.beneficiairesSubscription = this.beneficiaireService.beneficiairessSubject.subscribe(
