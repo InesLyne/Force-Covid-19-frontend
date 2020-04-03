@@ -32,6 +32,7 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   displayDialog: any;
   selectedData: any;
   displayDetailsDialog: boolean;
+  displayAllocationDialog: boolean;
   modalTitle: string;
 
   errorMsg: any;
@@ -130,6 +131,7 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
+    this.displayAllocationDialog=false;
     if(oldData){
       this.modalTitle = 'Modifier d\'un bénéficiaire';
     }else{
@@ -141,12 +143,21 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDialog = false;
     this.selectedData = data;
     this.displayDetailsDialog = true;
+    this.displayAllocationDialog=false;
     this.modalTitle = 'Recap Bénéficiaire';
+  }
+  
+  showAllocationDialog() {
+    this.displayDialog = false;
+    this.displayDetailsDialog = false;
+    this.displayAllocationDialog=true;
+    this.modalTitle = 'Allouer un stock';
   }
 
   onDialogHide(event) {
     this.displayDialog = event;
     this.displayDetailsDialog = event;
+    this.displayAllocationDialog=event;
     this.selectedData = null;
   }
 }

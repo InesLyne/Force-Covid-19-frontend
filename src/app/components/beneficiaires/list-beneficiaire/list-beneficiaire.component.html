@@ -89,11 +89,22 @@
   </div>
 </section>
 
-<p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true"
+<p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog || displayAllocationDialog" [modal]="true"
   [style]="{width: '60vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]='false'>
     <app-form-beneficiaire [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
     </app-form-beneficiaire>
     <app-details-beneficiaire [id]="selectedData" *ngIf="displayDetailsDialog"
       (displayChange)="onDialogHide($event)">
     </app-details-beneficiaire>
+    <app-list-allocation [selectedRows]="selectedItems" *ngIf="displayAllocationDialog"
+      (displayChange)="onDialogHide($event)">
+    </app-list-allocation>
 </p-dialog>
+
+<section *ngIf="selectedItems && selectedItems.length>0"  class="page-section first">
+    <div class="page-actions">
+      <button (click)="showAllocationDialog()" type="button" class="button bgColor-primary">
+        Allouer un stock
+      </button>
+    </div>
+  </section>

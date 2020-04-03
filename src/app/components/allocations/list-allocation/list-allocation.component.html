@@ -1,83 +1,35 @@
-<section class="page-section hero home container">
-  <div class="hero-content">
-    <h1 class="color-tertiary">Les Ayants droit</h1>
-
-    <div class="hero-image">
-      <img src="/assets/images/hero-beneficiaire.jpg" alt="">
+<form #f="ngForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+    <div class="p-grid">
+        <div class="p-col-12 txt-align-center">
+            <button (click)="onPushAllocation()" class="button">
+               <i class="pi pi-plus-circle"></i>
+           </button>
+         </div>
     </div>
-  </div>
-</section>
+    <div *ngFor="let allocation of allocations; let i=index"   class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Produit</label>
+        <p-dropdown [options]="subdivisions" [(ngModel)]="allocation.beneficiary" name="item1"></p-dropdown>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Quantité</label>
+        <p-dropdown [options]="subdivisions" [(ngModel)]="allocation.deliverer" name="item2"></p-dropdown>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Unité</label>
+        <p-dropdown [options]="subdivisions" [(ngModel)]="allocation.distributor" name="item3"></p-dropdown>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-1">
+         <button (click)="onRemoveAllocation(i)" type="submit" class="button">
+            <i class="pi pi-times-circle"></i>
+        </button>
+      </div>
+    </div>
 
-<section class="page-section first">
-  <div class="page-actions">
-    <form action="" class="form-filter">
-      <button type="button" class="button bgColor-yellow">
-        Filtrer
-      </button>
-    </form>
-    <button (click)="showFormDialog()" type="button" class="button bgColor-primary">
-      Ajouter un Bénéficiaire
-    </button>
-  </div>
-</section>
-
-<section class="page-section">
-  <div class="p-grid">
-      <p-table #dt [columns]="cols" 
-                    [value]="listItems" 
-                    selectionMode="multiple" 
-                    [lazy]="true" 
-                    [(selection)]="selectedItems" 
-                    [loading]="loading" 
-                    [totalRecords]="totalRecords" 
-                    [paginator]="true" 
-                    [rows]="searchCriteria.size"
-                    [responsive]="true"
-                    (onLazyLoad)="loadItemLazy($event)">
-          <ng-template pTemplate="caption">
-              <div style="text-align: right">        
-                  <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                  <input type="text" pInputText size="50" placeholder="recherche" [(ngModel)]="searchCriteria.searchKey" (input)="onSetSearchCriteria()" style="width:auto">
-              </div>
-          </ng-template>
-          <ng-template pTemplate="header" let-columns>
-              <tr>
-                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                      {{col.header}}
-                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-                  </th>
-                  <th> Action</th>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-rowData let-columns="columns">
-              <tr [pSelectableRow]="rowData">
-                  <td *ngFor="let col of columns">
-                      {{rowData[col.field]}}
-                  </td>
-                  <td>
-                      <div class="table_actions">
-                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
-                          <i class="pi pi-eye"></i>
-                        </a>
-                        <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
-                          <i class="pi pi-pencil"></i>
-                        </a>
-                        <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
-                          <i class="pi pi-trash"></i>
-                        </a>
-    
-                      </div>
-                    </td>
-              </tr>
-          </ng-template>
-      </p-table>
-  </div>
-</section>
-
-<p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true"
-  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-  <app-form-allocation [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
-  </app-form-allocation>
-  <app-details-allocation [id]="selectedData" *ngIf="displayDetailsDialog" (displayChange)="onDialogHide($event)">
-  </app-details-allocation>
-</p-dialog>
+    <div class="p-grid">
+        <div class="p-col-12 txt-align-center">
+          <button pButton type="button" (click)="onDialogHide()" label="Retour" class="ui-button-raised ui-button-secondary"></button>
+          <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
+        </div>
+      </div>
+  </form>
