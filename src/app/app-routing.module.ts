@@ -47,11 +47,13 @@ const routes: Routes = [
     path: 'biens',
     loadChildren: './components/biens/biens.module#BiensModule',
     canLoad: [AuthGuardService]
+  },
+  {
+    path: 'statistics',
+    loadChildren: './components/statistics/statistics.module#StatisticsModule',
+    canLoad: [AuthGuardService]
   }
-    //]//,
-	//	canActivate: [AuthGuardService]
-//	}
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
