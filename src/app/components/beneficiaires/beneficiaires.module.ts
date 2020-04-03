@@ -1,3 +1,4 @@
+import { ListAllocationComponent } from './../allocations/list-allocation/list-allocation.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListBeneficiaireComponent } from './list-beneficiaire/list-beneficiaire.component';
@@ -18,7 +19,8 @@ import { ButtonModule } from 'primeng/button';
   declarations: [
     ListBeneficiaireComponent,
     DetailsBeneficiaireComponent,
-    FormBeneficiaireComponent
+    FormBeneficiaireComponent,
+    ListAllocationComponent,
   ],
   imports: [
     CommonModule,

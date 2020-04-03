@@ -10,7 +10,7 @@ import { ShareModule } from 'src/app/share/share/share.module';
 
 @NgModule({
   declarations: [
-    ListAllocationComponent,
+    /* ListAllocationComponent, */
     DetailsAllocationComponent,
     FormAllocationComponent
   ],
