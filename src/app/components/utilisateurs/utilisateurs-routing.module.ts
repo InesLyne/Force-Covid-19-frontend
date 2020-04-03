@@ -11,8 +11,7 @@ const routes: Routes = [
     component: ListUtilisateurComponent
   },
   {
-    // path: ':id/details',
-    path: 'details',
+    path: ':id/details',
     component: DetailsUtilisateurComponent
   },
   {

@@ -13,8 +13,8 @@ export class DetailsUtilisateurComponent implements OnInit {
 
 
   user: User = new User();
-  visible: boolean = false;
-  visibleForm: boolean = true;
+  visibleInfo: boolean = true;
+  visibleForm: boolean = false;
   userform: FormGroup;
 
   submitted: boolean;
@@ -56,15 +56,12 @@ export class DetailsUtilisateurComponent implements OnInit {
 
   }
 
-  showInfos () {
-    this.visible = true;
-    this.visibleForm=true;
-  }
+
 
 
   clickModifier() {
-    this.visible=false;
-    this.visibleForm=false;
+    this.visibleInfo=false;
+    this.visibleForm=true;
   }
 
   onSubmit(user) {

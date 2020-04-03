@@ -21,6 +21,7 @@ import { ToastModule } from 'primeng/toast';
 import { PanelModule } from 'primeng/panel';
 import { MessageModule } from 'primeng/message';
 import {FocusTrapModule} from 'primeng/focustrap';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {FocusTrapModule} from 'primeng/focustrap';
     PanelModule,
     MessageModule,
     ToastModule,
-    FocusTrapModule
+    FocusTrapModule,
+    KeyFilterModule
   ],
   exports: [
     FormsModule,
@@ -60,7 +62,8 @@ import {FocusTrapModule} from 'primeng/focustrap';
     PanelModule,
     MessageModule,
     ToastModule,
-    FocusTrapModule
+    FocusTrapModule,
+    KeyFilterModule
   ]
 })
 export class ShareModule { }
