@@ -1,1 +1,152 @@
-<p>details-utilisateur works!</p>
+<p-dialog [(visible)]="visibleInfo" header="informations personnelles" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+<div class="form-wrapper">
+  <div *ngIf="user"  class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-6">
+          <label class="form-label" for="">Prenom</label>
+          <span>{{user.firstName}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-6">
+          <label class="form-label" for="">Nom</label>
+          <span>{{user.lastName}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-6">
+          <label class="form-label" for="">Telephone</label>
+          <span>{{user.phoneNumber}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-6">
+          <label class="form-label" for="">Numéro CNI</label>
+          <span>{{user.identityNumber}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-6">
+          <label class="form-label" for="">Email</label>
+          <span>{{user.email}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-6">
+          <label class="form-label" for="">Username</label>
+          <span>{{user.username}}</span>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-6">
+          <label class="form-label" for="">Password</label>
+          <span>**********</span>
+      </div>
+  </div>
+</div>
+<p-footer>
+  <button type="button" pButton icon="pi pi-check" (click)="clickModifier()" label="modifier"
+    class="ui-button-success"></button>
+  <button type="button" pButton icon="pi pi-times" (click)="visibleInfo=false" label="fermer"
+    class="ui-button-secondary"></button>
+</p-footer>
+</p-dialog>
+
+
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+  <form [style]="{width: '50vw', height: '40vw', marginLeft: '25vw'}" [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)" [hidden]="!visibleForm">
+    <p-panel header="Modification des informations personnelles.">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" >
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            Prenom <span style="color: red;">*</span>
+          </div>
+          <div class="ui-grid-col-8 ">
+            <input pInputText type="text" pKeyFilter="alpha" id="float-input" formControlName="firstName"  [ngModel]="user.firstName" />
+          </div>
+          <div class="ui-grid-col-8">
+            <p-message severity="error" text="Prenom is required"
+              *ngIf="!userform.controls['firstName'].valid&&userform.controls['firstName'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            Nom <span style="color: red;">*</span>
+          </div>
+          <div class="ui-grid-col-8 ">
+            <input pInputText type="text" pKeyFilter="alpha" formControlName="lastName" [ngModel]="user.lastName" />
+          </div>
+           <div class="ui-grid-col-8">
+            <p-message severity="error" text="Nom is required"
+              *ngIf="!userform.controls['lastName'].valid&&userform.controls['lastName'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            Telephone <span style="color: red;">*</span>
+          </div>
+          <div class="ui-grid-col-8 ">
+            <input pInputText type="text" pKeyFilter="int" formControlName="phoneNumber" [ngModel]="user.phoneNumber" />
+          </div>
+           <div class="ui-grid-col-8">
+            <p-message severity="error" text="Telephone is required"
+              *ngIf="!userform.controls['phoneNumber'].valid&&userform.controls['phoneNumber'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            Numéro CNI <span style="color: red;">*</span>
+          </div>
+          <div class="ui-grid-col-8 ">
+            <input pInputText type="text" maxlength="13" pKeyFilter="int" formControlName="identityNumber" [ngModel]="user.identityNumber" />
+          </div>
+           <div class="ui-grid-col-8">
+            <p-message severity="error" text="Numéro CNI is required"
+              *ngIf="!userform.controls['identityNumber'].valid&&userform.controls['identityNumber'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            Email <span style="color: red;">*</span>
+          </div>
+          <div class="ui-grid-col-8 ">
+            <input  type="text" pInputText  formControlName="email" [ngModel]="user.email" />
+          </div>
+           <div class="ui-grid-col-8">
+            <p-message severity="error" text="email is required"
+              *ngIf="!userform.controls['email'].valid&&userform.controls['email'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            Username <i class="pi  pi-user" style="font-size: 3em"></i> <span style="color: red;">*</span>
+          </div>
+          <div class="ui-grid-col-8 ">
+            <input pInputText type="username" formControlName="username" [ngModel]="user.username" />
+          </div>
+           <div class="ui-grid-col-8">
+            <p-message severity="error" text="Username  is required"
+              *ngIf="!userform.controls['username'].valid&&userform.controls['username'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            Password <i class="pi  pi-lock" style="font-size: 3em"></i><span style="color: red;">*</span>
+          </div>
+          <div class="ui-grid-col-8 ">
+            <input pInputText type="password" formControlName="password" [ngModel]="user.password" />
+          </div>
+           <div class="ui-grid-col-8">
+            <p-message severity="error" [text]="userform.controls['password'].errors['required'] ? 'Password is required' : userform.controls['password'].errors['minlength'] ? 'Must be longer than 6 characters' : ''"
+              *ngIf="!userform.controls['password'].valid&&userform.controls['password'].dirty"></p-message>
+          </div>
+
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"></div>
+          <div class="ui-grid-col-8">
+            <button pButton type="submit" label="Modifier" [disabled]="!userform.valid"></button>
+          </div>
+          <div class="ui-grid-col-8"></div>
+        </div>
+
+      </div>
+    </p-panel>
+  </form>
+
+
+
