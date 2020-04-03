@@ -27,6 +27,7 @@ export class GlobalService {
   STOCK_URL=this.BASE_API_URL+'/stocks';
   SUBDIVISION_URL=this.BASE_API_URL+'/subdivisions';
   UTILISATEUR_URL=this.BASE_API_URL+'/users';
+  STATISTIC_URL = this.BASE_API_URL+'/statistics';
 
 
   UPLOAD_FILE = '/upload/images';

@@ -12,7 +12,7 @@
         <div class="p-col-12 p-md-6 p-lg-4">
           <label class="form-label" for="">Produit</label>
           <div class="form-group">
-            <p-dropdown [options]="biens" [(ngModel)]="lineAllocation.welfare" name="welfare-{{i}}"></p-dropdown>
+            <p-dropdown [options]="biens" [filter]="true" [(ngModel)]="lineAllocation.welfare" name="welfare-{{i}}"></p-dropdown>
           </div>
         </div>
         <div class="p-col-12 p-md-6 p-lg-4">
@@ -21,18 +21,18 @@
             <input class="form-input" [required]="true" [(ngModel)]="lineAllocation.quantity" type="number" name="quantity-{{i}}">
           </div>
         </div>
-        <div class="p-col-12 p-md-6 p-lg-4">
+        <div class="p-col-12 p-md-6 p-lg-3">
           <label class="form-label" for="">Unité</label>
           <div class="form-group">
             <input class="form-input" [required]="true" [(ngModel)]="lineAllocation.welfare.category" type="text" name="welfare-category-{{i}}" readonly>
           </div>
         </div>
+        <div class="p-col-12 p-md-6 p-lg-1 moins">
+          <button (click)="onRemoveLineAllocation(i)" type="submit" class="button">
+           <img width="35" src="assets/images/moins.svg" />
+         </button>
+       </div>
       </div>
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-1 moins">
-       <button (click)="onRemoveLineAllocation(i)" type="submit" class="button">
-        <img width="35" src="assets/images/moins.svg" />
-      </button>
     </div>
   </div>
 
