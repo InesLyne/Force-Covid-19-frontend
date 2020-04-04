@@ -29,12 +29,12 @@ export class FromStockComponent implements OnInit {
     } else {
       this.stock = new Stock();
     }
-
+    
     this.welfaresCategory=[
         {label: 'Choix categroir', value: ''},
-        {label: 'Riz', value: 'Riz'},
-        {label: 'Gnambi', value: 'Gnambi'},
-        {label: 'Diakhatou', value: 'Diakhatou'},
+        {label: 'Périssable', value: 'Périssable'},
+        {label: 'Non périssable', value: 'Non périssable'},
+        {label: 'Espèces', value: 'Espèces'},
     ];
 
     this.welfaresWeightUnit=[
