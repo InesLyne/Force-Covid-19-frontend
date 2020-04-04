@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { BeneficiaireService } from '../../../services/beneficiaire.service';
 import { Beneficiaire } from 'src/app/models/beneficiaire';
+import { Subscription } from 'rxjs';
+import { AllocationService } from 'src/app/services/allocation.service';
 
 
 
@@ -16,12 +18,24 @@ export class DetailsBeneficiaireComponent implements OnInit {
   @Input() id: any;
   @Output() displayChange = new EventEmitter();
   errorMsg: any;
+  allocations: any[];
+  allocationsSubscription : Subscription;
   
-  constructor(private beneficiaireService: BeneficiaireService) { }
+  constructor(private beneficiaireService: BeneficiaireService, 
+    private allocationService: AllocationService) { }
 
   ngOnInit(): void {
     if(this.id){
       this.onGetBeneficiaire(this.id);
+      this.allocationsSubscription = this.allocationService.getAllocationsByBeneficiaryId(this.id).subscribe(
+        (allocations: any) => {
+          this.allocations=allocations['hydra:member'][0].lineAllocations;
+        }, (error: any) => {
+          console.log(error);
+        },
+        () => {
+        }
+      )
     }
   }
 

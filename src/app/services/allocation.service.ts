@@ -146,4 +146,10 @@ export class AllocationService {
     );
   }
 
+  getAllocationsByBeneficiaryId(id:number){
+    let url = `${this.baseUrl}?beneficiary=${id}`;
+    console.log("GET URL: "+url);
+    return this.http.get<any>(url);
+  }
+
 }

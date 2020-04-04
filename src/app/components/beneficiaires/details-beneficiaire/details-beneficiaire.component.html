@@ -1,4 +1,3 @@
-
 <div class="form-wrapper detail">
   <div *ngIf="beneficiaire">
     <div>Nom : <strong>{{beneficiaire.firstName}} {{beneficiaire.lastName}}</strong></div>
@@ -10,12 +9,17 @@
     <div>Adresse : <strong>{{beneficiaire.address}}</strong></div>
     <div>Coordonnées GPS : <strong>{{beneficiaire.latitude}} {{beneficiaire.longitude}}</strong></div>
   </div>
+  <div *ngIf="allocations">
+    <h2>Allocations: </h2>
+    <div class="alloc" *ngFor="let alloc of allocations">{{alloc.welfare.name}} </div>
+  </div>
+  <p *ngIf="!allocations">Aucune Allocation n'a été faite</p>
 
-  <div class="alloc" *ngFor="let alloc of beneficiaire.allocations" >{{alloc}} , </div>
 
   <div class="p-grid p-justify-end">
     <div class="p-col-12 action">
-      <button pButton type="button" (click)="onDialogHide()" label="Retour" class="button ui-button-raised ui-button-secondary"></button>
+      <button pButton type="button" (click)="onDialogHide()" label="Retour"
+        class="button ui-button-raised ui-button-secondary"></button>
     </div>
   </div>
 </div>
