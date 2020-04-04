@@ -1,12 +1,12 @@
 <form #f="ngForm" (ngSubmit)="onSubmit()" class="form-wrapper">
   <div class="p-grid">
       <div class="p-col-12 pushAllocation">
-          <button (click)="onPushLineAllocation()" class="button">
+          <button (click)="onPushLineAllocation()" type="button" class="button">
             <img width="220" src="assets/images/add.svg" /> Ajout de champ
          </button>
        </div>
   </div>
-  <div *ngFor="let lineAllocation of lineAllocations; let i=index"   class="p-grid">
+  <div *ngFor="let lineAllocation of lineAllocations; let i=index; trackBy: trackByFn"   class="p-grid">
     <div class="p-col-11">
       <div class="p-grid">
         <div class="p-col-12 p-md-6 p-lg-4">
@@ -15,20 +15,20 @@
             <p-dropdown [options]="biens" [filter]="true" [(ngModel)]="lineAllocation.welfare" name="welfare-{{i}}"></p-dropdown>
           </div>
         </div>
-        <div class="p-col-12 p-md-6 p-lg-4">
-          <label class="form-label" for="">Quantité</label>
-          <div class="form-group">
-            <input class="form-input" [required]="true" [(ngModel)]="lineAllocation.quantity" type="number" name="quantity-{{i}}">
-          </div>
-        </div>
         <div class="p-col-12 p-md-6 p-lg-3">
           <label class="form-label" for="">Unité</label>
           <div class="form-group">
             <input class="form-input" [required]="true" [(ngModel)]="lineAllocation.welfare.category" type="text" name="welfare-category-{{i}}" readonly>
           </div>
         </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+          <label class="form-label" for="">Quantité</label>
+          <div class="form-group">
+            <input class="form-input" [required]="true" [(ngModel)]="lineAllocation.quantity" type="number" name="quantity-{{i}}">
+          </div>
+        </div>
         <div class="p-col-12 p-md-6 p-lg-1 moins">
-          <button (click)="onRemoveLineAllocation(i)" type="submit" class="button">
+          <button (click)="onRemoveLineAllocation(i)" type="button" class="button">
            <img width="35" src="assets/images/moins.svg" />
          </button>
        </div>

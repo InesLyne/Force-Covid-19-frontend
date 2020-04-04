@@ -1,10 +1,11 @@
+import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
+import { Beneficiaire } from './../../../models/beneficiaire';
 import { BienService } from 'src/app/services/bien.service';
 import { Bien } from './../../../models/bien';
 import { Stock } from './../../../models/stock';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Allocation } from 'src/app/models/allocation';
 import { SearchCriteria } from 'src/app/models/search-critaria';
-import { AllocationService } from 'src/app/services/allocation.service';
 import { Subject, Subscription } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
 import { LineAllocationModel } from 'src/app/models/line-allocation.model';
@@ -25,35 +26,53 @@ export class ListAllocationComponent implements OnInit {
   lineAllocations: LineAllocationModel[]=[];
   biens: any;
 
-  constructor(private allocationService: AllocationService, private global: GlobalService, private bienService: BienService) { }
+  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService, private bienService: BienService) { }
 
   ngOnInit(): void {
-    console.log(this.selectedRows)
-    this.onGetBiens();
-    /* this.subdivisions = [
-      {label: 'Selectionnner item', value: null},
-      {label: 'Item 1', value: '/api/subdivisions/450'},
-      {label: 'Item 2', value: '/api/subdivisions/483'},
-      {label: 'Item 3', value: '/api/subdivisions/496'},
-      {label: 'Item 4', value: '/api/subdivisions/423'},
-      {label: 'Item 5', value: '/api/subdivisions/480'}
-  ]; */
+    this.onGetBiensForDropdown();
   }
 
 
 
   onSubmit(){
-
+    const beneficiaires= this.selectedRows as Beneficiaire[];
+    for(let i=0; i<beneficiaires.length; i++){
+      let beneficiaire=beneficiaires[i];
+      let allocation: Allocation= new Allocation();
+      allocation.lienAllocations=this.lineAllocations;
+      allocation.created=this.global.formatedCurentDate();
+      allocation.updated= this.global.formatedCurentDate();
+      allocation.beneficiary=''+beneficiaire.id;
+      if(beneficiaire.allocations && beneficiaire.allocations.length>0){
+        beneficiaire.allocations.push(allocation);
+      }else{
+        beneficiaire.allocations=[];
+        beneficiaire.allocations.push(allocation);
+      }
+      this.beneficiaireService.updateBeneficiaire(beneficiaire).then(
+        (response: any)=>{
+          if((beneficiaires.length-1)==i){
+            this.onDialogHide();
+          }
+        }
+      ).catch(
+        (error: any)=>{
+          this.errorMsg=error;
+          if((beneficiaires.length-1)==i){
+          }
+        }
+      )
+    }
   }
 
-  onGetBiens(){
+  onGetBiensForDropdown(){
     this.bienService.getBiensForDropdown().then(
       (biens: any[])=>{
         this.biens=biens;
       }
     ).catch(
       (error: any)=>{
-        console.log(error);
+        this.errorMsg=error;
       }
     )
   }
@@ -62,8 +81,12 @@ export class ListAllocationComponent implements OnInit {
     let lineAllocation: LineAllocationModel= new LineAllocationModel();
     let welfare: Bien= new Bien();
     lineAllocation.welfare=welfare;
-    this.lineAllocations.push(lineAllocation);
+    this.lineAllocations.unshift(lineAllocation);
+    console.log(this.lineAllocations);
+    //this.lineAllocations.push(lineAllocation);
   }
+
+  trackByFn = (index, item) => item.id;
 
   onRemoveLineAllocation(index: number){
     this.lineAllocations.splice(index,1);
