@@ -82,8 +82,6 @@ export class ListAllocationComponent implements OnInit {
     let welfare: Bien= new Bien();
     lineAllocation.welfare=welfare;
     this.lineAllocations.unshift(lineAllocation);
-    console.log(this.lineAllocations);
-    //this.lineAllocations.push(lineAllocation);
   }
 
   trackByFn = (index, item) => item.id;

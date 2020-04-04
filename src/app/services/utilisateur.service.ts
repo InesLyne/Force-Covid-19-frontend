@@ -48,6 +48,32 @@ export class UtilisateurService {
     )
   }
 
+
+  async getUtilisateursForDropdown() {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.get<any>(this.baseUrl).subscribe(
+          (response: any) => {
+            let utilisateurs=response['hydra:member'] as any[];
+            if(utilisateurs && utilisateurs.length>0){
+              utilisateurs=utilisateurs.map(
+                (utilisateur: User)=>{
+                  return {label:utilisateur.fullname, value:utilisateur}
+                }
+              );
+            }
+            utilisateurs.unshift({label: 'Sélectionner un utilisateur', value: {}});
+            resolve(utilisateurs);
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+
+      }
+
+    );
+  }
+
   async getUtilisateur(id: string) {
     return new Promise(
       (resolve, reject) => {

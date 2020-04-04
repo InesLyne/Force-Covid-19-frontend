@@ -71,8 +71,11 @@
                     <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
                   <td *ngFor="let col of columns">
-                    <div *ngIf="col.type != 'gps'">{{rowData[col.field]}}</div>
-                    <div *ngIf="col.type == 'gps'">L: {{rowData.longitude}} l: {{rowData.latitude}}</div> 
+                    <div *ngIf="!col.type">{{rowData[col.field]}}</div>
+                    <div *ngIf="col.type && col.type == 'fullName'">{{rowData?.manager?.fullname}}</div> 
+                    <div *ngIf="col.type && col.type == 'cni'">{{rowData?.manager?.identityNumber}}</div> 
+                    <div *ngIf="col.type && col.type == 'gArea'">{{onParseGeographicalArea(rowData.geographicalArea)}}</div> 
+                    <div *ngIf="col.type && col.type == 'gps'">L: {{rowData.longitude}} l: {{rowData.latitude}}</div> 
                   </td>
                   <td>
                       <div class="table_actions">

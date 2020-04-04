@@ -50,11 +50,12 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {  
     this.cols = [
-      { field: 'manager?.firstName', header: 'Nom & Prenom' },
-      { field: 'manager?.identityNumber', header: 'N° CNI' },
-      { field: 'geographicalArea', header: 'Magazin' },
-      { field: 'geographicalArea', header: 'Zone Octroyée' },
-      { field: 'longitude', header: 'Bénéficiaire Octroyé' },
+      { field: 'id', header: 'ID' },
+      { field: '.manager?.fullname', header: 'Nom & Prenom', type: 'fullName' },
+      { field: 'manager?.identityNumber', header: 'N° CNI', type: 'cni' },
+      { field: 'address', header: 'Magazin' },
+      { field: 'geographicalArea', header: 'Zone Octroyée', type: 'gArea' },
+      /* { field: 'longitude', header: 'Bénéficiaire Octroyé'}, */
       { field: 'longitude', header: 'Coordonnées GPS', type: 'gps' }
     ];
 
@@ -64,7 +65,7 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
         this.loading=false;
         for (let distributeur of distributeurs) {
           this.DistributeurFullName.push(`${distributeur.address}`);
-          this.Zones.push(distributeur.geographicalArea);
+          this.Zones.push(distributeur.geographicalArea.join());
         }
       }
     );
@@ -145,6 +146,13 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
   searchZones(event) {
     console.log('event', event);
     this.filteredZones = this.Zones.filter(c =>  c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
+
+  onParseGeographicalArea(geographicalArea: any[]): string{
+    if(geographicalArea && geographicalArea.length>0){
+      return geographicalArea.map((x: any)=> x['name']).join(', ');
+    }
+    return '';
   }
 
 }

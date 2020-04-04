@@ -27,11 +27,11 @@ export class DetailsUtilisateurComponent implements OnInit {
               private messageService: MessageService
                 ) {
 
-    this.user = { id: 0,
+    this.user = { 
+      id: 0,
     username: 'moussaDev',
-    salt: '',
     password: '0000',
-    roles: '',
+    roles: [],
     type: '',
     firstName: 'Moussa',
     lastName: 'Sall',
@@ -40,6 +40,7 @@ export class DetailsUtilisateurComponent implements OnInit {
     email:'user@gmail.com',
     lastLogin: '',
     isActive: '',
+    fullname:'Moussa Dev'
     }
   }
 
