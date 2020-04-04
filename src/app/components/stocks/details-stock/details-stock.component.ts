@@ -8,6 +8,8 @@ import { StockService } from 'src/app/services/stock.service';
   styleUrls: ['./details-stock.component.css']
 })
 export class DetailsStockComponent implements OnInit {
+  listItems: Stock[] = [];
+  cols: any[];
   stock: Stock;
   @Input() id: any;
   @Output() displayChange = new EventEmitter();
@@ -18,13 +20,32 @@ export class DetailsStockComponent implements OnInit {
   ngOnInit(): void {
     if(this.id){
       this.onGetStock(this.id);
+      this.loadStockHistory(this.id);
     }
+    this.cols = [
+      { field: 'updated', header: 'Dernière Mise à jour', type: 'date' },
+      { field: 'welfare.name', header: 'Entré / sortie' },
+      { field: 'quantity', header: 'Quantité' }
+    ];
   }
 
   onGetStock(id: string){
     this.stockService.getStock(id).then(
       (restult: Stock)=>{
         this.stock=restult;
+        this.listItems.push(this.stock);
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  loadStockHistory(id: string){
+    this.stockService.getStockHistory(id).then(
+      (restult: Stock[])=>{
+        this.listItems=restult;
       }
     ).catch(
       (error: any)=>{

@@ -1,9 +1,9 @@
 <p-dialog [(visible)]="visibleInfo" header="informations personnelles" [modal]="true"
   [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 <div class="form-wrapper">
-  <div *ngIf="user"  class="p-grid">
+  <div *ngIf="user"  class="p-grid user-profile">
       <div class="p-col-12 p-md-6 p-lg-6">
-          <label class="form-label" for="">Prenom</label>
+          <label class="form-label" for="">Prénom</label>
           <span>{{user.firstName}}</span>
       </div>
       <div class="p-col-12 p-md-6 p-lg-6">
@@ -11,11 +11,11 @@
           <span>{{user.lastName}}</span>
       </div>
       <div class="p-col-12 p-md-6 p-lg-6">
-          <label class="form-label" for="">Telephone</label>
+          <label class="form-label" for="">Téléphone</label>
           <span>{{user.phoneNumber}}</span>
       </div>
       <div class="p-col-12 p-md-6 p-lg-6">
-          <label class="form-label" for="">Numéro CNI</label>
+          <label class="form-label" for="">Numéro Carte d'Identité Nationale</label>
           <span>{{user.identityNumber}}</span>
       </div>
       <div class="p-col-12 p-md-6 p-lg-6">
@@ -23,17 +23,17 @@
           <span>{{user.email}}</span>
       </div>
       <div class="p-col-12 p-md-6 p-lg-6">
-          <label class="form-label" for="">Username</label>
+          <label class="form-label" for="">Nom d'utilisateur</label>
           <span>{{user.username}}</span>
       </div>
       <div class="p-col-12 p-md-6 p-lg-6">
-          <label class="form-label" for="">Password</label>
+          <label class="form-label" for="">Mot de passe</label>
           <span>*********</span>
       </div>
   </div>
 </div>
 <p-footer>
-  <button type="button" pButton icon="pi pi-check" (click)="clickModifier()" label="modifier"
+  <button type="button" pButton icon="pi pi-user-edit" (click)="clickModifier()" label="modifier"
     class="ui-button-success"></button>
   <button type="button" pButton icon="pi pi-times" (click)="visibleInfo=false" label="fermer"
     class="ui-button-secondary"></button>
@@ -41,15 +41,15 @@
 </p-dialog>
 
 
-  <p-toast [style]="{marginTop: '80px'}"></p-toast>
-  <form [style]="{width: '50vw', height: '40vw', marginLeft: '25vw'}" [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)" [hidden]="!visibleForm">
+  <p-toast [style]="{marginTop: '100px'}"></p-toast>
+  <form class="user_profile_form" [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)" [hidden]="!visibleForm">
     <p-panel header="Modification des informations personnelles.">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" >
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-            Prenom <span style="color: red;">*</span>
+          <div class="ui-grid-col-4 label">
+            Prénom <span style="color: red;">*</span>
           </div>
-          <div class="ui-grid-col-8 ">
+          <div class="ui-grid-col-8">
             <input pInputText type="text" pKeyFilter="alpha" id="float-input" formControlName="firstName"  [ngModel]="user.firstName" />
           </div>
           <div class="ui-grid-col-8">
@@ -59,7 +59,7 @@
 
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
+          <div class="ui-grid-col-4 label">
             Nom <span style="color: red;">*</span>
           </div>
           <div class="ui-grid-col-8 ">
@@ -72,8 +72,8 @@
 
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-            Telephone <span style="color: red;">*</span>
+          <div class="ui-grid-col-4 label">
+            Téléphone <span style="color: red;">*</span>
           </div>
           <div class="ui-grid-col-8 ">
             <input pInputText type="text" pKeyFilter="int" formControlName="phoneNumber" [ngModel]="user.phoneNumber" />
@@ -85,7 +85,7 @@
 
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
+          <div class="ui-grid-col-4 label">
             Numéro CNI <span style="color: red;">*</span>
           </div>
           <div class="ui-grid-col-8 ">
@@ -98,7 +98,7 @@
 
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
+          <div class="ui-grid-col-4 label">
             Email <span style="color: red;">*</span>
           </div>
           <div class="ui-grid-col-8 ">
@@ -111,8 +111,8 @@
 
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-            Username <i class="pi  pi-user" style="font-size: 3em"></i> <span style="color: red;">*</span>
+          <div class="ui-grid-col-4 label">
+            Nom d'utilisateur <span style="color: red;">*</span>
           </div>
           <div class="ui-grid-col-8 ">
             <input pInputText type="username" formControlName="username" [ngModel]="user.username" />
@@ -124,8 +124,8 @@
 
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-            Password <i class="pi  pi-lock" style="font-size: 3em"></i><span style="color: red;">*</span>
+          <div class="ui-grid-col-4 label">
+            Mot de passe <span style="color: red;">*</span>
           </div>
           <div class="ui-grid-col-8 ">
             <input pInputText type="password" formControlName="password" [ngModel]="user.password" />
@@ -137,9 +137,12 @@
 
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-3"></div>
-          <div class="ui-grid-col-8">
-            <button pButton type="submit" label="Modifier" [disabled]="!userform.valid"></button>
+          <div class="ui-grid-col-4 label"></div>
+          <div class="ui-grid-col-4">
+            <button pButton type="submit" class="ui-button-success" icon="pi pi-user-edit" label="Modifier" [disabled]="!userform.valid"></button>
+          </div>
+          <div class="ui-grid-col-4">
+            <button pButton type="cancel" label="Annuler" [disabled]="!userform.valid"></button>
           </div>
           <div class="ui-grid-col-8"></div>
         </div>
@@ -147,6 +150,3 @@
       </div>
     </p-panel>
   </form>
-
-
-

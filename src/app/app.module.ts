@@ -36,7 +36,7 @@ import { UtilisateursModule } from './components/utilisateurs/utilisateurs.modul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { StatisticsModule } from './components/statistics/statistics.module';
-
+import { ConfigurationsModule } from './components/configurations/configurations.module';
 
 
 @NgModule({
@@ -64,6 +64,7 @@ import { StatisticsModule } from './components/statistics/statistics.module';
     StocksModule,
     UtilisateursModule,
     StatisticsModule,
+    ConfigurationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],

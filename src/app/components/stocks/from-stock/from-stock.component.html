@@ -3,31 +3,23 @@
     <div *ngIf="stock"  class="p-grid">
       <div class="p-col-4 p-md-6 p-lg-4">
         <label class="form-label" for="">Nom Produit</label>
-        <input class="form-input" [required]="true" [(ngModel)]="stock.quantity" type="text" name="quantity">
+        <input class="form-input" [required]="true" [(ngModel)]="stock.welfare.name" type="text" name="name">
       </div>
       <div class="p-col-4 p-md-6 p-lg-4">
         <label class="form-label" for="">Descriptif</label>
-        <input class="form-input" type="text" name="quantity">
+        <input class="form-input" type="text" [(ngModel)]="stock.welfare.description" name="description">
       </div>
       <div class="p-col-4 p-md-6 p-lg-4">
         <label class="form-label" for="">Catégorie</label>
-        <p-dropdown [options]="users" [(ngModel)]="stock.userId" name="userId"></p-dropdown>
+        <p-dropdown [options]="welfaresCategory" [(ngModel)]="stock.welfare.category" name="category"></p-dropdown>
       </div>
-      <div class="p-col-4 p-md-6 p-lg-3">
-        <label class="form-label" for="">Quantité</label>
-        <input class="form-input" [required]="true" [(ngModel)]="stock.quantity" type="number" name="quantity">
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Poids</label>
+        <input class="form-input" type="text" [(ngModel)]="stock.welfare.weight" name="weight">
       </div>
       <div class="p-col-12 p-md-6 p-lg-3">
         <label class="form-label" for="">Unité</label>
-        <p-dropdown [options]="welfares" [(ngModel)]="stock.welfare" name="welfare"></p-dropdown>
-      </div>
-      <div class="p-col-4 p-md-6 p-lg-3">
-        <label class="form-label" for="">Quantité</label>
-        <input class="form-input" [required]="true" [(ngModel)]="stock.quantity" type="number" name="quantity">
-      </div>
-      <div class="p-col-4 p-md-6 p-lg-3">
-        <label class="form-label" for="">Date</label>
-        <p-calendar [(ngModel)]="value"></p-calendar>
+        <p-dropdown [options]="welfaresWeightUnit" [(ngModel)]="stock.welfare.unit" name="unit"></p-dropdown>
       </div>
       <div class="p-col-12 action">
         <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>

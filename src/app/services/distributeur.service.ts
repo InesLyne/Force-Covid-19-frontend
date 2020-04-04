@@ -147,23 +147,7 @@ export class DistributeurService {
 
     );
   }
-
-
-  loadFakeData() {
-    this.distributeurs = [];
-    for (let i = 1; i <= 20; i++) {
-      let bene = new Distributeur();
-      bene.id =  i;
-      bene.geographicalArea = 'geographicalArea ' + i;
-      bene.address = 'address ' + i;
-      bene.storageCapacity = 'storageCapacity ' + i;
-      bene.longitude =  i;
-      bene.latitude =  i;
-      this.distributeurs.push(bene);
-    }
-    this.emitTotalRecordsSubject(20);
-  }
-
+  
   getDistributeursByFilter(manager: number, zone?: number){
     let url : string;
     if(manager!=null && manager != 0){
@@ -188,5 +172,20 @@ export class DistributeurService {
       }
     )
   }
+  /* loadFakeData() {
+    this.distributeurs = [];
+    for (let i = 1; i <= 20; i++) {
+      let bene = new Distributeur();
+      bene.id =  i;
+      bene.geographicalArea = 'geographicalArea ' + i;
+      bene.address = 'address ' + i;
+      bene.storageCapacity = 'storageCapacity ' + i;
+      bene.longitude =  i;
+      bene.latitude =  i;
+      this.distributeurs.push(bene);
+    }
+    this.emitTotalRecordsSubject(20);
+  } */
+
 }
 

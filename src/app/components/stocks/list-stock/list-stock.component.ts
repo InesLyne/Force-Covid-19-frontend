@@ -36,8 +36,8 @@ export class ListStockComponent implements OnInit {
   displayDialog: boolean;
   selectedData: any;
   displayDetailsDialog: boolean;
+  displayStockManagerDialog: boolean;
   modalTitle: string;
-
   errorMsg: any;
 
   cities1: SelectItem[];
@@ -60,13 +60,13 @@ export class ListStockComponent implements OnInit {
   ngOnInit(): void {
 
     this.cols = [
-      { field: 'welfare', header: 'Nom Produit' },
-      { field: 'quantity', header: 'Description' },
-      { field: 'created', header: 'Catégorie' },
-      { field: 'updated', header: 'Poids' },
-      { field: 'userId', header: 'Unté' },
-      { field: 'userId', header: 'Quantité' },
-      { field: 'userId', header: 'Dernière Mise à jour' }
+      { field: 'welfare.name', header: 'Nom Produit' },
+      { field: 'welfare?.description', header: 'Description' },
+      { field: 'welfare?.category', header: 'Catégorie' },
+      { field: 'welfare?.weight', header: 'Poids' },
+      { field: 'welfare?.unit', header: 'Unté' },
+      { field: 'quantity', header: 'Quantité' },
+      { field: 'updated', header: 'Dernière Mise à jour', type: 'date' }
     ];
 
     this.itemSubscription = this.stockService.stocksSubject.subscribe(
@@ -145,6 +145,7 @@ export class ListStockComponent implements OnInit {
 
   showFormDialog(oldData = null) {
     this.displayDetailsDialog = false;
+    this.displayStockManagerDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
     if (oldData) {
@@ -156,13 +157,21 @@ export class ListStockComponent implements OnInit {
 
   showDetailsDialog(data) {
     this.displayDialog = false;
+    this.displayStockManagerDialog = false;
     this.selectedData = data;
     this.displayDetailsDialog = true;
     this.modalTitle = 'Details de Stock';
   }
 
+  showStockManagerFormDialog(data){
+    this.displayDialog = false;
+    this.displayDetailsDialog = false;
+    this.selectedData = data;
+    this.displayStockManagerDialog = true;
+    this.modalTitle = 'Gestionnaire de Stock';
+  }
   onDialogHide(event) {
-    console.log(event)
+    this.displayStockManagerDialog = event;
     this.displayDialog = event;
     this.displayDetailsDialog = event;
     this.selectedData = null;
