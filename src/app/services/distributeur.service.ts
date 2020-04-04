@@ -148,7 +148,7 @@ export class DistributeurService {
   }
 
 
-  loadFakeData() {
+  /* loadFakeData() {
     this.distributeurs = [];
     for (let i = 1; i <= 20; i++) {
       let bene = new Distributeur();
@@ -161,5 +161,5 @@ export class DistributeurService {
       this.distributeurs.push(bene);
     }
     this.emitTotalRecordsSubject(20);
-  }
+  } */
 }

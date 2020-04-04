@@ -5,11 +5,6 @@
       <input class="form-input" [required]="true" [(ngModel)]="distributeur.address" type="text" name="address">
     </div>
     <div class="p-col-12 p-md-6 p-lg-4">
-      <label class="form-label" for="">Zone geographique</label>
-      <input class="form-input" [required]="true" [(ngModel)]="distributeur.geographicalArea" type="text"
-        name="geographicalArea">
-    </div>
-    <div class="p-col-12 p-md-6 p-lg-4">
       <label class="form-label" for="">Capacité de stockage</label>
       <input class="form-input" [required]="true" [(ngModel)]="distributeur.storageCapacity" type="text"
         name="storageCapacity">
@@ -24,7 +19,24 @@
     </div>
     <div class="p-col-12 p-md-6 p-lg-4">
       <label class="form-label" for="">Manager</label>
-      <p-dropdown [options]="managers" [(ngModel)]="distributeur.manager" name="manager"></p-dropdown>
+      <p-dropdown [options]="managers" [filter]="true" [(ngModel)]="distributeur.manager" name="manager"></p-dropdown>
+    </div>
+    <div *ngFor="let geoArea of distributeur.geographicalArea; let i=index"  class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-10">
+        <label class="form-label" for="">Nom</label>
+        <input class="form-input" [required]="true" [(ngModel)]="geoArea.name" type="text"
+      name="geographicalArea-{{i}}">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-1 moins">
+        <button (click)="onRemoveGeographicalArea(i)" type="button" class="button">
+         <img width="35" src="assets/images/moins.svg" />
+       </button>
+     </div>
+    </div>
+    <div class="p-col-12 pushAllocation">
+        <button (click)="onPushGeographicalArea()" type="button" class="button">
+          <img width="220" src="assets/images/add.svg" /> Ajout de champ
+      </button>
     </div>
     <div class="p-col-12 action">
       <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
