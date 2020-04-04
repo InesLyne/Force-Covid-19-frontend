@@ -148,8 +148,6 @@ export class DistributeurService {
     );
   }
 
- }
-
   getDistributeursByFilter(firstname: string, lastname:string, zone?: string){
     let url : string;
     if(firstname!=null && lastname!=null){
