@@ -4,7 +4,7 @@ import { StockService } from 'src/app/services/stock.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { Subscription, Subject } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 interface City {
   name: string;

@@ -71,7 +71,7 @@
           </td>
           <td *ngFor="let col of columns">
             <div *ngIf="col.type != 'date'">{{rowData[col.field]}}</div>
-            <div *ngIf="col.type == 'date'">{{rowData[col.field] | date:'dd/MM/yyyy à HH:mm'}}</div> 
+            <div *ngIf="col.type == 'date'">{{rowData[col.field] | date:'dd/MM/yyyy à HH:mm'}}</div>
           </td>
           <td>
             <div class="table_actions">

@@ -13,15 +13,19 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 export class HeaderComponent implements OnInit {
   items: MenuItem[];
   user: User;
+  logged: boolean;
+  showMenu: boolean;
   
   constructor(
     private authService: AuthentificationService,
-    private router: Router
+    private router: Router,
+    
   ) { 
     
   }
 
   ngOnInit(): void {
+    this.showMenu = false;
     this.items = [
       {
         label: 'Accueil',
@@ -70,17 +74,24 @@ export class HeaderComponent implements OnInit {
       },
       { separator: true },
     ];
-
+    
     this.user = this.authService.getCurrentUser();
+    this.logged = this.user != null;
   }
 
   redirectToLogin() {
     this.router.navigate(['login']);
   }
 
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+    console.log(this.showMenu)
+  }
+
   logout() {
     this.authService.setToken(null);
     this.authService.setUser(null);
     this.user = null;
+    this.logged = false;
   }
 }
