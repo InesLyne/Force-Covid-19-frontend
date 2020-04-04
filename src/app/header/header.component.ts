@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
       },
       { separator: true },
     ];
-
+    
     this.user = this.authService.getCurrentUser();
     this.logged = this.user != null;
   }
@@ -92,5 +92,6 @@ export class HeaderComponent implements OnInit {
     this.authService.setToken(null);
     this.authService.setUser(null);
     this.user = null;
+    this.logged = false;
   }
 }
