@@ -5,6 +5,7 @@ import { DetailsStockComponent } from './details-stock/details-stock.component';
 import { FromStockComponent } from './from-stock/from-stock.component';
 import { StocksRoutingModule } from './stocks-routing.module';
 import { ShareModule } from 'src/app/share/share/share.module';
+import { StockManagerComponent } from './stock-manager/stock-manager.component';
 
 
 
@@ -12,7 +13,8 @@ import { ShareModule } from 'src/app/share/share/share.module';
   declarations: [
     ListStockComponent,
     DetailsStockComponent,
-    FromStockComponent
+    FromStockComponent,
+    StockManagerComponent
   ],
   imports: [
     CommonModule,

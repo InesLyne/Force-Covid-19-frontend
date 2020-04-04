@@ -6,3 +6,9 @@
 ::ng-deep footer{
   background-color: #379956 !important;
 }
+
+.gps_link {
+  font-size: 18px;
+  color: black;
+  text-align: center;
+}

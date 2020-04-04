@@ -1,7 +1,6 @@
 export class User {
     id: number;
     username: string;
-    salt: any;
     password: string;
     roles: any;
     type: string;
@@ -12,6 +11,19 @@ export class User {
     email:string;
     lastLogin: string;
     isActive: string;
+    fullname: string;
 
-    constructor(){}
+    constructor(){
+        this.username='';
+        this.password='';
+        this.roles=[];
+        this.type='';
+        this.firstName='';
+        this.lastName='';
+        this.phoneNumber='';
+        this.identityNumber='';
+        this.email='';
+        this.lastLogin='';
+        this.fullname='';
+    }
 }

@@ -1,13 +1,15 @@
-import { UtilisateursModule } from '../components/utilisateurs/utilisateurs.module';
-
+import { User } from './user';
 export class Distributeur {
     id: number;
     storageCapacity: string;
-    geographicalArea: string;
+    geographicalArea: any[];
     address: string;
     latitude: number;
     longitude: number;
-    manager: UtilisateursModule;
+    manager: User;
 
-    constructor(){}
+    constructor(){
+        this.geographicalArea=[];
+        this.manager= new User();
+    }
 }

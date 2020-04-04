@@ -1,28 +1,42 @@
 <div class="container">
     <div class="p-grid p-justify-center">
-        <div class="p-col-12 p-md-6 p-lg-5">
-            <p-chart type="bar" [data]="dataBeneficiairesParRegions"></p-chart>
-            <label>Nombre de distributeurs par région</label>
+        
+        <div class="p-col-12 p-md-5 p-lg-5">
+            <p-fieldset legend="Nombre de distributeurs/bénéficiaires par région" [toggleable]="true">
+                <p-chart type="bar" [data]="dataBenefDistribParRegion"></p-chart>
+            </p-fieldset>
+        </div>
+    
+        <div class="p-col-12 p-md-5 p-lg-5" style="margin-left: 80px;">
+            <p-fieldset legend="Quantité de stock disponible par catégorie de produit" [toggleable]="true">
+                <p-chart type="pie" [data]="dataStockProductCategories"></p-chart>
+            </p-fieldset>
         </div>
 
-        <div class="p-col-12 p-md-6 p-lg-5">
-            <p-chart type="pie" [data]="dataStockCategories"></p-chart>
-            <label>Quantité de stock disponible par catégorie de produit</label>
-        </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="p-grid p-justify-center">
-
-        <div class="p-col-12 p-md-6 p-lg-5">
-            <p-chart type="polarArea" [data]="dataPolarArea"></p-chart>
-            <label>Nombre d'allocation</label>
+    <div class="p-grid p-justify-center" style="margin-top: 60px;">
+        
+        <div class="p-col-12 p-md-5 p-lg-5">
+            <p-fieldset legend="Nombre d'allocations par mois" [toggleable]="true">
+                <p-chart type="line" [data]="dataAllocationsTemps"></p-chart>
+                <div class="form-group" style="margin-left: 280px;">
+                    <p-dropdown name="selectedRegion" [options]="regions" [(ngModel)]="selectedRegion"></p-dropdown>&nbsp;&nbsp;
+                    <button pButton type="button" label="Filtrer" class="ui-button-rounded" (click)="suiviAllocationByRegion()"></button>
+                </div>
+            </p-fieldset>
         </div>
 
-        <div class="p-col-12 p-md-6 p-lg-5">
-            <p-chart type="line" [data]="dataSuiviStocks"></p-chart>
-            <label>Suivi des entrées/sorties de stock en fonction du temps</label>
+        <div class="p-col-12 p-md-5 p-lg-5" style="margin-left: 80px;">
+            <p-fieldset legend="Suivi des entrées/sorties de stock en fonction du temps" [toggleable]="true">
+                <p-chart type="line" [data]="dataSuiviStocks"></p-chart>
+                <div class="form-group" style="margin-left: 280px;">
+                    <p-dropdown name="selectedProduct" [options]="products" [(ngModel)]="selectedProduct"></p-dropdown>&nbsp;&nbsp;
+                    <button pButton type="button" label="Filtrer" class="ui-button-rounded" (click)="suiviByCategory()"></button>
+                </div>
+            </p-fieldset>            
         </div>
         
     </div>

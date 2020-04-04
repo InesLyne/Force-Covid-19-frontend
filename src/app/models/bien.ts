@@ -1,10 +1,11 @@
 export class Bien {
-    id: number;
-    name: string;
-    description: string;
-    weight: number;
-    unit: number;
-    category: string;
 
-    constructor(){}
+    constructor(
+        public id?: number,
+        public name?: string,
+        public description?: string,
+        public weight?: number,
+        public unit?: number,
+        public category?: string,
+        ){}
 }

@@ -67,8 +67,13 @@
               <td>
                   <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
               </td>
-                  <td *ngFor="let col of columns">
-                      {{rowData[col.field]}}
+                  <td *ngFor="let col of columns" style="text-align: center;">
+                    <div *ngIf="col.type != 'gps'">{{rowData[col.field]}}</div>
+                    <div *ngIf="col.type == 'gps'" class="gps_link">
+                        <a target="_blank" href="{{  'https://www.google.sn/maps/@' + rowData.latitude + ',' + rowData.longitude + ',14z?hl=fr' }} ">
+                          <i class="pi pi-map-marker" title="Voir sur la carte"></i>
+                        </a>
+                    </div>
                   </td>
                   <td>
                       <div class="table_actions">
@@ -103,10 +108,10 @@
     </app-list-allocation>
 </p-dialog>
 
-<section *ngIf="selectedItems && selectedItems.length>0"  class="page-section first">
+<section  class="page-section">
     <div class="page-actions">
-      <button (click)="showAllocationDialog()" type="button" class="button bgColor-primary">
-        Allouer un stock
+      <button (click)="showAllocationDialog()" [disabled]="!(selectedItems && selectedItems.length>0)" type="button" class="button bgColor-secondary">
+        <i class="pi pi-shop"></i> Allouer un stock
       </button>
     </div>
-  </section>
+</section>

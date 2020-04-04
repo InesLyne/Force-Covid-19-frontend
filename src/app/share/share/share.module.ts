@@ -23,6 +23,7 @@ import { MessageModule } from 'primeng/message';
 import { FocusTrapModule } from 'primeng/focustrap';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { ChartModule } from 'primeng/chart';
+import { FieldsetModule } from 'primeng/fieldset';
 
 @NgModule({
   declarations: [],
@@ -47,6 +48,7 @@ import { ChartModule } from 'primeng/chart';
     FocusTrapModule,
     KeyFilterModule,
     ChartModule,
+    FieldsetModule,
   ],
   exports: [
     FormsModule,
@@ -68,6 +70,7 @@ import { ChartModule } from 'primeng/chart';
     FocusTrapModule,
     KeyFilterModule,
     ChartModule,
+    FieldsetModule,
   ]
 })
 export class ShareModule { }

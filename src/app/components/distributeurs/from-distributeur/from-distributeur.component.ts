@@ -1,3 +1,4 @@
+import { UtilisateurService } from './../../../services/utilisateur.service';
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Distributeur } from 'src/app/models/distributeur';
 import { DistributeurService } from 'src/app/services/distributeur.service';
@@ -16,7 +17,7 @@ export class FromDistributeurComponent implements OnInit {
 
   managers: any;
   
-  constructor(private distributeurService: DistributeurService) { }
+  constructor(private distributeurService: DistributeurService, private utilisateurService: UtilisateurService) { }
 
   ngOnInit(): void {
     if(this.id){
@@ -25,12 +26,13 @@ export class FromDistributeurComponent implements OnInit {
       this.distributeur = new Distributeur();
     }
 
-    this.managers = [
+    this.onGetUtilisateursForDropdown();
+    /* this.managers = [
       {label: 'Selectionnner un manager', value: null},
       {label: 'Modou khoulé', value: '/api/users/25'},
       {label: 'Mbaye Traoré', value: '/api/users/26'},
       {label: 'Ameth Gaye', value: '/api/users/27'},
-  ];
+  ]; */
   }
 
   onGetDistributeur(id: string){
@@ -49,6 +51,7 @@ export class FromDistributeurComponent implements OnInit {
     this.distributeurService.addDistributeur(this.distributeur).then(
       (response: any)=>{
         this.successMsg= response;
+        this.onDialogHide();
       }
     ).catch(
       (error: any)=>{
@@ -61,6 +64,7 @@ export class FromDistributeurComponent implements OnInit {
     this.distributeurService.updateDistributeur(this.distributeur).then(
       (response: any)=>{
         this.successMsg= response;
+        this.onDialogHide();
       }
     ).catch(
       (error: any)=>{
@@ -75,6 +79,29 @@ export class FromDistributeurComponent implements OnInit {
     } else {
       this.onAddDistributeur();
     }
+  }
+
+  onGetUtilisateursForDropdown(){
+    this.utilisateurService.getUtilisateursForDropdown().then(
+      (utilisateurs: any[])=>{
+        this.managers=utilisateurs;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onPushGeographicalArea(){
+    let geoArea: any= {name:''};
+    this.distributeur.geographicalArea.push(geoArea);
+  }
+
+  trackByFn = (index, item) => item.id;
+
+  onRemoveGeographicalArea(index: number){
+    this.distributeur.geographicalArea.splice(index,1);
   }
 
   onDialogHide() {
