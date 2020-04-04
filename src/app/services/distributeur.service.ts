@@ -17,6 +17,7 @@ export class DistributeurService {
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.DISTRIBUTEUR_URL;
+    this.getDistributeurs();
   }
 
   emitDistributeurs() {
@@ -147,7 +148,31 @@ export class DistributeurService {
     );
   }
 
+ }
 
+  getDistributeursByFilter(firstname: string, lastname:string, zone?: string){
+    let url : string;
+    if(firstname!=null && lastname!=null){
+      url = `${this.baseUrl}?firstName=${firstname}&lastName=${lastname}`;
+      if(zone){
+        url = `${url}&geographicalArea=${zone}`;
+      }
+    } else {
+      url = `${this.baseUrl}`;
+      if(zone){
+        url = `${url}?geographicalArea=${zone}`;
+      }
+    }
+    this.http.get<any>(url).subscribe(
+      (distributeurs: any) => {
+        this.distributeurs=distributeurs['hydra:member'];
+        this.emitTotalRecordsSubject(distributeurs['hydra:totalItems'] as number);
+        this.emitDistributeurs();
+      }, (error: any) => {
+        console.log(error);
+      }
+    )
+  }
   /* loadFakeData() {
     this.distributeurs = [];
     for (let i = 1; i <= 20; i++) {
@@ -162,4 +187,6 @@ export class DistributeurService {
     }
     this.emitTotalRecordsSubject(20);
   } */
+
 }
+

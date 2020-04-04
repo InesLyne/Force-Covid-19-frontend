@@ -147,11 +147,18 @@ export class BeneficiaireService {
   }
 
   getBeneficiairesByFilter(firstname: string, lastname:string, salaire?: number){
-    let url : string = `${this.baseUrl}?firstName=${firstname}&lastName=${lastname}`;
-    if(salaire){
-      url = `${this.baseUrl}?firstName=${firstname}&lastName=${lastname}&monthlyIncome=${salaire}`;
+    let url : string;
+    if(firstname!=null && lastname!=null){
+      url = `${this.baseUrl}?firstName=${firstname}&lastName=${lastname}`;
+      if(salaire){
+        url = `${url}&monthlyIncome=${salaire}`;
+      }
+    } else {
+      url = `${this.baseUrl}`;
+      if(salaire){
+        url = `${url}?monthlyIncome=${salaire}`;
+      }
     }
-    console.log("Url: "+url);
     this.http.get<any>(url).subscribe(
       (beneficiaires: any) => {
         this.beneficiaires=beneficiaires['hydra:member'];

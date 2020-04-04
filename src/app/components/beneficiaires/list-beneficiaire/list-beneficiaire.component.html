@@ -14,7 +14,7 @@
       <div class="form-group">
         <label for="" class="form-label">Nom</label>
         <p-autoComplete  name="selectedCity1"[(ngModel)]="selectName" [suggestions]="filteredNames" (completeMethod)="search($event)"
-          placeholder="Search" (ngModelChange)="onChange()"></p-autoComplete>
+          placeholder="Prenoms Nom ou Nom" (ngModelChange)="onChange()"></p-autoComplete>
       </div>
       <div class="form-group">
         <label for="" class="form-label">Salaire</label>
@@ -73,7 +73,7 @@
                         <a target="_blank" href="{{  'https://www.google.sn/maps/@' + rowData.latitude + ',' + rowData.longitude + ',14z?hl=fr' }} ">
                           <i class="pi pi-map-marker" title="Voir sur la carte"></i>
                         </a>
-                    </div> 
+                    </div>
                   </td>
                   <td>
                       <div class="table_actions">
