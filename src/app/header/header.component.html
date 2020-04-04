@@ -38,7 +38,7 @@
           <div class="name" *ngIf="user.firstName == undefined || user.lastName == undefined;">{{ user.username | titlecase}}</div>
           <div class="role">{{ user.type | titlecase }} <span class="dropdown-caret ui-submenu-icon pi pi-fw pi-caret-down"></span></div>
           <div class="dropdown" *ngIf="showMenu">
-            <a routerLink="/utilisateurs/{{ user.id }}/details" (click)="toggleMenu()">
+            <a routerLink="/utilisateurs/{{ user.username }}/details" (click)="toggleMenu()">
               <span class="ui-menuitem-icon pi pi-user" >Mon profil</span>
             </a>
             <a href="#" (click)="logout()">
