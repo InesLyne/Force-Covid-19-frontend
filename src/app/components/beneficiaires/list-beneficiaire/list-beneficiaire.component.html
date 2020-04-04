@@ -67,9 +67,13 @@
               <td>
                   <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
               </td>
-                  <td *ngFor="let col of columns">
+                  <td *ngFor="let col of columns" style="text-align: center;">
                     <div *ngIf="col.type != 'gps'">{{rowData[col.field]}}</div>
-                    <div *ngIf="col.type == 'gps'">L: {{rowData.longitude}} l: {{rowData.latitude}}</div> 
+                    <div *ngIf="col.type == 'gps'" class="gps_link">
+                        <a target="_blank" href="{{  'https://www.google.sn/maps/@' + rowData.latitude + ',' + rowData.longitude + ',14z?hl=fr' }} ">
+                          <i class="pi pi-map-marker" title="Voir sur la carte"></i>
+                        </a>
+                    </div> 
                   </td>
                   <td>
                       <div class="table_actions">

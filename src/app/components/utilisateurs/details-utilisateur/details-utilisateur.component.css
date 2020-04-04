@@ -12,3 +12,11 @@ font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.user-profile label, .user_profile_form .label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.user_profile_form {
+  padding: 30px 40px;
+}
