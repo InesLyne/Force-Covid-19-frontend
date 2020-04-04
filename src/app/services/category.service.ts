@@ -17,6 +17,7 @@ export class CategoryService {
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.CATEGORY_URL;
+    this.getCategories();
   }
 
   emitCategories() {

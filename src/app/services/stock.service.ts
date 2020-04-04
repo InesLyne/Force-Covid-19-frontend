@@ -149,7 +149,7 @@ export class StockService {
   getStocksByFilter(product: string, category?: string){
     let url : string;
     if(product!=null){
-      url = `${this.baseUrl}?product=${product}`;
+      url = `${this.baseUrl}?welfare=${product}`;
       if(category){
         url = `${url}&category=${category}`;
       }
@@ -159,6 +159,7 @@ export class StockService {
         url = `${url}?category=${category}`;
       }
     }
+    console.log("url Produit: "+url);
     this.http.get<any>(url).subscribe(
       (stocks: any) => {
         this.stocks=stocks['hydra:member'];
@@ -168,5 +169,10 @@ export class StockService {
         console.log(error);
       }
     )
+  }
+
+  getWelfares(){
+    let url = `${this.global.BASE_API_URL}/welfares`;
+    return this.http.get<any>(url);
   }
 }

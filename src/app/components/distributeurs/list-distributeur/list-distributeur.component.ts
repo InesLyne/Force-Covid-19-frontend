@@ -40,11 +40,12 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
   selectedCity1: City;
   selectedCity2: City;
   DistributeurFullName: string[] = [];
+  distributors: SelectItem[] = [{label: 'Selectionnez', value: 0}];
   filteredNames: string[];
-  selectName: string;
-  Zones: string[] = [];
+  selectName: any;
+  Zones: SelectItem[] = [{label: 'Selectionnez', value: 0}];
   filteredZones: string[];
-  selectZone: string;
+  selectZone: any;
 
   constructor(private distributeurService: DistributeurService, private global: GlobalService) { }
 
@@ -59,13 +60,16 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
     ];
 
     this.distributeurSubscription = this.distributeurService.distributeursSubject.subscribe(
-      (distributeurs: Distributeur[]) => {
+      (distributeurs: any[]) => {
         this.listItems = distributeurs;
         this.loading = false;
         if(this.DistributeurFullName.length <= 0){
           for (let distributeur of distributeurs) {
-            this.DistributeurFullName.push(`${distributeur.address}`);
-            this.Zones.push(distributeur.geographicalArea);
+            this.DistributeurFullName.push(`${distributeur.manager.fullname}`);
+            this.distributors.push({label: distributeur.manager.fullname, value: distributeur.manager.id});
+            for (let area of distributeur.geographicalArea){
+              this.Zones.push({label: area.name, value: area.id});
+            } 
           }
         }
       }
@@ -141,26 +145,28 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
 
   search(event) {
     console.log('event', event);
-    this.filteredNames = this.DistributeurFullName.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+    this.filteredNames = this.DistributeurFullName.filter(c => c.toLowerCase().includes(event.query.toLowerCase()));
   }
 
   searchZones(event) {
     console.log('event', event);
-    this.filteredZones = this.Zones.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+    //this.filteredZones = this.Zones.filter(c => c.toLowerCase().includes(event.query.toLowerCase()));
   }
 
   onFilter() {
-    if (this.selectName && this.selectName != null) {
-      const firstName = this.selectName.split(' ').slice(0, -1).join(' ');
-      const lastName = this.selectName.split(' ').slice(-1).join(' ');
-      if (this.selectZone) {
-        this.distributeurService.getDistributeursByFilter(firstName, lastName, this.selectZone);
+    console.log("Selected Zone"+ this.selectZone);
+    console.log("Selected Name"+ this.selectName);
+    if (this.selectName && this.selectName != 0) {
+      /* const firstName = this.selectName.split(' ').slice(0, -1).join(' ');
+      const lastName = this.selectName.split(' ').slice(-1).join(' '); */
+      if (this.selectZone!=0) {
+        this.distributeurService.getDistributeursByFilter(this.selectName, this.selectZone);
       } else {
-        this.distributeurService.getDistributeursByFilter(firstName, lastName);
+        this.distributeurService.getDistributeursByFilter(this.selectName);
       }
     } else {
-      if (this.selectZone) {
-        this.distributeurService.getDistributeursByFilter(null, null, this.selectZone);
+      if (this.selectZone!=0) {
+        this.distributeurService.getDistributeursByFilter(null, this.selectZone);
       } else {
         this.distributeurService.getDistributeurs();
       }
@@ -168,8 +174,8 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
     }
   }
   onChange() {
-    if (this.selectName == null || this.selectName == '') {
-      if (this.selectZone == null || !this.selectZone) {
+    if (this.selectName == null || this.selectName == 0) {
+      if (this.selectZone == null || !this.selectZone || this.selectZone ==0) {
         this.distributeurService.getDistributeurs();
       }
     }

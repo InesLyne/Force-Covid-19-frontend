@@ -5,6 +5,7 @@ import { SearchCriteria } from 'src/app/models/search-critaria';
 import { Subscription, Subject } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
 import { SelectItem } from 'primeng/api';
+import { CategoryService } from 'src/app/services/category.service';
 
 interface City {
   name: string;
@@ -27,6 +28,8 @@ export class ListStockComponent implements OnInit {
   itemSubscription: Subscription;
   searchCriteriaSubscription: Subscription;
   totalRecordsSubscription: Subscription;
+  categorySubscription : Subscription;
+  welfareSubscription: Subscription;
 
   loading: boolean = true;
 
@@ -41,16 +44,17 @@ export class ListStockComponent implements OnInit {
   cities2: SelectItem[];
   selectedCity1: City;
   selectedCity2: City;
-  products: string[] = [];
+  products: SelectItem[] = [{label: 'Selectionnez un produit', value: 0}];
   filteredProducts: string[];
-  selectProduct: string;
+  selectProduct: any;
   categories: string[] = [];
   filteredCategories: string[];
   selectCategory: string;
 
   constructor(
     private stockService: StockService,
-    private global: GlobalService) {
+    private global: GlobalService,
+    private categoryService : CategoryService) {
   }
 
   ngOnInit(): void {
@@ -69,15 +73,6 @@ export class ListStockComponent implements OnInit {
       (results: any[]) => {
         this.listItems = results;
         this.loading = false;
-        if (this.products.length <= 0) {
-          for (let stock of results) {
-            /*En supposant que les champs "product" et "category" existent dans la BDD et désignent 
-              respectivement le nom du produit et la catégorie
-            */
-            if (stock.product) { this.products.push(stock.product); }
-            if (stock.category) { this.categories.push(stock.category); }
-          }
-        }
       }
     );
     this.totalRecordsSubscription = this.stockService.totalRecordsSubject.subscribe(
@@ -94,6 +89,23 @@ export class ListStockComponent implements OnInit {
     );
     this.stockService.getStocks(this.searchCriteria);
 
+    this.categorySubscription = this.categoryService.categoriesSubject.subscribe(categories => {
+      for(let item of categories){
+        this.categories.push(item.name);
+      }
+    })
+    this.welfareSubscription = this.stockService.getWelfares().subscribe(
+      (welfares: any) => {
+        let response = welfares['hydra:member'];
+        for (let product of response){
+          this.products.push({label: product.name, value: product.id})
+        }
+      }, (error: any) => {
+        console.log(error);
+      }
+    )
+    
+
   }
   ngOnDestroy() {
     if (this.itemSubscription) {
@@ -105,6 +117,9 @@ export class ListStockComponent implements OnInit {
     if (this.totalRecordsSubscription) {
       this.totalRecordsSubscription.unsubscribe();
     }
+    if(this.categorySubscription) { this.categorySubscription.unsubscribe() }
+
+    if (this.welfareSubscription) {this.welfareSubscription.unsubscribe()}
   }
 
   //Call this method in form filter template
@@ -155,7 +170,7 @@ export class ListStockComponent implements OnInit {
 
   searchProduct(event) {
     console.log('event', event);
-    this.filteredProducts = this.products.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+    //this.filteredProducts = this.products.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
   }
 
   searchCategory(event) {
@@ -164,6 +179,7 @@ export class ListStockComponent implements OnInit {
   }
 
   onFilter() {
+    console.log("Produit Selected : "+this.selectProduct);
     if (this.selectProduct && this.selectProduct != null) {
       if (this.selectCategory) {
         this.stockService.getStocksByFilter(this.selectProduct, this.selectCategory);
@@ -177,7 +193,7 @@ export class ListStockComponent implements OnInit {
     }
   }
   onChange() {
-    if (this.selectProduct == null || this.selectProduct == '') {
+    if (this.selectProduct == null || this.selectProduct == '' || this.selectProduct == 0) {
       if (this.selectCategory == null || !this.selectCategory) {
         this.stockService.getStocks();
       }

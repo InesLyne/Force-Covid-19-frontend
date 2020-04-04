@@ -164,19 +164,20 @@ export class DistributeurService {
     this.emitTotalRecordsSubject(20);
   }
 
-  getDistributeursByFilter(firstname: string, lastname:string, zone?: string){
+  getDistributeursByFilter(manager: number, zone?: number){
     let url : string;
-    if(firstname!=null && lastname!=null){
-      url = `${this.baseUrl}?firstName=${firstname}&lastName=${lastname}`;
-      if(zone){
+    if(manager!=null && manager != 0){
+      url = `${this.baseUrl}?manager=${manager}`;
+      if(zone!=0){
         url = `${url}&geographicalArea=${zone}`;
       }
     } else {
       url = `${this.baseUrl}`;
-      if(zone){
+      if(zone!=0){
         url = `${url}?geographicalArea=${zone}`;
       }
     }
+    console.log("URL Distributeur "+url);
     this.http.get<any>(url).subscribe(
       (distributeurs: any) => {
         this.distributeurs=distributeurs['hydra:member'];
