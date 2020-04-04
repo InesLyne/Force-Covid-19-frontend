@@ -61,3 +61,18 @@
 .page-section.first{
   padding-top: 0;
 }
+
+h2.arc{
+  margin-bottom: 120px;
+  position: relative;
+}
+
+h2.arc div{
+  margin-left: 30px;
+}
+
+h2.arc img{
+  position: absolute;
+  left: 0;
+  bottom: -40px;
+}

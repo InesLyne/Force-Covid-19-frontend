@@ -177,7 +177,8 @@ tbody tr td div {
 
 body .ui-table .ui-table-tbody > tr.ui-state-highlight td,
 body .ui-table .ui-table-tbody > tr.ui-state-highlight td a,
-body .ui-table .ui-table-tbody > tr.ui-state-highlight td i {
+body .ui-table .ui-table-tbody > tr.ui-state-highlight td i,
+body .ui-table .ui-sortable-column.ui-state-highlight {
   background-color: var(--colors-yellow) !important;
   color: #ef255f;
   font-weight: bold;
@@ -224,11 +225,11 @@ body .form-filter .ui-dropdown{
   width: 220px;
 }
 
-.form-wrapper .ui-dropdown{
+.form-wrapper .ui-dropdown, body .ui-multiselect{
   width: 100% !important;
 }
 
-body .ui-dropdown {
+body .ui-dropdown, body .ui-multiselect {
   height: 50px;
   border: 2px solid #000 !important;
 }
@@ -239,6 +240,10 @@ body .ui-dropdown .ui-dropdown-label {
 .form-group .form-label {
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+body .ui-multiselect .ui-multiselect-label{
+  padding-top: 15px !important;
 }
 
 body .ui-chkbox .ui-chkbox-box.ui-state-active,
@@ -257,8 +262,11 @@ body .ui-table .ui-table-tbody > tr.ui-state-highlight td:first-child {
   background-color: #fff !important;
 }
 
-.form-input{
+input{
   border: 2px solid #000 !important;
+}
+
+.form-input{
   height: 50px !important;
 }
 
@@ -306,6 +314,11 @@ body .ui-dialog .ui-dialog-titlebar{
 
 body .ui-dialog .ui-dialog-content{
   border-top: 0px !important;
+}
+
+.button:disabled{
+  background-color: #eee !important;
+  cursor: not-allowed;
 }
 
 @media (min-width: 62rem) {
@@ -485,6 +498,10 @@ form.filter select {
   height: 50px;
   border: solid 1.5px #000000;
   background: white;
+}
+
+.form-filter input{
+  width: 220px;
 }
 
 .table_actions {
