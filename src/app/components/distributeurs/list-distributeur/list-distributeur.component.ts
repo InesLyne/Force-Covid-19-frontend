@@ -5,7 +5,7 @@ import { Distributeur } from 'src/app/models/distributeur';
 import { DistributeurService } from 'src/app/services/distributeur.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 interface City {
   name: string;
@@ -18,13 +18,13 @@ interface City {
   styleUrls: ['./list-distributeur.component.css']
 })
 export class ListDistributeurComponent implements OnInit, OnDestroy {
-  
+
   listItems: Distributeur[];
   cols: any[];
   selectedItems: Distributeur[];
-  searchCriteria: SearchCriteria= new SearchCriteria();
-  totalRecords: number=0;
-  searchCriteriaSubject=new Subject<SearchCriteria>();
+  searchCriteria: SearchCriteria = new SearchCriteria();
+  totalRecords: number = 0;
+  searchCriteriaSubject = new Subject<SearchCriteria>();
   distributeurSubscription: Subscription;
   searchCriteriaSubscription: Subscription;
   totalRecordsSubscription: Subscription;
@@ -46,36 +46,38 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
   filteredZones: string[];
   selectZone: string;
 
-  constructor(private distributeurService: DistributeurService, private global: GlobalService) {}
+  constructor(private distributeurService: DistributeurService, private global: GlobalService) { }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.cols = [
       { field: 'manager?.firstName', header: 'Nom & Prenom' },
       { field: 'manager?.identityNumber', header: 'N° CNI' },
       { field: 'geographicalArea', header: 'Magazin' },
       { field: 'geographicalArea', header: 'Zone Octroyée' },
       { field: 'longitude', header: 'Bénéficiaire Octroyé' },
-      { field: 'longitude', header: 'Coordonnées GPS', type: 'gps' }
+      { field: 'longitude', header: 'Coordonnées GPS' }
     ];
 
-    this.distributeurSubscription=this.distributeurService.distributeursSubject.subscribe(
-      (distributeurs: Distributeur[])=>{
-        this.listItems=distributeurs;
-        this.loading=false;
-        for (let distributeur of distributeurs) {
-          this.DistributeurFullName.push(`${distributeur.address}`);
-          this.Zones.push(distributeur.geographicalArea);
+    this.distributeurSubscription = this.distributeurService.distributeursSubject.subscribe(
+      (distributeurs: Distributeur[]) => {
+        this.listItems = distributeurs;
+        this.loading = false;
+        if(this.DistributeurFullName.length <= 0){
+          for (let distributeur of distributeurs) {
+            this.DistributeurFullName.push(`${distributeur.address}`);
+            this.Zones.push(distributeur.geographicalArea);
+          }
         }
       }
     );
-    this.totalRecordsSubscription=this.distributeurService.totalRecordsSubject.subscribe(
-      (totalRecords: number)=>{
-        this.totalRecords=totalRecords;
+    this.totalRecordsSubscription = this.distributeurService.totalRecordsSubject.subscribe(
+      (totalRecords: number) => {
+        this.totalRecords = totalRecords;
       }
     );
     //pipe(debounceTime(500),distinctUntilChanged()).
-    this.searchCriteriaSubscription=this.searchCriteriaSubject.subscribe(
-      (searchCriteria: SearchCriteria)=>{
+    this.searchCriteriaSubscription = this.searchCriteriaSubject.subscribe(
+      (searchCriteria: SearchCriteria) => {
         console.log(this.searchCriteria)
         this.distributeurService.getDistributeurs(searchCriteria);
       }
@@ -83,44 +85,44 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
     this.distributeurService.getDistributeurs(this.searchCriteria);
   }
 
-  ngOnDestroy(){
-    if(this.distributeurSubscription){
+  ngOnDestroy() {
+    if (this.distributeurSubscription) {
       this.distributeurSubscription.unsubscribe();
     }
-    if(this.searchCriteriaSubscription){
+    if (this.searchCriteriaSubscription) {
       this.searchCriteriaSubscription.unsubscribe();
     }
-    if(this.totalRecordsSubscription){
+    if (this.totalRecordsSubscription) {
       this.totalRecordsSubscription.unsubscribe();
     }
   }
 
   //Call this method in form filter template
-  onSetSearchCriteria(){
+  onSetSearchCriteria() {
     this.searchCriteriaSubject.next(this.searchCriteria);
   }
 
-  loadItemLazy(event: any){
-    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event,this.searchCriteria));
+  loadItemLazy(event: any) {
+    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event, this.searchCriteria));
   }
 
-  removeItme(id: number){
+  removeItme(id: number) {
     this.distributeurService.deleteDistributeur(id).then(
-      (response: any)=>{
+      (response: any) => {
         //continued!!!
       }
     ).catch(
-      (error: any)=>{
-        this.errorMsg=error;
+      (error: any) => {
+        this.errorMsg = error;
       }
     )
   }
-  
+
   showFormDialog(oldData = null) {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.modalTitle = oldData?'Modifier un distributeur':'Ajout un distributeur';
+    this.modalTitle = oldData ? 'Modifier un distributeur' : 'Ajout un distributeur';
   }
 
   showDetailsDialog(data) {
@@ -139,12 +141,38 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
 
   search(event) {
     console.log('event', event);
-    this.filteredNames = this.DistributeurFullName.filter(c =>  c.toLowerCase().startsWith(event.query.toLowerCase()));
+    this.filteredNames = this.DistributeurFullName.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
   }
 
   searchZones(event) {
     console.log('event', event);
-    this.filteredZones = this.Zones.filter(c =>  c.toLowerCase().startsWith(event.query.toLowerCase()));
+    this.filteredZones = this.Zones.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
+
+  onFilter() {
+    if (this.selectName && this.selectName != null) {
+      const firstName = this.selectName.split(' ').slice(0, -1).join(' ');
+      const lastName = this.selectName.split(' ').slice(-1).join(' ');
+      if (this.selectZone) {
+        this.distributeurService.getDistributeursByFilter(firstName, lastName, this.selectZone);
+      } else {
+        this.distributeurService.getDistributeursByFilter(firstName, lastName);
+      }
+    } else {
+      if (this.selectZone) {
+        this.distributeurService.getDistributeursByFilter(null, null, this.selectZone);
+      } else {
+        this.distributeurService.getDistributeurs();
+      }
+
+    }
+  }
+  onChange() {
+    if (this.selectName == null || this.selectName == '') {
+      if (this.selectZone == null || !this.selectZone) {
+        this.distributeurService.getDistributeurs();
+      }
+    }
   }
 
 }

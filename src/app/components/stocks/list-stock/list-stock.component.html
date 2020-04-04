@@ -13,11 +13,15 @@
     <form action="" class="form-filter">
       <div class="form-group">
         <label for="" class="form-label">Nom Produit</label>
-        <p-dropdown name="selectedCity1" [options]="cities1" [(ngModel)]="selectedCity1"></p-dropdown>
+        <!-- <p-dropdown name="selectedCity1" [options]="cities1" [(ngModel)]="selectedCity1"></p-dropdown> -->
+        <p-autoComplete  name="selectedCity1"[(ngModel)]="selectProduct" [suggestions]="filteredProducts" (completeMethod)="searchProduct($event)"
+          placeholder="rechercher" (ngModelChange)="onChange()"></p-autoComplete>
       </div>
       <div class="form-group">
         <label for="" class="form-label">Catégorie</label>
-        <p-dropdown name="selectedCity2" [options]="cities2" [(ngModel)]="selectedCity2"></p-dropdown>
+       <!--  <p-dropdown name="selectedCity2" [options]="cities2" [(ngModel)]="selectedCity2"></p-dropdown> -->
+        <p-autoComplete  name="selectedCity2"[(ngModel)]="selectCategory" [suggestions]="filteredCategories" (completeMethod)="searchCategory($event)"
+          placeholder="rechercher" (ngModelChange)="onChange()"></p-autoComplete>
       </div>
       <button type="button" class="button bgColor-yellow">
         Filtrer
@@ -70,8 +74,7 @@
               <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
           </td>
           <td *ngFor="let col of columns">
-            <div *ngIf="col.type != 'date'">{{rowData[col.field]}}</div>
-            <div *ngIf="col.type == 'date'">{{rowData[col.field] | date:'dd/MM/yyyy à HH:mm'}}</div> 
+            {{rowData[col.field]}}
           </td>
           <td>
             <div class="table_actions">

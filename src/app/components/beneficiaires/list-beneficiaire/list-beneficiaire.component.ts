@@ -42,9 +42,9 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   BeneficiaresFullName: string[] = [];
   filteredNames: string[];
   selectName: string;
-  salaire : number; 
+  salaire: number;
 
-  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) {}
+  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) { }
 
   ngOnInit(): void {
     this.cols = [
@@ -54,17 +54,16 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
       { field: 'numberOfPeopleInCharge', header: 'Nombre de personnes en charge' },
       { field: 'mobileNumber', header: 'Contact' },
       { field: 'address', header: 'Adresse' },
-      { field: 'longitude', header: 'Coordonnées GPS', type: 'gps'}
+      { field: 'address', header: 'Coordonnées GPS' }
     ];
 
     this.beneficiairesSubscription = this.beneficiaireService.beneficiairessSubject.subscribe(
       (beneficiaires: Beneficiaire[]) => {
+        this.BeneficiaresFullName =[];
         this.listItems = beneficiaires;
         this.loading = false;
-        if(this.BeneficiaresFullName.length <= 0){
-          for (let beneficiaire of beneficiaires) {
-            this.BeneficiaresFullName.push(`${beneficiaire.firstName} ${beneficiaire.lastName}`);
-          }
+        for (let beneficiaire of beneficiaires) {
+          this.BeneficiaresFullName.push(`${beneficiaire.firstName} ${beneficiaire.lastName}`);
         }
       }
     );
@@ -120,7 +119,7 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    this.displayAllocationDialog=false;
+    this.displayAllocationDialog = false;
     if (oldData) {
       this.modalTitle = 'Modifier d\'un bénéficiaire';
     } else {
@@ -132,50 +131,50 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
     this.displayDialog = false;
     this.selectedData = data;
     this.displayDetailsDialog = true;
-    this.displayAllocationDialog=false;
+    this.displayAllocationDialog = false;
     this.modalTitle = 'Recap Bénéficiaire';
   }
-  
+
   showAllocationDialog() {
     this.displayDialog = false;
     this.displayDetailsDialog = false;
-    this.displayAllocationDialog=true;
+    this.displayAllocationDialog = true;
     this.modalTitle = 'Allouer un stock';
   }
 
   onDialogHide(event) {
     this.displayDialog = event;
     this.displayDetailsDialog = event;
-    this.displayAllocationDialog=event;
+    this.displayAllocationDialog = event;
     this.selectedData = null;
   }
 
   search(event) {
     console.log('event', event);
-    this.filteredNames = this.BeneficiaresFullName.filter(c =>  c.toLowerCase().startsWith(event.query.toLowerCase()));
+    this.filteredNames = this.BeneficiaresFullName.filter(c => c.toLowerCase().includes(event.query.toLowerCase()));
   }
 
-  onFilter(){
-    console.log("Name: "+this.selectName);
-    console.log('Salaire: '+ this.salaire);
-    if(this.selectName && this.selectName != null){
-      const [firstName, lastName] = this.selectName.split(" ");
-      if(this.salaire){
-        console.log('Salaire: '+ this.salaire);
+  onFilter() {
+    if (this.selectName && this.selectName != null) {
+      const firstName = this.selectName.split(' ').slice(0, -1).join(' ');
+      const lastName = this.selectName.split(' ').slice(-1).join(' ');
+      if (this.salaire) {
         this.beneficiaireService.getBeneficiairesByFilter(firstName, lastName, this.salaire);
       } else {
         this.beneficiaireService.getBeneficiairesByFilter(firstName, lastName);
       }
     } else {
-      this.beneficiaireService.getBeneficiaires();
+      if (this.salaire) {
+        this.beneficiaireService.getBeneficiairesByFilter(null, null, this.salaire);
+      } else {
+        this.beneficiaireService.getBeneficiaires();
+      }
+
     }
   }
-  onChange(){
-    console.log("Change!");
-    console.log("Names: "+this.selectName);
-    if(this.selectName == null || this.selectName == ''){
-      console.log("Names: "+this.selectName);
-      if(this.salaire == null || !this.salaire){
+  onChange() {
+    if (this.selectName == null || this.selectName == '') {
+      if (this.salaire == null || !this.salaire) {
         this.beneficiaireService.getBeneficiaires();
       }
     }

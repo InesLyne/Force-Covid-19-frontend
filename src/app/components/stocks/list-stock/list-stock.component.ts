@@ -4,7 +4,7 @@ import { StockService } from 'src/app/services/stock.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { Subscription, Subject } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 interface City {
   name: string;
@@ -21,9 +21,9 @@ export class ListStockComponent implements OnInit {
   cols: any[];
 
   selectedItems: Stock[];
-  totalRecords: number=0;
-  searchCriteriaSubject=new Subject<SearchCriteria>();
-  searchCriteria: SearchCriteria= new SearchCriteria();
+  totalRecords: number = 0;
+  searchCriteriaSubject = new Subject<SearchCriteria>();
+  searchCriteria: SearchCriteria = new SearchCriteria();
   itemSubscription: Subscription;
   searchCriteriaSubscription: Subscription;
   totalRecordsSubscription: Subscription;
@@ -41,93 +41,89 @@ export class ListStockComponent implements OnInit {
   cities2: SelectItem[];
   selectedCity1: City;
   selectedCity2: City;
+  products: string[] = [];
+  filteredProducts: string[];
+  selectProduct: string;
+  categories: string[] = [];
+  filteredCategories: string[];
+  selectCategory: string;
 
   constructor(
     private stockService: StockService,
     private global: GlobalService) {
-      this.cities1 = [
-        {label:'Select City', value:null},
-        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-      ];
-  
-      this.cities2 = [
-        {label:'Select City', value:null},
-        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-      ];
-    }
+  }
 
   ngOnInit(): void {
 
     this.cols = [
-      { field: 'welfare.name', header: 'Nom Produit' },
-      { field: 'welfare.description', header: 'Description' },
-      { field: 'welfare.category', header: 'Catégorie' },
-      { field: 'welfare.weight', header: 'Poids' },
-      { field: 'welfare.unit', header: 'Unté' },
-      { field: 'quantity', header: 'Quantité' },
-      { field: 'updated', header: 'Dernière Mise à jour', type: 'date' }
+      { field: 'welfare', header: 'Nom Produit' },
+      { field: 'quantity', header: 'Description' },
+      { field: 'created', header: 'Catégorie' },
+      { field: 'updated', header: 'Poids' },
+      { field: 'userId', header: 'Unté' },
+      { field: 'userId', header: 'Quantité' },
+      { field: 'userId', header: 'Dernière Mise à jour' }
     ];
 
-    this.itemSubscription=this.stockService.stocksSubject.subscribe(
-      (results: Stock[])=>{
-        this.listItems=results;
-        this.loading=false;
+    this.itemSubscription = this.stockService.stocksSubject.subscribe(
+      (results: any[]) => {
+        this.listItems = results;
+        this.loading = false;
+        if (this.products.length <= 0) {
+          for (let stock of results) {
+            /*En supposant que les champs "product" et "category" existent dans la BDD et désignent 
+              respectivement le nom du produit et la catégorie
+            */
+            if (stock.product) { this.products.push(stock.product); }
+            if (stock.category) { this.categories.push(stock.category); }
+          }
+        }
       }
     );
-    this.totalRecordsSubscription=this.stockService.totalRecordsSubject.subscribe(
-      (totalRecords: number)=>{
-        this.totalRecords=totalRecords;
+    this.totalRecordsSubscription = this.stockService.totalRecordsSubject.subscribe(
+      (totalRecords: number) => {
+        this.totalRecords = totalRecords;
       }
     );
     //pipe(debounceTime(500),distinctUntilChanged()).
-    this.searchCriteriaSubscription=this.searchCriteriaSubject.subscribe(
-      (searchCriteria: SearchCriteria)=>{
+    this.searchCriteriaSubscription = this.searchCriteriaSubject.subscribe(
+      (searchCriteria: SearchCriteria) => {
         console.log(this.searchCriteria)
         this.stockService.getStocks(searchCriteria);
       }
     );
     this.stockService.getStocks(this.searchCriteria);
-  
+
   }
-
-
-  ngOnDestroy(){
-    if(this.itemSubscription){
+  ngOnDestroy() {
+    if (this.itemSubscription) {
       this.itemSubscription.unsubscribe();
     }
-    if(this.searchCriteriaSubscription){
+    if (this.searchCriteriaSubscription) {
       this.searchCriteriaSubscription.unsubscribe();
     }
-    if(this.totalRecordsSubscription){
+    if (this.totalRecordsSubscription) {
       this.totalRecordsSubscription.unsubscribe();
     }
   }
 
   //Call this method in form filter template
-  onSetSearchCriteria(){
+  onSetSearchCriteria() {
     this.searchCriteriaSubject.next(this.searchCriteria);
   }
 
-  loadItemLazy(event: any){
-    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event,this.searchCriteria));
+  loadItemLazy(event: any) {
+    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event, this.searchCriteria));
   }
 
-  removeItme(id: number){
+  removeItme(id: number) {
     this.stockService.deleteStock(id).then(
-      (response: any)=>{
+      (response: any) => {
         //continued!!!
       }
     ).catch(
-      (error: any)=>{
-        this.errorMsg=error;
+      (error: any) => {
+        this.errorMsg = error;
       }
     )
   }
@@ -136,9 +132,9 @@ export class ListStockComponent implements OnInit {
     this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
-    if(oldData){
+    if (oldData) {
       this.modalTitle = 'Mettre à jour le Stock';
-    }else{
+    } else {
       this.modalTitle = 'Ajout de Stock';
     }
   }
@@ -156,5 +152,36 @@ export class ListStockComponent implements OnInit {
     this.displayDetailsDialog = event;
     this.selectedData = null;
   }
-  
+
+  searchProduct(event) {
+    console.log('event', event);
+    this.filteredProducts = this.products.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
+
+  searchCategory(event) {
+    console.log('event', event);
+    this.filteredCategories = this.categories.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
+
+  onFilter() {
+    if (this.selectProduct && this.selectProduct != null) {
+      if (this.selectCategory) {
+        this.stockService.getStocksByFilter(this.selectProduct, this.selectCategory);
+      } else {
+        this.stockService.getStocksByFilter(this.selectProduct);
+      }
+    } else {
+      if (this.selectCategory) {
+        this.stockService.getStocksByFilter(null, this.selectCategory);
+      }
+    }
+  }
+  onChange() {
+    if (this.selectProduct == null || this.selectProduct == '') {
+      if (this.selectCategory == null || !this.selectCategory) {
+        this.stockService.getStocks();
+      }
+    }
+  }
+
 }

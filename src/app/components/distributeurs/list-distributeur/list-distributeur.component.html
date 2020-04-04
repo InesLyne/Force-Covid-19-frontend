@@ -14,14 +14,14 @@
       <div class="form-group">
         <label for="" class="form-label">Nom Distributeur</label>
         <p-autoComplete  name="selectedCity1"[(ngModel)]="selectName" [suggestions]="filteredNames" (completeMethod)="search($event)"
-          placeholder="Search"></p-autoComplete>
+          placeholder="Prenoms Nom ou Nom" (ngModelChange)="onChange()"></p-autoComplete>
       </div>
       <div class="form-group">
         <label for="" class="form-label">Zone</label>
         <p-autoComplete  name="selectedCity2"[(ngModel)]="selectZone" [suggestions]="filteredZones" (completeMethod)="searchZones($event)"
-          placeholder="Search"></p-autoComplete>
+          placeholder="Search" (ngModelChange)="onChange()"></p-autoComplete>
       </div>
-      <button type="button" class="button bgColor-yellow">
+      <button type="button" class="button bgColor-yellow" (click)="onFilter()" [disabled]="!selectName && !selectZone">
         Filtrer
       </button>
     </form>
@@ -71,8 +71,7 @@
                     <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
                   <td *ngFor="let col of columns">
-                    <div *ngIf="col.type != 'gps'">{{rowData[col.field]}}</div>
-                    <div *ngIf="col.type == 'gps'">L: {{rowData.longitude}} l: {{rowData.latitude}}</div> 
+                      {{rowData[col.field]}}
                   </td>
                   <td>
                       <div class="table_actions">

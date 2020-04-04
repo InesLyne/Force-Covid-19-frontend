@@ -17,6 +17,7 @@ export class StockService {
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.STOCK_URL;
+    this.getStocks();
   }
 
   emitStocks() {
@@ -143,5 +144,29 @@ export class StockService {
       }
 
     );
+  }
+
+  getStocksByFilter(product: string, category?: string){
+    let url : string;
+    if(product!=null){
+      url = `${this.baseUrl}?product=${product}`;
+      if(category){
+        url = `${url}&category=${category}`;
+      }
+    } else {
+      url = `${this.baseUrl}`;
+      if(category){
+        url = `${url}?category=${category}`;
+      }
+    }
+    this.http.get<any>(url).subscribe(
+      (stocks: any) => {
+        this.stocks=stocks['hydra:member'];
+        this.emitTotalRecordsSubject(stocks['hydra:totalItems'] as number);
+        this.emitStocks();
+      }, (error: any) => {
+        console.log(error);
+      }
+    )
   }
 }
