@@ -27,7 +27,8 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   beneficiairesSubscription: Subscription;
   searchCriteriaSubscription: Subscription;
   totalRecordsSubscription: Subscription;
-  loading: boolean = true;
+  loading: boolean = true; 
+
 
   displayDialog: any;
   selectedData: any;
