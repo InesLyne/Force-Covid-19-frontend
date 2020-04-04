@@ -5,10 +5,7 @@
   display: flex;
   justify-content: space-between;
 }
-
-.header > div:first-child {
-}
-
+ 
 .header .logo {
   height: 80px;
 } 
@@ -20,11 +17,7 @@
 
 .header .header-links .pages-links{
   margin-right: 30px;
-}
-
-.header .header-links .pages-links > a:not(.notif) {
-
-}
+} 
 
 .header .header-links .pages-links > a:not(.notif) {
   font-size: 18px;
@@ -99,13 +92,6 @@ a.active img.active{
 .user .loggedout .avatar {
   width: 31px;
   height: 31px;
-}
-.user .loggedout {
-  
-}
-
-.user .name, .user .role {
-
 }
 
 .user .name {
@@ -182,9 +168,6 @@ a.active img.active{
 
 ::ng-deep .ui-menubar {
   border: none !important;
-}
-
-::ng-deep .customItem {
 }
 
 ::ng-deep .customItem:hover {
