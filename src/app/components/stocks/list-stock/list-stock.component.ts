@@ -19,8 +19,6 @@ interface City {
 export class ListStockComponent implements OnInit {
   listItems: Stock[];
   cols: any[];
-  public static STRING_TYPE = 0;
-  public static DATE_TYPE = 1;
 
   selectedItems: Stock[];
   totalRecords: number=0;

@@ -11,18 +11,22 @@
 
 .header .logo {
   height: 80px;
-}
+} 
 
-.header .herder-links, .header .herder-links .pages-links{
+.header .header-links, .header .header-links .pages-links, .header .header-links, .header .header-links .pages-links{
   display: flex;
   align-items: center;
 }
 
-.header .herder-links .pages-links{
+.header .header-links .pages-links{
   margin-right: 30px;
 }
 
-.header .herder-links .pages-links a{
+.header .header-links .pages-links > a:not(.notif) {
+
+}
+
+.header .header-links .pages-links > a:not(.notif) {
   font-size: 18px;
   color: #000;
   display: flex;
@@ -35,7 +39,7 @@
   outline: none;
 }
 
-.header .herder-links .pages-links a.active{
+.header .header-links .pages-links > a.active{
   color: #379956;
   font-weight: bold;
 }
@@ -48,74 +52,60 @@ a.active img.active{
   display: block;
 }
 
-.header .herder-links .pages-links a img{
+.header .header-links .pages-links > a img{
   height: 30px;
   margin-bottom: 5px;
 }
 
-.header .title {
-  font-size: 30px;
-  font-weight: normal;
-  color: #000000;
-  padding-left: 20px;
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
-
-.header div:first-child {
-  text-align: left;
-}
-
 .user {
-  text-align: right;
-  height: 100%;
-  margin-top: 25px;
-  text-align: left;
-  padding: 0 !important;
-  vertical-align: middle;
+  font-size: 18px;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 55px;
+  text-align: center;
 }
 
-.user .avatar {
-  width: 24px;
-  height: 24px;
-  margin-top: 10px;
+.user.loggedout {
+  margin-left: 40px;
+}
+
+
+.user a:not(.notif) {
+  color: black;
+}
+.user .loggedin {
+  display: flex;
+  justify-content: flex-start;
+  min-width: 130px;
 }
 
 .user div.userinfos {
   display: inline-block;
-  height: 100%;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 12px;
-  font-weight: bold;
-  width: 50%;
-  /* margin: 5px 0 0 5px; */
-}
-
-.user div.userinfos:hover + .logout {
-  display: block;
-}
-.user div.userinfos + .logout {
-  display: none;
-}
-
-.user .logout:hover {
-  display: block !important;
-
-}
-
-.user .logout {
-  background: #ddd;
-  text-align: center;
-  color: #000;
-  margin-top: -11px;
-  padding: 5px 0;
+  text-align: left;
   font-size: 12px;
   font-weight: bold;
 }
-.user div.userinfos > .name:hover, .user div.userinfos > .role:hover {
-  cursor: pointer;
+
+.user .loggedin .avatar {
+  width: 31px;
+  height: 31px;
+  margin-right: 5px;
+}
+
+.user .loggedout .avatar {
+  width: 31px;
+  height: 31px;
+}
+.user .loggedout {
+  
+}
+
+.user .name, .user .role {
+
 }
 
 .user .name {
@@ -126,28 +116,58 @@ a.active img.active{
 
 .user .role {
   color: #379956;
+}
+
+.user .dropdown {
+  position: absolute;
+  background-color: #f4f4f4;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  color: #172b4d;
+}
+
+.user .dropdown a {
+  padding: 10px 5px 10px;
   display: inline-block;
   width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+  "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-.user .notif {
-  display: inline-block;
-  width: 20%;
-  vertical-align: top;
-  margin: 15px 0 0 3px;
+.user .dropdown a:hover {
+  background-color: rgba(9,30,66,.04); 
+  color: #379956;
 }
-.user .notif_badge {
+
+.user .dropdown a span {
+  font-size: 15px;
+}
+.user .dropdown a span:before {
+  margin-right: 10px;
+  font-size: 17px;
+}
+
+.user .dropdown-caret {
+  font-size: 13px;
+  color: black;
+}
+
+
+.notif {
+  font-size: 25px;
+  color: black;
+}
+.notif_badge {
   background: red;
   border-radius: 50%;
-  color: white;
-  font-weight: bold;
+  color: white; 
   padding: 0 3px;
-  font-size: 10px;
+  font-size: 12px;
+  margin-left: -10px;
+  position: absolute;
 }
 
-.user .login-btn {
-  margin-top: 10px;
-}
 
 /* Custom Menu Item */
 ::ng-deep .ui-menubar {
