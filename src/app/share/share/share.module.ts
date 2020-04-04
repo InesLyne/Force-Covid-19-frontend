@@ -17,6 +17,7 @@ import { SliderModule } from 'primeng/slider';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
 import { ChartModule } from 'primeng/chart';
+import { FieldsetModule } from 'primeng/fieldset';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { ChartModule } from 'primeng/chart';
     MultiSelectModule,
     DialogModule,
     ChartModule,
+    FieldsetModule,
   ],
   exports: [
     FormsModule,
@@ -50,6 +52,7 @@ import { ChartModule } from 'primeng/chart';
     MultiSelectModule,
     DialogModule,
     ChartModule,
+    FieldsetModule,
   ]
 })
 export class ShareModule { }
