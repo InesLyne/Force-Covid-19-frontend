@@ -3,15 +3,15 @@
         <div *ngIf="stock" class="p-grid">
             <div class="p-col-4 p-md-6 p-lg-4">
                 <label class="form-label" for="">Nom Produit</label>
-                {{stock.quantity}}
+                {{stock.welfare.name}}
             </div>
             <div class="p-col-4 p-md-6 p-lg-4">
                 <label class="form-label" for="">Catégorie</label>
-                {{stock.userId}}
+                {{stock.welfare.category}}
             </div>
             <div class="p-col-12 p-md-6 p-lg-3">
                 <label class="form-label" for="">Unité</label>
-                {{stock.welfare}}
+                {{stock.welfare.unit}}
             </div>
             <div class="p-col-4 p-md-6 p-lg-3">
                 <label class="form-label" for="">Quantité</label>

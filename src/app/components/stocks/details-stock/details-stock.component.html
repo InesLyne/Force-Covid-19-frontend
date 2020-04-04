@@ -1,9 +1,9 @@
 <div class="form-wrapper detail">
     <div *ngIf="stock">
-      <div>Quantité : <strong>{{stock.quantity}}</strong></div>
-      <div>Utilisateur : <strong>{{stock.userId}}</strong></div>
-      <div>Bien : <strong>{{stock.welfare}}</strong></div>
-      <div>Dernière modification : <strong>{{stock.updated}}</strong></div>      
+      <div>Quantité : <strong>{{stock?.quantity}}</strong></div>
+      <div>Utilisateur : <strong>{{stock?.user?.username}}</strong></div>
+      <div>Bien : <strong>{{stock.welfare?.name}}</strong></div>
+      <div>Dernière modification : <strong>{{stock?.updated | date:'dd/MM/yyyy à HH:mm'}}</strong></div>      
     </div>
   
     <div class="p-grid p-justify-end">
