@@ -9,7 +9,7 @@
   <div class="p-col-12">
     <p-fieldset legend="Historiques" [toggleable]="true" [collapsed]="true">
       <div class="p-col-12">
-        <p-table [columns]="cols" [value]="listItems">
+       <p-table [columns]="cols" [value]="listItems" [paginator]="listItems.length > 5" [rows]="5">
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th *ngFor="let col of columns" pResizableColumn>

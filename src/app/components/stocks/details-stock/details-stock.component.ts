@@ -24,7 +24,7 @@ export class DetailsStockComponent implements OnInit {
     }
     this.cols = [
       { field: 'updated', header: 'Dernière Mise à jour', type: 'date' },
-      { field: 'welfare.name', header: 'Nom Produit' },
+      { field: 'welfare.name', header: 'Entré / sortie' },
       { field: 'quantity', header: 'Quantité' }
     ];
   }
