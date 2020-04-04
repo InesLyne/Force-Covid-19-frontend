@@ -4,7 +4,7 @@ import { StockService } from 'src/app/services/stock.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { Subscription, Subject } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 interface City {
   name: string;
@@ -33,8 +33,8 @@ export class ListStockComponent implements OnInit {
   displayDialog: boolean;
   selectedData: any;
   displayDetailsDialog: boolean;
+  displayStockManagerDialog: boolean;
   modalTitle: string;
-
   errorMsg: any;
 
   cities1: SelectItem[];
@@ -68,10 +68,10 @@ export class ListStockComponent implements OnInit {
 
     this.cols = [
       { field: 'welfare.name', header: 'Nom Produit' },
-      { field: 'welfare.description', header: 'Description' },
-      { field: 'welfare.category', header: 'Catégorie' },
-      { field: 'welfare.weight', header: 'Poids' },
-      { field: 'welfare.unit', header: 'Unté' },
+      { field: 'welfare?.description', header: 'Description' },
+      { field: 'welfare?.category', header: 'Catégorie' },
+      { field: 'welfare?.weight', header: 'Poids' },
+      { field: 'welfare?.unit', header: 'Unté' },
       { field: 'quantity', header: 'Quantité' },
       { field: 'updated', header: 'Dernière Mise à jour', type: 'date' }
     ];
@@ -134,6 +134,7 @@ export class ListStockComponent implements OnInit {
 
   showFormDialog(oldData = null) {
     this.displayDetailsDialog = false;
+    this.displayStockManagerDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
     if(oldData){
@@ -145,13 +146,21 @@ export class ListStockComponent implements OnInit {
 
   showDetailsDialog(data) {
     this.displayDialog = false;
+    this.displayStockManagerDialog = false;
     this.selectedData = data;
     this.displayDetailsDialog = true;
     this.modalTitle = 'Details de Stock';
   }
 
+  showStockManagerFormDialog(data){
+    this.displayDialog = false;
+    this.displayDetailsDialog = false;
+    this.selectedData = data;
+    this.displayStockManagerDialog = true;
+    this.modalTitle = 'Gestionnaire de Stock';
+  }
   onDialogHide(event) {
-    console.log(event)
+    this.displayStockManagerDialog = event;
     this.displayDialog = event;
     this.displayDetailsDialog = event;
     this.selectedData = null;

@@ -64,6 +64,22 @@ export class StockService {
     );
   }
 
+  async getStockHistory(id: string) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.get<any>(this.baseUrl  + '/' + id).subscribe(
+          (stock: any) => {
+            resolve(stock);
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+
+      }
+
+    );
+  }
+
   async addStock(stock: Stock) {
     return new Promise(
       (resolve, reject) => {

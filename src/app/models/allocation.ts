@@ -1,7 +1,7 @@
 import { LineAllocationModel } from './line-allocation.model';
 export class Allocation {
     id: number;
-    status: number;
+    status: string;
     created: string;
     updated: string;
     confirmationCode: string;
@@ -9,6 +9,11 @@ export class Allocation {
     beneficiary: string;
     deliverer: string;
     distributor: string;
-    constructor(){}
+    constructor(){
+        this.status='created';
+        this.distributor='undefined';
+        this.deliverer='undifined';
+        this.confirmationCode='undifined';
+    }
 
 }

@@ -59,8 +59,9 @@ export class BienService {
                 (bien: Bien)=>{
                   return {label:bien.name, value:bien}
                 }
-              )
+              );
             }
+            biens.unshift({label: 'Sélectionner un produit', value: {}});
             resolve(biens);
           }, (error: any) => {
             reject(error);
