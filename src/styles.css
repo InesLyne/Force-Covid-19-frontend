@@ -317,8 +317,8 @@ body .ui-dialog .ui-dialog-content{
 }
 
 .button:disabled{
-  background-color: #eee !important;
   cursor: not-allowed;
+  opacity: .5;
 }
 
 @media (min-width: 62rem) {
