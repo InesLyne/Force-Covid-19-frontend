@@ -33,8 +33,8 @@ export class ListStockComponent implements OnInit {
   displayDialog: boolean;
   selectedData: any;
   displayDetailsDialog: boolean;
+  displayStockManagerDialog: boolean;
   modalTitle: string;
-
   errorMsg: any;
 
   cities1: SelectItem[];
@@ -134,6 +134,7 @@ export class ListStockComponent implements OnInit {
 
   showFormDialog(oldData = null) {
     this.displayDetailsDialog = false;
+    this.displayStockManagerDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
     if(oldData){
@@ -145,13 +146,21 @@ export class ListStockComponent implements OnInit {
 
   showDetailsDialog(data) {
     this.displayDialog = false;
+    this.displayStockManagerDialog = false;
     this.selectedData = data;
     this.displayDetailsDialog = true;
     this.modalTitle = 'Details de Stock';
   }
 
+  showStockManagerFormDialog(data){
+    this.displayDialog = false;
+    this.displayDetailsDialog = false;
+    this.selectedData = data;
+    this.displayStockManagerDialog = true;
+    this.modalTitle = 'Gestionnaire de Stock';
+  }
   onDialogHide(event) {
-    console.log(event)
+    this.displayStockManagerDialog = event;
     this.displayDialog = event;
     this.displayDetailsDialog = event;
     this.selectedData = null;
