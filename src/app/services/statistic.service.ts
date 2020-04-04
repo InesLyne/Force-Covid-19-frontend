@@ -73,6 +73,32 @@ export class StatisticService {
     return this.allocationMensuels;
   }
 
+  getSuiviStockByCategory(productName: string){
+    this.http.get(`${this.baseUrl}/entree-sortie/${productName}`).subscribe(res => 
+      this.entresortie = res as EntreSortie,
+    (err: HttpErrorResponse) => 
+        console.log("Error occured.")
+    );
+    /**-------------------------------------------------*/
+    const data:any = this.loadDataEntreeSortieByCategory();
+    this.entresortie = data as EntreSortie;
+    /**---------------------------------------------------- */
+    return this.entresortie;
+  }
+
+  getAllocationsParMoisForRegion(region: string) {
+    this.http.get(`${this.baseUrl}/allocations/${region}`).subscribe(res => 
+      this.allocationMensuels = res as AllocationParMois,
+    (err: HttpErrorResponse) => 
+        console.log("Error occured.")
+    );
+    /**-------------------------------------------------*/
+    const data:any = this.loadDataAllocationMoisForRegion();
+    this.allocationMensuels = data as AllocationParMois;
+    /**---------------------------------------------------- */
+    return this.allocationMensuels;
+  }
+
   loadDataBenefDistrib(){
     return {
       "regions": ['Dakar','Diourbel','Fatick','Kaffrine','Kaolack','Kédougou','Kolda','Louga','Matam','Saint-Louis','Sédhiou','Tambacounda','Thiès','Ziguinchor'],
@@ -89,6 +115,14 @@ export class StatisticService {
     };
   }
 
+  loadDataEntreeSortieByCategory(){
+    return {
+      "mois": ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+      "entrees": [ 43, 54, 21, 27, 10, 67, 80, 38, 56, 55, 90, 28],
+      "sorties": [ 54, 28, 48, 12, 11, 45, 90, 69, 59, 53, 34, 43 ]
+    };
+  }
+
   loadDataProductCategories(){
     return {
       "categories": ['Céréales', 'Accessoires', 'Riz', 'Huiles', 'Détergents'],
@@ -100,6 +134,13 @@ export class StatisticService {
     return {
       "mois": ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
       "nbreallocations": [ 28, 48, 40, 19, 86, 27, 90, 65, 59, 80, 81, 56, 90, 65],
+    };
+  }
+
+  loadDataAllocationMoisForRegion(){
+    return {
+      "mois": ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+      "nbreallocations": [ 28, 23, 11, 19, 86, 24, 90, 65, 59, 17, 27, 56, 30, 23],
     };
   }
 
