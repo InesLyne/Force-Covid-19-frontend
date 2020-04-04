@@ -68,10 +68,10 @@ export class ListStockComponent implements OnInit {
 
     this.cols = [
       { field: 'welfare.name', header: 'Nom Produit' },
-      { field: 'welfare.description', header: 'Description' },
-      { field: 'welfare.category', header: 'Catégorie' },
-      { field: 'welfare.weight', header: 'Poids' },
-      { field: 'welfare.unit', header: 'Unté' },
+      { field: 'welfare?.description', header: 'Description' },
+      { field: 'welfare?.category', header: 'Catégorie' },
+      { field: 'welfare?.weight', header: 'Poids' },
+      { field: 'welfare?.unit', header: 'Unté' },
       { field: 'quantity', header: 'Quantité' },
       { field: 'updated', header: 'Dernière Mise à jour', type: 'date' }
     ];

@@ -69,10 +69,18 @@
           <td>
               <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
           </td>
-          <td *ngFor="let col of columns">
+          <!--td *ngFor="let col of columns">
             <div *ngIf="col.type != 'date'">{{rowData[col.field]}}</div>
             <div *ngIf="col.type == 'date'">{{rowData[col.field] | date:'dd/MM/yyyy à HH:mm'}}</div>
-          </td>
+          </td-->
+          <!-- rework me to be dynamic -->
+          <td>{{rowData.welfare.name}}</td>
+          <td>{{rowData.welfare?.description}}</td>
+          <td>{{rowData.welfare?.category}}</td>
+          <td>{{rowData.welfare?.weight}}</td>
+          <td>{{rowData.welfare?.unit}}</td>
+          <td>{{rowData.quantity}}</td>
+          <td>{{rowData.updated | date:'dd/MM/yyyy à HH:mm'}}</td>
           <td>
             <div class="table_actions">
               <div class="p-grid">

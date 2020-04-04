@@ -1,14 +1,46 @@
 <div class="form-wrapper detail">
-    <div *ngIf="stock">
-      <div>Quantité : <strong>{{stock?.quantity}}</strong></div>
-      <div>Utilisateur : <strong>{{stock?.user?.username}}</strong></div>
-      <div>Bien : <strong>{{stock.welfare?.name}}</strong></div>
-      <div>Dernière modification : <strong>{{stock?.updated | date:'dd/MM/yyyy à HH:mm'}}</strong></div>      
-    </div>
-  
-    <div class="p-grid p-justify-end">
-      <div class="p-col-12 action">
-        <button pButton type="button" (click)="onDialogHide()" label="Retour" class="button ui-button-raised ui-button-secondary"></button>
+  <div *ngIf="stock">
+    <div>Quantité : <strong>{{stock?.quantity}}</strong></div>
+    <div>Utilisateur : <strong>{{stock?.user?.username}}</strong></div>
+    <div>Bien : <strong>{{stock.welfare?.name}}</strong></div>
+    <div>Dernière modification : <strong>{{stock?.updated | date:'dd/MM/yyyy à HH:mm'}}</strong></div>
+
+
+  <div class="p-col-12">
+    <p-fieldset legend="Historiques" [toggleable]="true" [collapsed]="true">
+      <div class="p-col-12">
+        <p-table [columns]="cols" [value]="listItems">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" pResizableColumn>
+                {{col.header}}
+                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                  ariaLabelDesc="Activate to sort in descending order"
+                  ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <!--td *ngFor="let col of columns">
+                        <div *ngIf="col.type != 'date'">{{rowData[col.field]}}</div>
+                        <div *ngIf="col.type == 'date'">{{rowData[col.field] | date:'dd/MM/yyyy à HH:mm'}}</div>
+                      </td -->
+              <!-- rework me to be dynamic -->
+              <td>{{rowData.quantity | date:'dd/MM/yyyy à HH:mm'}}</td>
+              <td>{{rowData.welfare.name}}</td>
+              <td>{{rowData.quantity}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
       </div>
+    </p-fieldset>
+  </div>
+</div>
+  <div class="p-grid p-justify-end">
+    <div class="p-col-12 action">
+      <button pButton type="button" (click)="onDialogHide()" label="Retour"
+        class="button ui-button-raised ui-button-secondary"></button>
     </div>
+  </div>
 </div>

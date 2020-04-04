@@ -17,26 +17,6 @@
                 <label class="form-label" for="">Quantité</label>
                 <input class="form-input" [required]="true" [(ngModel)]="stock.quantity" type="number" name="quantity">
             </div>
-            <div class="p-col-12">
-                <p-fieldset legend="Historiques" [toggleable]="true" [collapsed]="true">
-                    <p-table [columns]="cols" [value]="listItems">
-                        <ng-template pTemplate="header" let-columns>
-                            <tr>
-                                <th *ngFor="let col of columns">
-                                    {{col.header}}
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-rowData let-columns="columns">
-                            <tr [pSelectableRow]="rowData">
-                                <td *ngFor="let col of columns">
-                                    {{rowData[col.field]}}
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </p-fieldset>
-            </div>
             <div class="p-col-12 action">
                 <button type="submit" [disabled]="!f.valid" class="button bgColor-secondary">Enregistrer</button>
                 <button pButton type="button" (click)="onDialogHide()" label="Annuler"

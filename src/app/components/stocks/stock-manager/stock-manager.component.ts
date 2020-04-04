@@ -9,8 +9,6 @@ import { GlobalService } from 'src/app/global.service';
   styleUrls: ['./stock-manager.component.css']
 })
 export class StockManagerComponent implements OnInit {
-  listItems: Stock[];
-  cols: any[];
   stock: Stock;
   @Input() id: any;
   @Output() displayChange = new EventEmitter();
@@ -22,32 +20,13 @@ export class StockManagerComponent implements OnInit {
   ngOnInit(): void {
     if(this.id){
       this.onGetStock(this.id);
-      this.loadStockHistory(this.id);
     }
-
-    this.cols = [
-      { field: 'updated', header: 'Dernière Mise à jour', type: 'date' },
-      { field: 'welfare.name', header: 'Nom Produit' },
-      { field: 'quantity', header: 'Quantité' }
-    ];
   }
 
   onGetStock(id: string){
     this.stockService.getStock(id).then(
       (restult: Stock)=>{
         this.stock=restult;
-      }
-    ).catch(
-      (error: any)=>{
-        this.errorMsg=error;
-      }
-    )
-  }
-
-  loadStockHistory(id: string){
-    this.stockService.getStockHistory(id).then(
-      (restult: Stock[])=>{
-        this.listItems=restult;
       }
     ).catch(
       (error: any)=>{
